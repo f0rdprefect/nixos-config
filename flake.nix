@@ -16,7 +16,9 @@
       url = "github:NixOS/nixos-hardware/master";
     };
     hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+      url = "https://github.com/hyprwm/Hyprland";
+      type = "git";
+      submodules = true;
     };
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -38,7 +40,8 @@
       url = "github:nix-community/impermanence";
     };
   };
-  #inputs@ or {} @ inputs names the set
+  #inputs@ or {} @ inputs names the set only way to access parameters inside the function
+  # https://mhwombat.codeberg.page/nix-book/#at-patterns
   outputs = 
     { self
     , nixpkgs
@@ -53,13 +56,13 @@
       host = "xin";
       inherit (import ./hosts/${host}/options.nix) username hostname;
 
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
 	    allowUnfree = true;
+        };
       };
-    };
-  in {
+    in {
     nixosConfigurations = {
       "${hostname}" = nixpkgs.lib.nixosSystem {
 	specialArgs = { 

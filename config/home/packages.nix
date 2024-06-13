@@ -26,7 +26,7 @@ in {
     texliveFull
     ####Media Ripping###
     asunder
-    handbrake
+    #handbrake
     lame
     ####File sharing###
     nextcloud-client
