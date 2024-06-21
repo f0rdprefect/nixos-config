@@ -7,7 +7,10 @@ in {
   # Install Packages For The User
   home.packages = with pkgs; [
     calibre
+    super-slicer-latest
+    #####system maintenance stuff
     gparted
+    usbutils
     #####shell stuff####
     #fzf
     fd
@@ -18,7 +21,7 @@ in {
     gimp
     nomacs
     libreoffice
-    logseq
+    (logseq.override{ electron_27 = electron-bin; })
     evince
     okular
     mupdf
@@ -26,7 +29,7 @@ in {
     texliveFull
     ####Media Ripping###
     asunder
-    #handbrake
+    handbrake
     lame
     ####File sharing###
     nextcloud-client
@@ -34,7 +37,6 @@ in {
     git-annex
     ####Communication####
     signal-desktop
-    element-desktop-wayland
     fractal
     rambox
     ####bitwarden related###
@@ -55,13 +57,14 @@ in {
     swaynotificationcenter 
     rofi-wayland 
     imv 
-    transmission-gtk 
     mpv
     gimp 
     rustup 
     audacity 
     pavucontrol 
-    tree protonup-qt
+    tree 
+    nix-tree
+    protonup-qt
     font-awesome 
     spotify 
     swayidle 

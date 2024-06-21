@@ -48,6 +48,7 @@ in {
     };
     
     plugins = {
+      neorg.enable = true;
       barbecue.enable = true;
       gitsigns.enable = true;
       telescope = {

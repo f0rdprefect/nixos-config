@@ -123,9 +123,9 @@ in with lib; {
         pseudotile = true
         preserve_split = true
       }
-      master {
-        new_is_master = true
-      }
+      #master {
+      #  new_is_master = true
+      #}
       bind = CTRLALT,P,exec,rofi-rbw
       bind = ${modifier}, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy
       bind = ${modifier},Return,exec,${terminal}
