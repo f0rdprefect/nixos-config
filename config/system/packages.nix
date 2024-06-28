@@ -3,6 +3,10 @@
 {
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  # Allow Insecure Packages
+  nixpkgs.config.permittedInsecurePackages = [
+     "electron-28.3.3"
+     ];
 
   # List System Programs
   environment.systemPackages = with pkgs; [

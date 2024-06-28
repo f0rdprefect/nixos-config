@@ -21,7 +21,7 @@ in {
     gimp
     nomacs
     libreoffice
-    (logseq.override{ electron_27 = electron-bin; })
+    logseq
     evince
     okular
     mupdf
@@ -86,5 +86,7 @@ in {
     (import ./../scripts/list-hypr-bindings.nix { inherit pkgs; inherit host; })
   ];
 
+  programs.direnv.enable = true; 
   programs.gh.enable = true;
+
 }
