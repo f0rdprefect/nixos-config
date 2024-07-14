@@ -15,6 +15,7 @@
     ./intel-nvidia.nix
     ./kernel.nix
     ./logitech.nix
+    ./mullvad.nix
     ./nfs.nix
     ./ntp.nix
     ./nvidia.nix
