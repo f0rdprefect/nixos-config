@@ -22,6 +22,9 @@ mount | grep /mnt
 ### Install
 
 ```sh
+nixos-generate-config --show-hardware-config > <your hardware.nix>
+# edit mount starting with /mnt and remove /mnt. 
+# All other mount points can be removed
 nixos-install --flake .#<host>
 ```
 
