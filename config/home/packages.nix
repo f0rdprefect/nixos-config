@@ -66,6 +66,7 @@ in {
     nix-tree
     protonup-qt
     font-awesome 
+    glib
     spotify 
     swayidle 
     neovide 
