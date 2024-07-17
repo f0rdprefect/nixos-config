@@ -97,9 +97,9 @@ in with lib; {
         on-click = "sleep 0.1 && rofi-launcher";
       };
       "custom/hyprbindings" = {
-        tooltip = false;
-        format = " Bindings";
-        on-click = "sleep 0.1 && list-hypr-bindings";
+        tooltip = true;
+        format = " (On/Off)";
+        on-click = "togglekbd";
       };
       "idle_inhibitor" = {
         format = "{icon}";

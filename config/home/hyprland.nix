@@ -119,6 +119,7 @@ in with lib; {
       exec-once = wallsetter
       exec-once = nm-applet --indicator
       exec-once = swayidle -w timeout 720 'pidof swaylock || swaylock -f --screenshots --clock --effect-blur 4x3' timeout 800 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'pidof swaylock || swaylock -f --screenshots --clock --effect-blur 4x3'
+      exec-once = iio-hyprland
       dwindle {
         pseudotile = true
         preserve_split = true

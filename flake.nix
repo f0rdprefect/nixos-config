@@ -39,6 +39,9 @@
     impermanence = {
       url = "github:nix-community/impermanence";
     };
+    iio-hyprland = {
+      url = "github:JeanSchoeller/iio-hyprland";
+    };
   };
   #inputs@ or {} @ inputs names the set only way to access parameters inside the function
   # https://mhwombat.codeberg.page/nix-book/#at-patterns
@@ -49,6 +52,7 @@
     , impermanence
     , nixos-hardware
     , disko
+    , iio-hyprland
     , ... 
     } @ inputs:
     let

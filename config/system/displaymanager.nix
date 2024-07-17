@@ -1,4 +1,4 @@
-{ pkgs, config, host, ... }:
+{ pkgs, config, host, inputs,... }:
 
 let inherit (import ../../hosts/${host}/options.nix) theKBDVariant
 theKBDLayout theSecondKBDLayout; in
@@ -26,5 +26,6 @@ in [
     sugar.sddm-sugar-dark # Name: sugar-dark
     tokyo-night # Name: tokyo-night-sddm
     pkgs.libsForQt5.qt5.qtgraphicaleffects
+    inputs.iio-hyprland.packages.${pkgs.system}.default
   ];
 }
