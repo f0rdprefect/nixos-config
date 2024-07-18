@@ -1,8 +1,5 @@
-{ pkgs, host, ... }:
+{ pkgs, ... }:
 
-let
-  inherit ( import ../../hosts/${host}/options.nix ) terminal browser;
-in
 pkgs.writeShellScriptBin "togglekbd" ''
 #!/usr/bin/env bash
 

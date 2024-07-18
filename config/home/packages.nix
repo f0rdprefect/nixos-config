@@ -1,4 +1,4 @@
-{ pkgs, config, username, host, ... }:
+{ pkgs,  username, host, ... }:
 
 let 
   inherit (import ../../hosts/${host}/options.nix) 
@@ -84,7 +84,7 @@ in {
     (import ./../scripts/web-search.nix { inherit pkgs; })
     (import ./../scripts/rofi-launcher.nix { inherit pkgs; })
     (import ./../scripts/screenshootin.nix { inherit pkgs; })
-    (import ./../scripts/togglekbd.nix { inherit pkgs; inherit host; })
+    (import ./../scripts/togglekbd.nix { inherit pkgs; })
   ];
 
   programs.direnv.enable = true; 
