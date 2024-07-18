@@ -47,6 +47,11 @@ in with lib; {
         sensitivity = 0.5 # -1.0 - 1.0, 0 means no modification.
         accel_profile = adaptive
       }
+      $LAPTOP_KB_ENABLED = true
+      device {
+          name = at-translated-set-2-keyboard
+          enabled = $LAPTOP_KB_ENABLED
+      }
       env = NIXOS_OZONE_WL, 1
       env = NIXPKGS_ALLOW_UNFREE, 1
       env = XDG_CURRENT_DESKTOP, Hyprland
