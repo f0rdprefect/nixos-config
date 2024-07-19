@@ -31,13 +31,14 @@ in {
     asunder
     handbrake
     lame
+    yt-dlp
     ####File sharing###
     nextcloud-client
-    localsend
+    #localsend
     git-annex
     ####Communication####
     signal-desktop
-    fractal
+    fluffychat
     rambox
     ####bitwarden related###
     bitwarden # will be replaced by bitwarden-desktop
