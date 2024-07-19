@@ -125,6 +125,9 @@ in with lib; {
       exec-once = nm-applet --indicator
       exec-once = swayidle -w timeout 720 'pidof swaylock || swaylock -f --screenshots --clock --effect-blur 4x3' timeout 800 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'pidof swaylock || swaylock -f --screenshots --clock --effect-blur 4x3'
       exec-once = iio-hyprland
+      exec-once = wl-paste --type text --watch cliphist store #Stores only text data
+      exec-once = wl-paste --type image --watch cliphist store #Stores only image data
+
       dwindle {
         pseudotile = true
         preserve_split = true
@@ -211,6 +214,8 @@ in with lib; {
       bind = ,XF86AudioPrev, exec, playerctl previous
       bind = ,XF86MonBrightnessDown,exec,brightnessctl set 5%-
       bind = ,XF86MonBrightnessUp,exec,brightnessctl set +5%
+      
+      windowrule = idleinhibit fullscreen, ^(firefox)$
       source = ~/.config/hypr/adhoc.conf
     '' ];
   };
