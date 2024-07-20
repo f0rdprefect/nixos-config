@@ -4,13 +4,13 @@
 
 let
   setUsername = "matt";
-  setHostname = "xin";
+  setHostname = "lux";
 in {
   # No Change Needed Below
   username = "${setUsername}";
   hostname = "${setHostname}";
   userHome = "/home/${setUsername}";
-  flakeDir = "/home/${setUsername}/zaneyos";
+  flakeDir = "/home/${setUsername}/nixos-config";
   wallpaperGit = "https://github.com/f0rdprefect/my-wallpaper.git";# Can be changed IF you know what your doing
   wallpaperDir = "/home/${setUsername}/Pictures/Wallpapers";
   screenshotDir = "/home/${setUsername}/Pictures/Screenshots";
