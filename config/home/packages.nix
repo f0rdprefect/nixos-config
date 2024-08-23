@@ -40,6 +40,7 @@ in {
     signal-desktop
     fluffychat
     rambox
+    paper-plane
     ####bitwarden related###
     bitwarden # will be replaced by bitwarden-desktop
     rofi-rbw
@@ -54,7 +55,7 @@ in {
     swww 
     grim 
     slurp 
-    gnome.file-roller
+    file-roller
     swaynotificationcenter 
     rofi-wayland 
     imv 

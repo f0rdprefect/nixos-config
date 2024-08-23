@@ -3,20 +3,21 @@
 let inherit (import ../../hosts/${host}/options.nix) theKBDVariant
 theKBDLayout theSecondKBDLayout; in
 {
+  services.libinput.enable = true;
   services.xserver = {
     enable = true;
     xkb = {
       variant = "${theKBDVariant}";
       layout = "${theKBDLayout}, ${theSecondKBDLayout}";
     };
-    libinput.enable = true;
-    displayManager.sddm = {
+  };
+  services.displayManager.sddm = {
       enable = true;
       autoNumlock = true;
       wayland.enable = true;
       theme = "tokyo-night-sddm";
-    };
   };
+  
 
   environment.systemPackages =
 let
