@@ -14,6 +14,7 @@ in {
     #####shell stuff####
     #fzf
     fd
+    nix-search-cli
     #####python stuff#####
     poetry
     ####Office#######
@@ -32,13 +33,15 @@ in {
     handbrake
     lame
     yt-dlp
+    vlc
     ####File sharing###
     nextcloud-client
     #localsend
     git-annex
     ####Communication####
     signal-desktop
-    fluffychat
+    zapzap
+    fractal
     rambox
     paper-plane
     ####bitwarden related###

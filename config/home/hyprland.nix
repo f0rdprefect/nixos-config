@@ -217,6 +217,7 @@ in with lib; {
       bind = ,XF86MonBrightnessUp,exec,brightnessctl set +5%
       
       windowrule = idleinhibit fullscreen, ^(firefox)$
+      windowrule = idleinhibit fullscreen, ^(vlc)$
       source = ~/.config/hypr/adhoc.conf
     '' ];
   };
