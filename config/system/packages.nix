@@ -36,7 +36,6 @@
     lshw
     pkg-config 
     gnumake 
-    symbola
     noto-fonts-color-emoji 
     material-icons 
     brightnessctl
