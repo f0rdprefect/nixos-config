@@ -7,7 +7,7 @@ in {
   # Install Packages For The User
   home.packages = with pkgs; [
     calibre
-    super-slicer-latest
+    super-slicer-beta
     #####system maintenance stuff
     gparted
     usbutils
