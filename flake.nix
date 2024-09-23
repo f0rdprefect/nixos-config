@@ -42,6 +42,9 @@
     iio-hyprland = {
       url = "github:JeanSchoeller/iio-hyprland";
     };
+    espanso-fix = {
+      url = "github:pitkling/nixpkgs/espanso-fix-capabilities-export";
+    };
   };
   #inputs@ or {} @ inputs names the set only way to access parameters inside the function
   # https://mhwombat.codeberg.page/nix-book/#at-patterns
@@ -53,6 +56,7 @@
     , nixos-hardware
     , disko
     , iio-hyprland
+    , espanso-fix
     , ... 
     } @ inputs:
     let
@@ -75,7 +79,8 @@
           inherit host;
         };
 	modules = [ 
-	  ./system.nix
+          ./system.nix
+          espanso-fix.nixosModules.espanso-capdacoverride
           # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-yoga
 	  impermanence.nixosModules.impermanence
