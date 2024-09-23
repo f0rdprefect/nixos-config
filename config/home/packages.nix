@@ -70,13 +70,17 @@ in {
     tree 
     nix-tree
     protonup-qt
-    font-awesome 
     glib
     spotify 
     swayidle 
     neovide 
     swaylock-effects
+    #fonts
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    fantasque-sans-mono
+    font-awesome 
+    roboto
+    source-sans-pro
     # Import Scripts
     (import ./../scripts/emopicker9000.nix { inherit pkgs; })
     (import ./../scripts/task-waybar.nix { inherit pkgs; })
@@ -91,7 +95,9 @@ in {
     (import ./../scripts/screenshootin.nix { inherit pkgs; })
     (import ./../scripts/togglekbd.nix { inherit pkgs; })
   ];
-
+  
+  fonts.fontconfig.enable = true; 
+  
   programs.direnv.enable = true; 
   programs.gh.enable = true;
 
