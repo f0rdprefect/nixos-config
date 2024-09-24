@@ -47,6 +47,7 @@
     yad 
     playerctl 
     nh
+    podman-compose
   ];
 
   programs = {

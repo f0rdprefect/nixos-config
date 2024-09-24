@@ -36,6 +36,7 @@ in {
     vlc
     ####File sharing###
     nextcloud-client
+    libsForQt5.qt5.qtwayland
     #localsend
     git-annex
     ####Communication####
