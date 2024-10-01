@@ -34,9 +34,9 @@ in {
     lame
     yt-dlp
     vlc
+    ffmpeg-full
     ####File sharing###
     nextcloud-client
-    libsForQt5.qt5.qtwayland
     #localsend
     git-annex
     ####Communication####
@@ -54,6 +54,7 @@ in {
     dotool
     cliphist
     #######
+    cosmic-files
     pkgs."${browser}" 
     libvirt 
     swww 

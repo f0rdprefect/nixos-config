@@ -22,12 +22,12 @@ pkgs.writeShellScriptBin "list-hypr-bindings" ''
   " + SHIFT + W" "Search Websites Like Nix Packages" "web-search" \
   " + SHIFT + N" "Reload SwayNC Styling" "swaync-client -rs" \
   " + W" "Launch Web Browser" "${browser}" \
-  " + E" "Launch Emoji Selector" "emopicker9000" \
+  " + E" "Cosmic File Manager" "cosmic-files" \
   " + S" "Take Screenshot" "screenshootin" \
   " + D" "Launch Discord" "discord" \
   " + O" "Launch OBS" "obs" \
   " + G" "Launch GIMP" "gimp" \
-  " + N" "Launch New File Browser Window" "thunar" \
+  " + T" "Launch New File Browser Window" "thunar" \
   " + M" "Launch Spotify" "spotify" \
   " + P" "Pseudo Tiling" "pseudo" \
   " + SHIFT + I" "Toggle Split Direction" "togglesplit" \

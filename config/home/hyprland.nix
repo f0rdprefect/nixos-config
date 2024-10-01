@@ -146,7 +146,7 @@ in with lib; {
       '' else ''
 	bind = ${modifier},W,exec,${browser}
       ''}
-      bind = ${modifier},E,exec,emopicker9000
+      bind = ${modifier},E,exec,cosmic-files
       bind = ${modifier},S,exec,screenshootin
       bind = ${modifier},O,exec,obs
       bind = ${modifier},G,exec,gimp
