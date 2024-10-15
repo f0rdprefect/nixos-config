@@ -56,7 +56,7 @@
     , nixos-hardware
     , disko
     , iio-hyprland
-    , espanso-fix
+#    , espanso-fix
     , ... 
     } @ inputs:
     let
@@ -80,7 +80,7 @@
         };
 	modules = [ 
           ./system.nix
-          espanso-fix.nixosModules.espanso-capdacoverride
+          #espanso-fix.nixosModules.espanso-capdacoverride
           # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-yoga
 	  impermanence.nixosModules.impermanence

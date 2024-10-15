@@ -2,15 +2,15 @@
 
 let inherit (import ../../hosts/${host}/options.nix) gpuType; in
 lib.mkIf ("${gpuType}" == "intel") { 
-  nixpkgs.config.packageOverrides =
-    pkgs: {
-      intel-vaapi-driver = pkgs.intel-vaapi-driver.override { 
-        enableHybridCodec = true; 
-      };
-      vaapiIntel = pkgs.vaapiIntel.override {
-      enableHybridCodec = true;
-    };
-  };
+#  nixpkgs.config.packageOverrides =
+#    pkgs: {
+#      intel-vaapi-driver = pkgs.intel-vaapi-driver.override { 
+#        enableHybridCodec = true; 
+#      };
+#      vaapiIntel = pkgs.vaapiIntel.override {
+#      enableHybridCodec = true;
+#    };
+#  };
 
   # OpenGL
   hardware.graphics = {
