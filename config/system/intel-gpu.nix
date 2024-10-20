@@ -15,10 +15,11 @@ lib.mkIf ("${gpuType}" == "intel") {
   # OpenGL
   hardware.graphics = {
     extraPackages = with pkgs; [
-      #intel-media-driver
-      intel-vaapi-driver
+      intel-media-driver
+      #intel-vaapi-driver
       vaapiVdpau
       libvdpau-va-gl
+      intel-media-sdk
     ];
   };
   environment.sessionVariables = { 

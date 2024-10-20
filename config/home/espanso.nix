@@ -28,10 +28,6 @@
             trigger = ":hello";
             replace = "line1\nline2";
           }
-          {
-            regex = ":hi(?P.*)\\.";
-            replace = "Hi {{person}}!";
-          }
         ];
       };
       global_vars = {

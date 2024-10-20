@@ -51,6 +51,7 @@ in {
       neorg.enable = true;
       barbecue.enable = true;
       gitsigns.enable = true;
+      web-devicons.enable = true;      
       telescope = {
 	enable = true;
 	keymaps = {
@@ -73,10 +74,10 @@ in {
       lsp = {
 	enable = true;
 	servers = {
-	  tsserver.enable = true;
-	  lua-ls.enable = true;
+	  ts_ls.enable = true;
+	  lua_ls.enable = true;
 	  bashls.enable = true;
-	  rust-analyzer = {
+	  rust_analyzer = {
 	    enable = true;
 	    installRustc = true;
 	    installCargo = true;
@@ -85,7 +86,7 @@ in {
 	  html.enable = true;
 	  ccls.enable = true;
 	  cmake.enable = true;
-	  csharp-ls.enable = true;
+	  csharp_ls.enable = true;
 	  cssls.enable = true;
 	  gopls.enable = true;
 	  jsonls.enable = true;

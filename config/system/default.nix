@@ -24,7 +24,8 @@
     ./python.nix
     ./printer.nix
     ./services.nix
-    ./steam.nix
+    ./tailscale.nix
+    #./steam.nix
     ./syncthing.nix
     ./vm.nix
   ];

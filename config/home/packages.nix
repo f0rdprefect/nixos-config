@@ -6,7 +6,7 @@ let
 in {
   # Install Packages For The User
   home.packages = with pkgs; [
-    calibre
+    #calibre
     super-slicer-beta
     #####system maintenance stuff
     gparted
@@ -18,16 +18,17 @@ in {
     #####python stuff#####
     poetry
     ####Office#######
-    inkscape
+    evince
     gimp
-    nomacs
+    inkscape
     libreoffice
     logseq
-    evince
-    okular
     mupdf
+    nomacs
+    okular
     pandoc
     texliveFull
+    typst
     ####Media Ripping###
     asunder
     handbrake
@@ -43,7 +44,7 @@ in {
     signal-desktop
     zapzap
     fractal
-    rambox
+    #rambox
     paper-plane
     ####bitwarden related###
     bitwarden # will be replaced by bitwarden-desktop

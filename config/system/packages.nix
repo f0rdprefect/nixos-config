@@ -11,6 +11,7 @@
   # List System Programs
   environment.systemPackages = with pkgs; [
     wget 
+    jq
     curl 
     git 
     cmatrix 
@@ -56,7 +57,7 @@
       defaultEditor = true;
     };
     nano.enable = false;
-    steam.gamescopeSession.enable = true;
+    steam.gamescopeSession.enable = false;
     dconf.enable = true;
     seahorse.enable=true;
     hyprland = {

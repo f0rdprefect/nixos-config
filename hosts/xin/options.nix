@@ -90,5 +90,6 @@ in {
 
   #Custom Options
   espanso = true;
+  tailscale = true;
 
 }
