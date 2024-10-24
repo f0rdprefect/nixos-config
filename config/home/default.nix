@@ -7,7 +7,8 @@
     ./bash.nix
     ./espanso.nix
     ./fzf.nix
-    ./gtk-qt.nix
+# Disable when using stylix
+#    ./gtk-qt.nix
     ./hyprland.nix
     ./kdenlive.nix
     ./kitty.nix

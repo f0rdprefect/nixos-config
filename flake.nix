@@ -42,6 +42,9 @@
     iio-hyprland = {
       url = "github:JeanSchoeller/iio-hyprland";
     };
+    stylix = {
+      url = "github:danth/stylix";
+    };
     espanso-fix = {
       url = "github:pitkling/nixpkgs/espanso-fix-capabilities-export";
     };
@@ -56,6 +59,7 @@
     , nixos-hardware
     , disko
     , iio-hyprland
+    , stylix
     , espanso-fix
     , ... 
     } @ inputs:
@@ -82,6 +86,7 @@
           ./system.nix
           espanso-fix.nixosModules.espanso-capdacoverride
           # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
+          stylix.nixosModules.stylix
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-yoga
 	  impermanence.nixosModules.impermanence
           home-manager.nixosModules.home-manager {

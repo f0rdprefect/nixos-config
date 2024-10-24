@@ -9,16 +9,16 @@ in lib.mkIf (wezterm == false && alacritty == false
   programs.kitty = {
     enable = true;
     package = pkgs.kitty;
-    font.name = "JetBrainsMono Nerd Font";
-    font.size = 16;
-    settings = {
+    font.name = lib.mkDefault "JetBrainsMono Nerd Font";
+    font.size = lib.mkDefault 16;
+    settings = lib.mkDefault {
       scrollback_lines = 2000;
       wheel_scroll_min_lines = 1;
       window_padding_width = 4;
       confirm_os_window_close = 0;
       background_opacity = "0.85";
     };
-    extraConfig = ''
+    extraConfig = lib.mkDefault ''
       foreground #${palette.base05}
       background #${palette.base00}
       color0  #${palette.base03}

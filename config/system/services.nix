@@ -69,4 +69,27 @@
       auth include login
     '';
   };
+  stylix = {
+    enable = true;
+    image = pkgs.fetchurl {
+       url = "https://github.com/f0rdprefect/my-wallpaper/blob/main/comet_still2.jpg?raw=true";
+       sha256 = "LvWXiPoa+v1WGtLZjxKPjPYQsF1gNdye3QdMoFAaB3E=";
+    }; 
+    polarity = "dark";
+    fonts = {
+      sizes = {
+        terminal = 16;
+        applications = 14;
+
+      };
+    };
+    cursor = {
+      package = pkgs.graphite-cursors;
+      name = "graphite-dark-nord";
+    };
+    opacity = {
+      terminal = 0.87;
+    };
+
+  };
 }

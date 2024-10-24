@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, username,
+{ config, pkgs, inputs, username, lib,
   host, gtkThemeFromScheme, ... }:
 let 
   inherit (import ./../../hosts/${host}/options.nix)
@@ -24,7 +24,7 @@ in {
 
   # Define Settings For Xresources
   xresources.properties = {
-    "Xcursor.size" = 24;
+    "Xcursor.size" = lib.mkDefault 24;
   };
 
   # Install & Configure Git
