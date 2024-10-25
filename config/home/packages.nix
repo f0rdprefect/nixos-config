@@ -6,7 +6,7 @@ let
 in {
   # Install Packages For The User
   home.packages = with pkgs; [
-    #calibre
+    calibre
     super-slicer-beta
     #####system maintenance stuff
     gparted
