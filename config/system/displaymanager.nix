@@ -12,10 +12,13 @@ theKBDLayout theSecondKBDLayout; in
     };
   };
   services.displayManager.sddm = {
-      enable = true;
+      enable = false;
       autoNumlock = true;
       wayland.enable = true;
       theme = "tokyo-night-sddm";
+    };
+  services.displayManager.ly = {
+    enable = true;
   };
   
 
