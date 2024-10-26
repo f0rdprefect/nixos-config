@@ -77,29 +77,23 @@
     }; 
     polarity = "dark";
     fonts = {
-      serif = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Serif";
-      };
-
-      sansSerif = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Sans";
-      };
-
       monospace = {
-        package = pkgs.jetbrains-mono;
-        name = "JetBrainsMono Nerd Font";
+        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+        name = "JetBrainsMono Nerd Font Mono";
       };
-
-      emoji = {
-        package = pkgs.noto-fonts-emoji;
-        name = "Noto Color Emoji";
+      sansSerif = {
+        package = pkgs.montserrat;
+        name = "Montserrat";
+      };
+      serif = {
+        package = pkgs.montserrat;
+        name = "Montserrat";
       };
       sizes = {
-        terminal = 16;
-        applications = 14;
-
+        applications = 12;
+        terminal = 15;
+        desktop = 11;
+        popups = 12;
       };
     };
     cursor = {
