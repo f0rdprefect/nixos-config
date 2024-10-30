@@ -11,7 +11,7 @@
     ./hyprland.nix
     ./kdenlive.nix
     ./kitty.nix
-    ./neovim.nix
+    ./neovim
     ./packages.nix
     ./rofi.nix
     ./starship.nix
