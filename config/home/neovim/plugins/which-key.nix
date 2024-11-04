@@ -1,1 +1,5 @@
-{ plugins.which-key = { enable = true; }; }
+{  
+  programs.nixvim = {
+     plugins.which-key = { enable = true; }; 
+  };
+}

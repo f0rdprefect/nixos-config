@@ -3,6 +3,7 @@
     treesitter = {
       enable = true;
 
+      nixGrammars = true;
       nixvimInjections = true;
 
       settings = {
@@ -20,6 +21,11 @@
         clearOnCursorMove = false;
       };
     };
+    treesitter-context = {
+      enable = true;
+      settings = { max_lines = 2; };
+    };
+    rainbow-delimiters.enable = true;
 
     hmts.enable = true;
   };

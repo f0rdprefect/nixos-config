@@ -28,8 +28,8 @@
         };
 
         servers = {
-          clangd.enable = true;
-          texlab.enable = true;
+            nixd.enable = true;
+            typst_lsp.enable = true;
         };
       };
     };

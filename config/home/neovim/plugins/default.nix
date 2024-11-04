@@ -13,7 +13,8 @@
     ./tagbar.nix
     ./telescope.nix
     ./treesitter.nix
-    ./vimtex.nix # inria
+    #./vimtex.nix # inria
+    ./which-key.nix
   ];
 
   programs.nixvim = {

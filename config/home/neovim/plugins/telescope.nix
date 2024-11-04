@@ -28,6 +28,7 @@
         ];
         set_env.COLORTERM = "truecolor";
       };
+      extensions.fzf-native = { enable = true; };
     };
   };
 }

@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{inputs, lib, ...}: {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     ./autocommands.nix
@@ -9,11 +9,11 @@
     ./todo.nix
   ];
 
-  home.shellAliases.v = "nvim";
-
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
+    colorschemes.dracula.enable = lib.mkForce true;
+    plugins.web-devicons.enable = true;
 
     performance = {
       combinePlugins = {
