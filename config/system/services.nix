@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, inputs, ... }:
 
 {
   # List services that you want to enable:
@@ -6,7 +6,7 @@
   zramSwap.enable = true;
   services.openssh.enable = true;
   services.fstrim.enable = true;
-  
+
   services.tlp = {
     enable = true;
     settings = {
@@ -71,10 +71,11 @@
   };
   stylix = {
     enable = true;
+    base16Scheme=inputs.nix-colors.colorSchemes.solarflare.palette;
     image = pkgs.fetchurl {
        url = "https://github.com/f0rdprefect/my-wallpaper/blob/main/comet_still2.jpg?raw=true";
        sha256 = "LvWXiPoa+v1WGtLZjxKPjPYQsF1gNdye3QdMoFAaB3E=";
-    }; 
+    };
     polarity = "dark";
     fonts = {
       monospace = {
