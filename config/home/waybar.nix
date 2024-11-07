@@ -12,7 +12,7 @@ in with lib; {
  {
         layer = "top";
         position = "top";
-        modules-center = [ 
+        modules-center = [
           "hyprland/workspaces"
           "clock"
 
@@ -188,7 +188,14 @@ in with lib; {
         window#waybar {
           background: rgba(0,0,0,0);
         }
-        #workspaces, #clock {
+        #clock {
+          color: #${config.stylix.base16Scheme.base00};
+          background: #${config.stylix.base16Scheme.base0D};
+          margin: 4px 4px;
+          padding: 5px 5px;
+          border-radius: 16px;
+        }
+        #workspaces {
           color: #${config.stylix.base16Scheme.base00};
           background: #${config.stylix.base16Scheme.base01};
           margin: 4px 4px;

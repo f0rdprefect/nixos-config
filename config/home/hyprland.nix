@@ -3,7 +3,7 @@
 let
   theme = config.colorScheme.palette;
   hyprplugins = inputs.hyprland-plugins.packages.${pkgs.system};
-  inherit (import ../../hosts/${host}/options.nix) 
+  inherit (import ../../hosts/${host}/options.nix)
     browser cpuType gpuType
     wallpaperDir borderAnim
     theKBDLayout terminal
@@ -41,7 +41,7 @@ in with lib; {
         touchpad {
           natural_scroll = true
           tap-to-click = false
-          clickfinger_behavior = true 
+          clickfinger_behavior = true
           scroll_factor = 0.5
         }
         sensitivity = 0.5 # -1.0 - 1.0, 0 means no modification.
@@ -215,9 +215,10 @@ in with lib; {
       bind = ,XF86AudioPrev, exec, playerctl previous
       bind = ,XF86MonBrightnessDown,exec,brightnessctl set 5%-
       bind = ,XF86MonBrightnessUp,exec,brightnessctl set +5%
-      
+
       windowrule = idleinhibit fullscreen, ^(firefox)$
       windowrule = idleinhibit fullscreen, ^(vlc)$
+      windowrule = idleinhibit fullscreen, ^(Jellyfin)$
       source = ~/.config/hypr/adhoc.conf
     '' ];
   };
