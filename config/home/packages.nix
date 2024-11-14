@@ -1,7 +1,7 @@
 { pkgs,  username, host, ... }:
 
-let 
-  inherit (import ../../hosts/${host}/options.nix) 
+let
+  inherit (import ../../hosts/${host}/options.nix)
     browser wallpaperDir wallpaperGit flakeDir;
 in {
   # Install Packages For The User
@@ -56,32 +56,32 @@ in {
     cliphist
     #######
     cosmic-files
-    pkgs."${browser}" 
-    libvirt 
-    swww 
-    grim 
-    slurp 
+    pkgs."${browser}"
+    libvirt
+    swww
+    grim
+    slurp
     file-roller
-    swaynotificationcenter 
-    rofi-wayland 
-    imv 
+    swaynotificationcenter
+    rofi-wayland
+    imv
     mpv
-    gimp 
-    rustup 
-    audacity 
-    pavucontrol 
-    tree 
+    gimp
+    rustup
+    audacity
+    pavucontrol
+    tree
     nix-tree
     protonup-qt
     glib
-    spotify 
-    swayidle 
-    neovide 
+    spotify
+    swayidle
+    neovide
     swaylock-effects
     #fonts
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     fantasque-sans-mono
-    font-awesome 
+    font-awesome
     roboto
     source-sans-pro
     # Import Scripts
@@ -98,10 +98,10 @@ in {
     (import ./../scripts/screenshootin.nix { inherit pkgs; })
     (import ./../scripts/togglekbd.nix { inherit pkgs; })
   ];
-  
-  fonts.fontconfig.enable = true; 
-  
-  programs.direnv.enable = true; 
+
+  fonts.fontconfig.enable = true;
+
+  programs.direnv.enable = true;
   programs.gh.enable = true;
 
 }
