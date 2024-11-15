@@ -30,22 +30,19 @@
     };
     nixvim-conf = {
       #url = "github:f0rdprefect/nixvim-config";
-            url = "git+file:///home/matt/src/nixvim-config";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-   disko = {
+      url = "git+file:///home/matt/src/nixvim-config";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-   treefmt-nix = {
+    treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence = {
       url = "github:nix-community/impermanence";
-    };
-    iio-hyprland = {
-      url = "github:JeanSchoeller/iio-hyprland";
     };
     stylix = {
       url = "github:danth/stylix";
@@ -57,19 +54,19 @@
   #inputs@ or {} @ inputs names the set only way to access parameters inside the function
   # https://mhwombat.codeberg.page/nix-book/#at-patterns
   outputs =
-    { self
-    , nixpkgs
-    , home-manager
-    , impermanence
-    , nixos-hardware
-    , disko
-    , iio-hyprland
-    , stylix
-    , espanso-fix
-    , nixvim-conf
-    , nix-colors
-    , ...
-    } @ inputs:
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      impermanence,
+      nixos-hardware,
+      disko,
+      stylix,
+      espanso-fix,
+      nixvim-conf,
+      nix-colors,
+      ...
+    }@inputs:
     let
       system = "x86_64-linux";
       host = "xin";
@@ -78,37 +75,44 @@
       pkgs = import nixpkgs {
         inherit system;
         config = {
-	    allowUnfree = true;
+          allowUnfree = true;
         };
       };
-    in {
-    nixosConfigurations = {
-      "${hostname}" = nixpkgs.lib.nixosSystem {
-	specialArgs = {
-          inherit system; inherit inputs;
-          inherit username; inherit hostname;
-          inherit host; inherit nix-colors;
-        };
-	modules = [
-      ./system.nix
-      espanso-fix.nixosModules.espanso-capdacoverride
-      # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
-      nixos-hardware.nixosModules.lenovo-thinkpad-x1-yoga
-      stylix.nixosModules.stylix
-	  impermanence.nixosModules.impermanence
-      home-manager.nixosModules.home-manager {
-	    home-manager.extraSpecialArgs = {
-            inherit username; inherit inputs;
-            inherit host; inherit nixvim-conf;
-            inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
+    in
+    {
+      nixosConfigurations = {
+        "${hostname}" = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit system;
+            inherit inputs;
+            inherit username;
+            inherit hostname;
+            inherit host;
+            inherit nix-colors;
           };
-	    home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.backupFileExtension = "backup";
-	    home-manager.users.${username} = import ./users/default/home.nix;
-	  }
-	];
+          modules = [
+            ./system.nix
+            espanso-fix.nixosModules.espanso-capdacoverride
+            # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
+            nixos-hardware.nixosModules.lenovo-thinkpad-x1-yoga
+            stylix.nixosModules.stylix
+            impermanence.nixosModules.impermanence
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.extraSpecialArgs = {
+                inherit username;
+                inherit inputs;
+                inherit host;
+                inherit nixvim-conf;
+                inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
+              };
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+              home-manager.users.${username} = import ./users/default/home.nix;
+            }
+          ];
+        };
       };
     };
-  };
 }

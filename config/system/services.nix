@@ -75,7 +75,7 @@
   };
   stylix = {
     enable = true;
-    base16Scheme=inputs.nix-colors.colorSchemes.solarflare.palette;
+    base16Scheme=inputs.nix-colors.colorSchemes.apathy.palette;
     image = pkgs.fetchurl {
        url = "https://github.com/f0rdprefect/my-wallpaper/blob/main/comet_still2.jpg?raw=true";
        sha256 = "LvWXiPoa+v1WGtLZjxKPjPYQsF1gNdye3QdMoFAaB3E=";

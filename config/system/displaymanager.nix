@@ -4,8 +4,8 @@ let inherit (import ../../hosts/${host}/options.nix) theKBDVariant
 theKBDLayout theSecondKBDLayout; in
 {
   services.libinput.enable = true;
-  environment.systemPackages = [ 
-    inputs.iio-hyprland.packages.${pkgs.system}.default
+  environment.systemPackages = [
+        pkgs.iio-hyprland
   ];
   services.xserver = {
     enable = true;
@@ -21,5 +21,5 @@ theKBDLayout theSecondKBDLayout; in
       hide_borders = true;
     };
   };
-  
+
 }

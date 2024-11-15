@@ -249,8 +249,8 @@ in with lib; {
           border-radius: 24px 10px 24px 10px;
         }
         #custom-startmenu {
-          color: #${config.stylix.base16Scheme.base0B};
-          background: #${config.stylix.base16Scheme.base02};
+          color: #${config.stylix.base16Scheme.base00};
+          background: linear-gradient(90deg, #${config.stylix.base16Scheme.base0C}, #${config.stylix.base16Scheme.base04});
           font-size: 28px;
           margin: 0px;
           padding: 0px 30px 0px 15px;
@@ -269,7 +269,7 @@ in with lib; {
         #custom-exit {
           font-weight: bold;
           color: #0D0E15;
-          background: linear-gradient(90deg, #${config.stylix.base16Scheme.base0E}, #${config.stylix.base16Scheme.base0C});
+          background: linear-gradient(90deg, #${config.stylix.base16Scheme.base0F}, #${config.stylix.base16Scheme.base0C});
           margin: 4px;
           padding: 0px 15px 0px 30px;
           border-radius: 0px 0px 0px 40px;

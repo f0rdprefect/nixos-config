@@ -10,18 +10,22 @@ let
     theSecondKBDLayout
     theKBDVariant sdl-videodriver;
 in with lib; {
+  stylix.targets.hyprland.enable = false;
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
     systemd.enable = true;
     plugins = [
-      # hyprplugins.hyprtrails
+                #hyprplugins.hyprtrails
     ];
     extraConfig = let
       modifier = "SUPER";
     in concatStrings [ ''
       monitor = eDP-1,preferred,0x0,1.2500
-      monitor = ,preferred,auto,1
+      monitor = ,preferred,auto-left,1
+      xwayland {
+         force_zero_scaling = true
+      }
       general {
         gaps_in = 6
         gaps_out = 8
@@ -100,15 +104,7 @@ in with lib; {
         animation = workspaces, 1, 5, wind
       }
       decoration {
-        rounding = 10
-        drop_shadow = false
-        blur {
-            enabled = true
-            size = 5
-            passes = 3
-            new_optimizations = on
-            ignore_opacity = on
-        }
+        rounding = 5
       }
       plugin {
         hyprtrails {

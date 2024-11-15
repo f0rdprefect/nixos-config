@@ -10,43 +10,43 @@
 
   # List System Programs
   environment.systemPackages = with pkgs; [
-    wget 
+    wget
     jq
-    curl 
-    git 
-    cmatrix 
-    lolcat 
-    neofetch 
-    macchina 
+    curl
+    git
+    cmatrix
+    lolcat
+    neofetch
+    macchina
     fastfetch
-    htop 
-    btop 
+    htop
+    btop
     libvirt
-    polkit_gnome 
-    lm_sensors 
-    unzip 
-    unrar 
-    libnotify 
+    polkit_gnome
+    lm_sensors
+    unzip
+    unrar
+    libnotify
     eza
-    v4l-utils 
-    ydotool 
-    wl-clipboard 
-    socat 
-    cowsay 
-    lsd 
+    v4l-utils
+    ydotool
+    wl-clipboard
+    socat
+    cowsay
+    lsd
     lshw
-    pkg-config 
-    gnumake 
-    noto-fonts-color-emoji 
-    material-icons 
+    pkg-config
+    gnumake
+    noto-fonts-color-emoji
+    material-icons
     brightnessctl
-    virt-viewer 
-    swappy 
-    ripgrep 
-    appimage-run 
-    networkmanagerapplet 
-    yad 
-    playerctl 
+    virt-viewer
+    swappy
+    ripgrep
+    appimage-run
+    networkmanagerapplet
+    yad
+    playerctl
     nh
     podman-compose
   ];
