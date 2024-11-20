@@ -8,7 +8,7 @@
     ./espanso.nix
     ./fzf.nix
     ./gtk-qt.nix
-    ./hyprland.nix
+    ./hyprland
     ./kdenlive.nix
     ./kitty.nix
     ./neovim
