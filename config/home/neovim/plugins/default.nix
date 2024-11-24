@@ -22,7 +22,7 @@
 
     plugins = {
       web-devicons.enable = true;
-
+      lastplace.enable = true;
       gitsigns = {
         enable = true;
         settings.signs = {
