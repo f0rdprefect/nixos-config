@@ -30,6 +30,7 @@ with lib;
         hyprlock
     ];
   stylix.targets.hyprland.enable = false;
+  stylix.targets.hyprlock.enable = false;
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -195,7 +196,7 @@ with lib;
                 exec-once = swaync
                 exec-once = wallsetter
                 exec-once = nm-applet --indicator
-                exec-once = swayidle -w timeout 720 'pidof hyprlock || hyprlock' timeout 800 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'pidof hyprlock || hyprlock'
+                exec-once = hypridle
                 exec-once = iio-hyprland
                 exec-once = wl-paste --type text --watch cliphist store #Stores only text data
                 exec-once = wl-paste --type image --watch cliphist store #Stores only image data
@@ -329,24 +330,24 @@ with lib;
                 vibrancy_darkness = 0.0
             }
 
-#            input-field {
-#                monitor =
-#                size = 250, 50
-#                outline_thickness = 3
-#                dots_size = 0.33 # Scale of input-field height, 0.2 - 0.8
-#                dots_spacing = 0.15 # Scale of dots' absolute size, 0.0 - 1.0
-#                dots_center = true
-#                outer_color = rgba(${theme.base05}ff)
-#                inner_color = rgba(${theme.base00}ff)
-#                font_color = rgba(${theme.base0C}ff)
-#                fade_on_empty = true
-#                placeholder_text = <i>Password...</i> # Text rendered in the input box when it's empty.
-#                hide_input = false
-#
-#                position = 0, 80
-#                halign = center
-#                valign = bottom
-#            }
+            input-field {
+                monitor =
+                size = 250, 50
+                outline_thickness = 3
+                dots_size = 0.33 # Scale of input-field height, 0.2 - 0.8
+                dots_spacing = 0.15 # Scale of dots' absolute size, 0.0 - 1.0
+                dots_center = true
+                outer_color = rgba(${theme.base05}ff)
+                inner_color = rgba(${theme.base00}ff)
+                font_color = rgba(${theme.base0C}ff)
+                fade_on_empty = true
+                placeholder_text = <i>Password...</i> # Text rendered in the input box when it's empty.
+                hide_input = false
+
+                position = 0, 80
+                halign = center
+                valign = bottom
+            }
 
             # Date
             label {
@@ -441,4 +442,29 @@ with lib;
         ];
 
   };
+ services = {
+    hypridle = {
+      enable = true;
+      settings = {
+        general = {
+          before_sleep_cmd = "loginctl lock-session";
+          after_sleep_cmd = "hyprctl dispatch dpms on";
+          ignore_dbus_inhibit = false;
+          lock_cmd = "hyprlock";
+          };
+        listener = [
+          {
+            timeout = 900;
+            on-timeout = "hyprlock";
+          }
+          {
+            timeout = 1200;
+            on-timeout = "hyprctl dispatch dpms off";
+            on-resume = "hyprctl dispatch dpms on";
+          }
+        ];
+      };
+    };
+  };
+
 }
