@@ -30,6 +30,8 @@
         servers = {
             nixd.enable = true;
             typst_lsp.enable = true;
+            ruff.enable = true;
+            bashls.enable = true;
         };
       };
     };

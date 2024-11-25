@@ -2,10 +2,12 @@
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     ./autocommands.nix
-    ./completion.nix
+    #./completion.nix
+    ./cmp.nix
     ./keymappings.nix
     ./options.nix
     ./plugins
+    ./git.nix
     ./todo.nix
   ];
 
