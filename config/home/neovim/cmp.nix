@@ -33,6 +33,7 @@
             }
             { name = "nvim_lua"; }
             { name = "path"; }
+            { name = "neorg"; }
           ];
 
           formatting = {

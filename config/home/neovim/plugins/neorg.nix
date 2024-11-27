@@ -34,12 +34,13 @@
         '';
 
         "core.dirman".config.workspaces = {
-          notes = "~/notes";
-          nix = "~/perso/nix/notes";
+          notes = "~/Documents/notes/general";
+          nix = "~/Documents/notes/nix";
         };
 
         "core.concealer".__empty = null;
         "core.completion".config.engine = "nvim-cmp";
+        "core.integrations.nvim-cmp".__empty = null;
         "core.qol.toc".config.close_after_use = true;
       };
     };
