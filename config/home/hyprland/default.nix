@@ -415,7 +415,7 @@ with lib;
             # uptime
             label {
                 monitor =
-                text = cmd[update:60000] echo "<b> "$(uptime)" </b>"
+                text = cmd[update:60000] echo "<b> "$(uptime | cut -f 1 -d "," |cut -f 4-8 -d " ")" </b>"
                 color = rgba(${theme.base0A}ff)
                 font_size = 24
                 font_family = JetBrains Mono Nerd Font 10
