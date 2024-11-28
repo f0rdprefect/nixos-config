@@ -8,6 +8,7 @@ in {
   home.packages = with pkgs; [
     calibre
     super-slicer-beta
+    orca-slicer
     #####system maintenance stuff
     gparted
     usbutils
@@ -16,7 +17,7 @@ in {
     fd
     nix-search-cli
     #####python stuff#####
-    poetry
+    uv
     ####Office#######
     evince
     gimp
@@ -38,7 +39,7 @@ in {
     ffmpeg-full
     ####File sharing###
     nextcloud-client
-    #localsend
+    localsend
     git-annex
     ####Communication####
     signal-desktop
@@ -76,7 +77,6 @@ in {
     glib
     spotify
     swayidle
-    neovide
     swaylock-effects
     #fonts
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
