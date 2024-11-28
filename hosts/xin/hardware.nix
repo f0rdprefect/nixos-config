@@ -12,6 +12,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  boot.plymouth.enable = true;
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/47197c13-0937-4b85-ae31-2b973f45f70f";
