@@ -68,6 +68,11 @@
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
+  services.smartd = {
+      enable = false;
+      autodetect = true;
+    };
+
   security.pam.services.hyprlock = {};
   security.pam.services.swaylock = {
     text = ''
