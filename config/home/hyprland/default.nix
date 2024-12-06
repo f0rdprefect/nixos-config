@@ -9,7 +9,6 @@
 
 let
   theme = config.colorScheme.palette;
-  hyprplugins = inputs.hyprland-plugins.packages.${pkgs.system};
   inherit (import ../../../hosts/${host}/options.nix)
     browser
     cpuType
@@ -36,8 +35,8 @@ with lib;
     xwayland.enable = true;
     systemd.enable = true;
     plugins = [
-      hyprplugins.hyprtrails
-      inputs.hyprgrass.packages.${pkgs.system}.default
+            pkgs.hyprlandPlugins.hyprtrails
+            pkgs.hyprlandPlugins.hyprgrass
     ];
     extraConfig =
       let

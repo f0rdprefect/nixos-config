@@ -15,19 +15,6 @@
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware/master";
     };
-    hyprland = {
-      url = "https://github.com/hyprwm/Hyprland";
-      type = "git";
-      submodules = true;
-    };
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
-    hyprgrass = {
-         url = "github:horriblename/hyprgrass";
-         inputs.hyprland.follows = "hyprland"; # IMPORTANT
-    };
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,10 +24,10 @@
       url = "git+file:///home/matt/src/nixvim-config";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+        #    disko = {
+        #      url = "github:nix-community/disko";
+        #      inputs.nixpkgs.follows = "nixpkgs";
+        #    };
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -64,7 +51,6 @@
       home-manager,
       impermanence,
       nixos-hardware,
-      disko,
       stylix,
       espanso-fix,
       nixvim-conf,
