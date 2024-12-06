@@ -1,8 +1,8 @@
 { inputs, config, pkgs,
   username, hostname, host, ... }:
 
-let 
-  inherit (import ./hosts/${host}/options.nix) 
+let
+  inherit (import ./hosts/${host}/options.nix)
     theLocale theTimezone gitUsername
     theShell wallpaperDir wallpaperGit
     theLCVariables theKBDLayout flakeDir
@@ -74,5 +74,5 @@ in {
 
   };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.11";
 }

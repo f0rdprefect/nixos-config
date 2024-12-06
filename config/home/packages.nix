@@ -7,7 +7,7 @@ in {
   # Install Packages For The User
   home.packages = with pkgs; [
     calibre
-    super-slicer-beta
+    #super-slicer
     orca-slicer
     #####system maintenance stuff
     gparted
@@ -17,6 +17,7 @@ in {
     fd
     nix-search-cli
     #####python stuff#####
+    poetry
     uv
     ####Office#######
     evince
@@ -79,7 +80,7 @@ in {
     swayidle
     swaylock-effects
     #fonts
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    nerd-fonts.jetbrains-mono
     fantasque-sans-mono
     font-awesome
     roboto
