@@ -1,4 +1,4 @@
-{
+{inputs, lib, ...}: {
   imports = [
     ./barbar.nix
     ./comment.nix
@@ -18,7 +18,6 @@
   ];
 
   programs.nixvim = {
-    colorschemes.gruvbox.enable = true;
 
     plugins = {
       web-devicons.enable = true;
@@ -33,9 +32,8 @@
 
       nvim-autopairs.enable = true;
 
-      nvim-colorizer = {
+      colorizer = {
         enable = true;
-        userDefaultOptions.names = false;
       };
 
       oil.enable = true;

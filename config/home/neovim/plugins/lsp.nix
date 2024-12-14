@@ -29,7 +29,7 @@
 
         servers = {
             nixd.enable = true;
-            typst_lsp.enable = true;
+            tinymist.enable = true;
             ruff.enable = true;
             bashls.enable = true;
         };
