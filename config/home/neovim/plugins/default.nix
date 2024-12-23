@@ -1,5 +1,6 @@
 {inputs, lib, ...}: {
   imports = [
+    ./avante.nix
     ./barbar.nix
     ./comment.nix
     ./floaterm.nix
