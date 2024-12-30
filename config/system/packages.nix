@@ -49,6 +49,7 @@
     playerctl
     nh
     podman-compose
+    adwaita-icon-theme
   ];
 
   programs = {
@@ -71,6 +72,7 @@
       enableSSHSupport = true;
     };
     virt-manager.enable = true;
+    hamster.enable = true;
   };
 
   virtualisation.libvirtd.enable = true;

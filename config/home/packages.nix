@@ -16,6 +16,7 @@ in {
     #fzf
     fd
     nix-search-cli
+    nixfmt-rfc-style
     #####python stuff#####
     poetry
     uv
@@ -31,6 +32,7 @@ in {
     pandoc
     texliveFull
     typst
+    code-cursor
     ####Media Ripping###
     asunder
     handbrake
@@ -104,5 +106,4 @@ in {
 
   programs.direnv.enable = true;
   programs.gh.enable = true;
-
 }
