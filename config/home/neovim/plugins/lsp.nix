@@ -28,10 +28,15 @@
         };
 
         servers = {
-            nixd.enable = true;
-            tinymist.enable = true;
-            ruff.enable = true;
-            bashls.enable = true;
+          nixd.enable = true;
+          tinymist.enable = true;
+          ruff.enable = true;
+          rust_analyzer = {
+            enable = true;
+            installRustc = false;
+            installCargo = false;
+          };
+          bashls.enable = true;
         };
       };
     };

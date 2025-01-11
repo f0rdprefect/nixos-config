@@ -870,6 +870,38 @@
         "type": "github"
       }
     },
+    "nixpkgs-master": {
+      "locked": {
+        "lastModified": 1736540723,
+        "narHash": "sha256-s5l45VinNPdCzUmmUk5kSpZfd+KOS8HOJCqtUgEzYOc=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "5ea86236345b58c522a9953d577125d32d13d992",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-stable": {
+      "locked": {
+        "lastModified": 1736543165,
+        "narHash": "sha256-4+u6psmCF0BVJBEqkuHWIi8RZIUutUVRL556CbGxMiI=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d5c48fb48bccffbd8eb5e6d6ede9170f6f5302f3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "release-24.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1730200266,
@@ -1050,6 +1082,8 @@
         "nix-colors": "nix-colors",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-master": "nixpkgs-master",
+        "nixpkgs-stable": "nixpkgs-stable",
         "nixvim": "nixvim",
         "nixvim-conf": "nixvim-conf",
         "stylix": "stylix_2",

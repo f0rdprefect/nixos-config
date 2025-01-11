@@ -5,6 +5,12 @@
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
+    nixpkgs-stable = {
+      url = "github:nixos/nixpkgs/release-24.11";
+    };
+    nixpkgs-master = {
+      url = "github:nixos/nixpkgs/master";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,10 +30,10 @@
       url = "git+file:///home/matt/src/nixvim-config";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-        #    disko = {
-        #      url = "github:nix-community/disko";
-        #      inputs.nixpkgs.follows = "nixpkgs";
-        #    };
+    #    disko = {
+    #      url = "github:nix-community/disko";
+    #      inputs.nixpkgs.follows = "nixpkgs";
+    #    };
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -46,8 +52,9 @@
   # https://mhwombat.codeberg.page/nix-book/#at-patterns
   outputs =
     {
-      self,
       nixpkgs,
+      nixpkgs-master,
+      nixpkgs-stable,
       home-manager,
       impermanence,
       nixos-hardware,
@@ -67,6 +74,26 @@
         config = {
           allowUnfree = true;
         };
+      };
+      pkgs-stable = import nixpkgs-stable {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+      };
+      pkgs-master = import nixpkgs-master {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+      };
+      # Make stable  packages available in the unstable configuration
+      overlay-stable = final: prev: {
+        stable = pkgs-stable;
+      };
+      # Make master packages available in the unstable configuration
+      overlay-master = final: prev: {
+        master = pkgs-master;
       };
     in
     {
@@ -88,6 +115,13 @@
             stylix.nixosModules.stylix
             impermanence.nixosModules.impermanence
             home-manager.nixosModules.home-manager
+            # Apply the overlays
+            {
+              nixpkgs.overlays = [
+                overlay-master
+                overlay-stable
+              ];
+            }
             {
               home-manager.extraSpecialArgs = {
                 inherit username;
