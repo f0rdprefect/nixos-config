@@ -1,7 +1,9 @@
-{inputs, lib, ...}: {
+{ inputs, lib, ... }:
+{
   imports = [
     ./avante.nix
     ./barbar.nix
+    ./bufferline.nix
     ./comment.nix
     ./floaterm.nix
     ./harpoon.nix

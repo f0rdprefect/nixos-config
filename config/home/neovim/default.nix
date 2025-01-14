@@ -1,4 +1,5 @@
-{inputs, lib, ...}: {
+{ inputs, lib, ... }:
+{
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     ./autocommands.nix
@@ -24,6 +25,7 @@
           "hmts.nvim"
           "neorg"
           "nvim-treesitter"
+          "bufferline.nvim"
         ];
       };
       byteCompileLua.enable = true;
