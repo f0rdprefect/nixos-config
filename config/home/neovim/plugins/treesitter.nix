@@ -16,14 +16,17 @@
     treesitter-refactor = {
       enable = true;
       highlightDefinitions = {
-        enable = true;
+        # enabled makes nvim choke on some flakes
+        enable = false;
         # Set to false if you have an `updatetime` of ~100.
         clearOnCursorMove = false;
       };
     };
     treesitter-context = {
       enable = true;
-      settings = { max_lines = 2; };
+      settings = {
+        max_lines = 2;
+      };
     };
     rainbow-delimiters.enable = true;
 
