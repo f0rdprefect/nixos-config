@@ -18,7 +18,7 @@ in
   home.packages = with pkgs; [
     calibre
     super-slicer
-    stable.orca-slicer
+    orca-slicer
     #####system maintenance stuff
     gparted
     usbutils

@@ -27,6 +27,7 @@ with lib;
   home.packages = with pkgs; [
         hypridle
         hyprlock
+        wayland-pipewire-idle-inhibit
     ];
   stylix.targets.hyprland.enable = false;
   stylix.targets.hyprlock.enable = false;
@@ -196,6 +197,7 @@ with lib;
                 exec-once = wallsetter
                 exec-once = nm-applet --indicator
                 exec-once = hypridle
+                exec-once = wayland-pipewire-idle-inhibit
                 exec-once = iio-hyprland
                 exec-once = wl-paste --type text --watch cliphist store #Stores only text data
                 exec-once = wl-paste --type image --watch cliphist store #Stores only image data

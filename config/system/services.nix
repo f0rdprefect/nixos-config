@@ -59,7 +59,7 @@
       };
     };
   };
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   programs.thunar.enable = true;
   services.gvfs.enable = true;
