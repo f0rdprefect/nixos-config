@@ -23,7 +23,6 @@
   ];
 
   programs.nixvim = {
-    imports = [ ./fidget.nix ];
     plugins = {
       web-devicons.enable = true;
       lastplace.enable = true;
