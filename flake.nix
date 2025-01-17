@@ -26,8 +26,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim-conf = {
-      #url = "github:f0rdprefect/nixvim-config";
-      url = "git+file:///home/matt/src/nixvim-config";
+      url = "github:f0rdprefect/nixvim-config";
+      #url = "git+file:///home/matt/src/nixvim-config";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     #    disko = {
@@ -98,7 +98,7 @@
     in
     {
       nixosConfigurations = {
-        "${hostname}" = nixpkgs.lib.nixosSystem {
+        xin = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit system;
             inherit inputs;
@@ -136,6 +136,29 @@
               home-manager.users.${username} = import ./users/default/home.nix;
             }
           ];
+        };
+        yakari = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit system;
+            inherit inputs;
+            inherit username;
+            inherit hostname;
+            inherit host;
+            inherit nix-colors;
+          };
+          modules = [
+            ./hosts/yakari/configuration.nix
+            # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
+            stylix.nixosModules.stylix
+            # Apply the overlays
+            {
+              nixpkgs.overlays = [
+                overlay-master
+                overlay-stable
+              ];
+            }
+          ];
+
         };
       };
     };
