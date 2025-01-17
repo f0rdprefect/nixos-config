@@ -3,9 +3,11 @@
   imports = [
     ./avante.nix
     ./barbar.nix
+    ./blankline.nix
     ./bufferline.nix
     ./comment.nix
     ./floaterm.nix
+    ./fidget.nix
     ./harpoon.nix
     ./lsp.nix
     ./lualine.nix
@@ -21,7 +23,7 @@
   ];
 
   programs.nixvim = {
-
+    imports = [ ./fidget.nix ];
     plugins = {
       web-devicons.enable = true;
       lastplace.enable = true;
