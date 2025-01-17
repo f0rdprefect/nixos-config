@@ -48,7 +48,7 @@
       url = "github:pitkling/nixpkgs/espanso-fix-capabilities-export";
     };
   };
-  #inputs@ or {} @ inputs names the set only way to access parameters inside the function
+  #inputs@ or {} @ inputs gives a name to the set; only way to access parameters inside the function
   # https://mhwombat.codeberg.page/nix-book/#at-patterns
   outputs =
     {
