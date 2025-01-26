@@ -888,6 +888,21 @@
         "type": "github"
       }
     },
+    "nixos-facter-modules": {
+      "locked": {
+        "lastModified": 1736931726,
+        "narHash": "sha256-aY55yiifyo1XPPpbpH0kWlV1g2dNGBlx6622b7OK8ks=",
+        "owner": "nix-community",
+        "repo": "nixos-facter-modules",
+        "rev": "fa11d87b61b2163efbb9aed7b7a5ae0299e5ab9c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixos-facter-modules",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1736441705,
@@ -1053,17 +1068,17 @@
         "stylix": "stylix"
       },
       "locked": {
-        "lastModified": 1734932227,
-        "narHash": "sha256-3zAMScWrN07vKuJeeQAb21FEZ1WsT57v9v7W6VfJg1o=",
-        "ref": "refs/heads/main",
-        "rev": "a554bcc77666a48ac203949fd53b52e78b10b5e6",
-        "revCount": 124,
-        "type": "git",
-        "url": "file:///home/matt/src/nixvim-config"
+        "lastModified": 1736244031,
+        "narHash": "sha256-S39f4bmle63XAaAqetr6sg0RAhlQVfsK2tDYtTcmEl4=",
+        "owner": "f0rdprefect",
+        "repo": "nixvim-config",
+        "rev": "78da31176b7372398868ad6a1c3260db9b83cce8",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/matt/src/nixvim-config"
+        "owner": "f0rdprefect",
+        "repo": "nixvim-config",
+        "type": "github"
       }
     },
     "nixvim_2": {
@@ -1145,6 +1160,7 @@
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nix-colors": "nix-colors",
+        "nixos-facter-modules": "nixos-facter-modules",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixpkgs-master": "nixpkgs-master",

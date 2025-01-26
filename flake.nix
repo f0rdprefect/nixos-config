@@ -47,6 +47,9 @@
     espanso-fix = {
       url = "github:pitkling/nixpkgs/espanso-fix-capabilities-export";
     };
+    nixos-facter-modules = {
+      url = "github:nix-community/nixos-facter-modules";
+    };
   };
   #inputs@ or {} @ inputs gives a name to the set; only way to access parameters inside the function
   # https://mhwombat.codeberg.page/nix-book/#at-patterns
@@ -108,6 +111,8 @@
             inherit nix-colors;
           };
           modules = [
+            inputs.nixos-facter-modules.nixosModules.facter
+            { config.facter.reportPath = ./hosts/xin/facter.json; }
             ./system.nix
             espanso-fix.nixosModules.espanso-capdacoverride
             # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
@@ -147,7 +152,32 @@
             inherit nix-colors;
           };
           modules = [
+            inputs.nixos-facter-modules.nixosModules.facter
+            { config.facter.reportPath = ./hosts/yakari/facter.json; }
             ./hosts/yakari/configuration.nix
+            # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
+            stylix.nixosModules.stylix
+            # Apply the overlays
+            {
+              nixpkgs.overlays = [
+                overlay-master
+                overlay-stable
+              ];
+            }
+          ];
+
+        };
+        nix = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit system;
+            inherit inputs;
+            inherit username;
+            inherit hostname;
+            inherit host;
+            inherit nix-colors;
+          };
+          modules = [
+            ./hosts/nix/configuration.nix
             # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
             stylix.nixosModules.stylix
             # Apply the overlays

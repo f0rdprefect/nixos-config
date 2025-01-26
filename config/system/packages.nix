@@ -74,6 +74,12 @@
     virt-manager.enable = true;
     hamster.enable = true;
   };
+  security.pam.services.hyprlock = { };
+  security.pam.services.swaylock = {
+    text = ''
+      auth include login
+    '';
+  };
 
   virtualisation.libvirtd.enable = true;
 }
