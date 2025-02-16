@@ -1,4 +1,10 @@
-{ pkgs, config, lib, inputs, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  inputs,
+  ...
+}:
 
 {
   # List services that you want to enable:
@@ -6,15 +12,15 @@
   zramSwap.enable = true;
   services.openssh.enable = true;
   services.fstrim.enable = true;
-
+  services.power-profiles-daemon.enable = false; # for tlp and auto-cpufreq
   services.tlp = {
     enable = true;
     settings = {
-      START_CHARGE_THRESH_BAT0=75;
-      STOP_CHARGE_THRESH_BAT0=80;
+      START_CHARGE_THRESH_BAT0 = 75;
+      STOP_CHARGE_THRESH_BAT0 = 80;
 
-      START_CHARGE_THRESH_BAT1=75;
-      STOP_CHARGE_THRESH_BAT1=80;
+      START_CHARGE_THRESH_BAT1 = 75;
+      STOP_CHARGE_THRESH_BAT1 = 80;
 
     };
   };
@@ -23,15 +29,15 @@
   xdg.portal = {
     enable = true;
     extraPortals = [
-            pkgs.xdg-desktop-portal-gtk
-            pkgs.xdg-desktop-portal-kde
-            pkgs.xdg-desktop-portal
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-kde
+      pkgs.xdg-desktop-portal
     ];
     configPackages = [
-            pkgs.xdg-desktop-portal-gtk
-            pkgs.xdg-desktop-portal-kde
-            pkgs.xdg-desktop-portal-hyprland
-            pkgs.xdg-desktop-portal
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-kde
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal
     ];
   };
   services.pipewire = {
@@ -64,27 +70,21 @@
   programs.thunar.enable = true;
   services.gvfs.enable = true;
   services.tumbler.enable = true;
-  services.gnome.gnome-keyring.enable=true;
+  services.gnome.gnome-keyring.enable = true;
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
   services.smartd = {
-      enable = false;
-      autodetect = true;
-    };
-
-  security.pam.services.hyprlock = {};
-  security.pam.services.swaylock = {
-    text = ''
-      auth include login
-    '';
+    enable = false;
+    autodetect = true;
   };
+
   stylix = {
     enable = true;
-    base16Scheme=inputs.nix-colors.colorSchemes.apathy.palette;
+    base16Scheme = inputs.nix-colors.colorSchemes.monokai.palette;
     image = pkgs.fetchurl {
-       url = "https://github.com/f0rdprefect/my-wallpaper/blob/main/comet_still2.jpg?raw=true";
-       sha256 = "LvWXiPoa+v1WGtLZjxKPjPYQsF1gNdye3QdMoFAaB3E=";
+      url = "https://github.com/f0rdprefect/my-wallpaper/blob/main/comet_still2.jpg?raw=true";
+      sha256 = "LvWXiPoa+v1WGtLZjxKPjPYQsF1gNdye3QdMoFAaB3E=";
     };
     polarity = "dark";
     fonts = {
@@ -94,11 +94,11 @@
       };
       sansSerif = {
         package = pkgs.montserrat;
-        name = "Montserrat";
+        name = "Montserrat Medium";
       };
       serif = {
-        package = pkgs.montserrat;
-        name = "Montserrat";
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Serif";
       };
       sizes = {
         applications = 12;

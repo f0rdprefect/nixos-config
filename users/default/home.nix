@@ -1,11 +1,26 @@
-{ config, pkgs, inputs, username, lib,
-  host, gtkThemeFromScheme, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  username,
+  lib,
+  host,
+  gtkThemeFromScheme,
+  ...
+}:
 let
   inherit (import ./../../hosts/${host}/options.nix)
-    gitUsername gitEmail theme browser
-    wallpaperDir wallpaperGit flakeDir
-    waybarStyle;
-in {
+    gitUsername
+    gitEmail
+    theme
+    browser
+    wallpaperDir
+    wallpaperGit
+    flakeDir
+    waybarStyle
+    ;
+in
+{
   # Home Manager Settings
   home.username = "${username}";
   home.homeDirectory = "/home/${username}";
@@ -17,6 +32,7 @@ in {
   # Import Program Configurations
   imports = [
     inputs.nix-colors.homeManagerModules.default
+    ./../../hosts/${host}/backup.nix
     ./../../config/home
   ];
 
@@ -36,8 +52,8 @@ in {
   xdg = {
     enable = true;
     userDirs = {
-        enable = true;
-        createDirectories = true;
+      enable = true;
+      createDirectories = true;
     };
     systemDirs = {
       data = [ "$HOME/.nix-profile/share" ];
@@ -46,8 +62,8 @@ in {
 
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
     };
   };
 

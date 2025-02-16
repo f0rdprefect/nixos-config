@@ -1,19 +1,33 @@
-{ inputs, config, pkgs,
-  username, hostname, host, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  username,
+  hostname,
+  host,
+  ...
+}:
 
 let
   inherit (import ./hosts/${host}/options.nix)
-    theLocale theTimezone gitUsername
-    theShell wallpaperDir wallpaperGit
-    theLCVariables theKBDLayout flakeDir
-    theme;
-in {
-  imports =
-    [
-      ./hosts/${host}/hardware.nix
-      ./config/system
-      ./users/users.nix
-    ];
+    theLocale
+    theTimezone
+    gitUsername
+    theShell
+    wallpaperDir
+    wallpaperGit
+    theLCVariables
+    theKBDLayout
+    flakeDir
+    theme
+    ;
+in
+{
+  imports = [
+    ./hosts/${host}/hardware.nix
+    ./config/system
+    ./users/users.nix
+  ];
 
   # Enable networking
   networking.hostName = "${hostname}"; # Define your hostname
@@ -45,7 +59,7 @@ in {
 
   environment.variables = {
     FLAKE = "${flakeDir}";
-    ZANEYOS_VERSION="1.0";
+    ZANEYOS_VERSION = "1.0";
     POLKIT_BIN = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
     #EDITOR = "nvim";
   };
@@ -53,10 +67,17 @@ in {
   # Optimization settings and garbage collection automation
   nix = {
     settings = {
-      trusted-users = [ "root" "matt"];
+      trusted-users = [
+        "root"
+        "matt"
+      ];
       auto-optimise-store = true;
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       substituters = [
+        "https://cache.nixos.org"
         "https://hyprland.cachix.org"
         "https://devenv.cachix.org"
 
@@ -72,6 +93,20 @@ in {
       options = "--delete-older-than 7d";
     };
 
+  };
+  # https://lgug2z.com/articles/handling-secrets-in-nixos-an-overview/
+  sops.defaultSopsFile = ./secrets/secrets.yaml;
+  # This will automatically import SSH keys as age keys
+  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  # This is using an age key that is expected to already be in the filesystem
+  sops.age.keyFile = "/var/lib/sops-nix/key.txt";
+  # This will generate a new key if the key specified above does not exist
+  sops.age.generateKey = true;
+  # This is the actual specification of the secrets.
+  sops.secrets.hello = { };
+  sops.secrets.rustic-xin = {
+    owner = "matt";
+    path = "/home/matt/.config/rustic/password.txt";
   };
 
   system.stateVersion = "24.11";

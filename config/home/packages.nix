@@ -22,6 +22,7 @@ in
     #####system maintenance stuff
     gparted
     usbutils
+    sops
     #####shell stuff####
     #fzf
     fd
