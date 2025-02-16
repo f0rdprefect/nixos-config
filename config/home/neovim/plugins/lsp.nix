@@ -37,6 +37,7 @@
             installCargo = false;
           };
           bashls.enable = true;
+          marksman.enable = true;
         };
       };
     };
