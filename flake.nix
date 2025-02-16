@@ -50,6 +50,11 @@
     nixos-facter-modules = {
       url = "github:nix-community/nixos-facter-modules";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
   #inputs@ or {} @ inputs gives a name to the set; only way to access parameters inside the function
   # https://mhwombat.codeberg.page/nix-book/#at-patterns
@@ -65,6 +70,7 @@
       espanso-fix,
       nixvim-conf,
       nix-colors,
+      sops-nix,
       ...
     }@inputs:
     let
@@ -119,6 +125,7 @@
             nixos-hardware.nixosModules.lenovo-thinkpad-x1-yoga
             stylix.nixosModules.stylix
             impermanence.nixosModules.impermanence
+            sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             # Apply the overlays
             {
