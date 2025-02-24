@@ -25,6 +25,7 @@ in
 {
   imports = [
     ./hosts/${host}/hardware.nix
+    ./hosts/${host}/backup.nix
     ./config/system
     ./users/users.nix
   ];
@@ -80,11 +81,13 @@ in
         "https://cache.nixos.org"
         "https://hyprland.cachix.org"
         "https://devenv.cachix.org"
+        "https://nix-community.cachix.org"
 
       ];
       trusted-public-keys = [
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
     };
     gc = {
@@ -102,12 +105,6 @@ in
   sops.age.keyFile = "/var/lib/sops-nix/key.txt";
   # This will generate a new key if the key specified above does not exist
   sops.age.generateKey = true;
-  # This is the actual specification of the secrets.
-  sops.secrets.hello = { };
-  sops.secrets.rustic-xin = {
-    owner = "matt";
-    path = "/home/matt/.config/rustic/password.txt";
-  };
 
   system.stateVersion = "24.11";
 }

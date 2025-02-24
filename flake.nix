@@ -42,6 +42,7 @@
       url = "github:nix-community/impermanence";
     };
     stylix = {
+      #url = "github:awwpotato/stylix";
       url = "github:danth/stylix";
     };
     espanso-fix = {

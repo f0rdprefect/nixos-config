@@ -23,6 +23,8 @@ in
     gparted
     usbutils
     sops
+    rustic
+    caligula
     #####shell stuff####
     #fzf
     fd

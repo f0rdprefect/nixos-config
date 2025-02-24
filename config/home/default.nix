@@ -7,7 +7,7 @@
     ./bash.nix
     ./espanso.nix
     ./fzf.nix
-    ./gtk-qt.nix
+    #    ./gtk-qt.nix
     ./hyprland
     ./kdenlive.nix
     ./kitty.nix
