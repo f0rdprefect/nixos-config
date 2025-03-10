@@ -25,6 +25,12 @@
   programs.nixvim = {
     plugins = {
       web-devicons.enable = true;
+      image = {
+        enable = true;
+        integrations.neorg.enabled = true;
+        integrations.markdown.enabled = true;
+        backend = "kitty";
+      };
       lastplace.enable = true;
       gitsigns = {
         enable = true;
