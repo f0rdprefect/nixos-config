@@ -38,10 +38,9 @@ in
     gimp
     inkscape
     libreoffice
-    logseq
     mupdf
     nomacs
-    okular
+    kdePackages.okular
     pandoc
     texliveFull
     typst
