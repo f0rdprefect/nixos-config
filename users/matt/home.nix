@@ -1,10 +1,19 @@
-{ config, pkgs, nixvim-conf, system, inputs, stylix, ... }:
+{
+  config,
+  pkgs,
+  nixvim-conf,
+  system,
+  inputs,
+  stylix,
+  ...
+}:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   imports = [
     ../../config/home/neovim
+    ../../config/home/vifm
   ];
   nixpkgs.config.allowUnfree = true;
   home.username = "matt";
@@ -27,8 +36,7 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
     #base16Scheme = "${pkgs.base16-schemes}/share/themes/greenscreen.yaml";
     image = pkgs.fetchurl {
-      url =
-        "https://www.pixelstalk.net/wp-content/uploads/2016/05/Epic-Anime-Awesome-Wallpapers.jpg";
+      url = "https://www.pixelstalk.net/wp-content/uploads/2016/05/Epic-Anime-Awesome-Wallpapers.jpg";
       sha256 = "enQo3wqhgf0FEPHj2coOCvo7DuZv+x5rL/WIo4qPI50=";
     };
 
@@ -95,9 +103,9 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
   };
-    # Create a directory in your home folder for scripts
+  # Create a directory in your home folder for scripts
   home.file."bin" = {
-    source = ./bin;  # This references a 'bin' directory next to your configuration
+    source = ./bin; # This references a 'bin' directory next to your configuration
     recursive = true;
     executable = true;
   };
@@ -123,16 +131,22 @@
   #
   #  /etc/profiles/per-user/matt/etc/profile.d/hm-session-vars.sh
   #
-  home.language = { base = "en_US.UTF-8"; };
+  home.language = {
+    base = "en_US.UTF-8";
+  };
   home.sessionVariables = {
     EDITOR = "nvim";
     LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     LANG = "en_US.UTF-8";
-    #LC_ALL = "en_US.UTF-8"; 
+    #LC_ALL = "en_US.UTF-8";
   };
 
-  programs.nh = { enable = true; };
-  programs.bash = { enable = true; };
+  programs.nh = {
+    enable = true;
+  };
+  programs.bash = {
+    enable = true;
+  };
   programs.zsh = {
     enable = false;
 
