@@ -223,5 +223,24 @@
           ];
         };
       };
+      
+      homeConfigurations."matt" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        
+        extraSpecialArgs = {
+          inherit nixvim-conf;
+          inherit inputs;
+          inherit system;
+        };
+        # Specify your home configuration modules here, for example,
+        # the path to your home.nix.
+        modules = [ 
+           stylix.homeManagerModules.stylix
+          ./users/matt/home.nix 
+        ];
+
+        # Optionally use extraSpecialArgs
+        # to pass through arguments to home.nix
+      };
     };
 }
