@@ -1,4 +1,9 @@
-{ inputs, lib, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./avante.nix
@@ -62,5 +67,34 @@
         };
       };
     };
+    # WIP
+    extraPlugins = with pkgs.vimPlugins; [
+      outline-nvim
+    ];
+    extraConfigLua = ''
+      require("outline").setup({})
+    '';
+    keymaps = [
+      {
+        mode = "n";
+        key = "<leader>oo";
+        options.silent = true;
+        action = ":OutlineOpen<CR>";
+      }
+      {
+        mode = "n";
+        key = "<leader>oc";
+        options.silent = true;
+        action = ":OutlineClose<CR>";
+      }
+      {
+        # new markdown note creation
+        mode = "n";
+        key = "<c-n><c-n>";
+        action = ":e <c-r><c-w>.md<CR>";
+        options.silent = true;
+      }
+    ];
+    # END WIP
   };
 }

@@ -20,6 +20,7 @@
     ./swappy.nix
     ./swaylock.nix
     ./swaync.nix
+    ./vifm
     ./wezterm.nix
     ./zeroad.nix
     ./zsh.nix
