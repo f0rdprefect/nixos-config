@@ -42,7 +42,6 @@
       url = "github:nix-community/impermanence";
     };
     stylix = {
-      #url = "github:awwpotato/stylix";
       url = "github:danth/stylix";
     };
     espanso-fix = {
@@ -55,7 +54,22 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    raspberry-pi-nix = {
+      url = "github:nix-community/raspberry-pi-nix/v0.4.1";
+    };
 
+  };
+  nixConfig = {
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
   };
   #inputs@ or {} @ inputs gives a name to the set; only way to access parameters inside the function
   # https://mhwombat.codeberg.page/nix-book/#at-patterns
@@ -72,6 +86,8 @@
       nixvim-conf,
       nix-colors,
       sops-nix,
+      nix-index-database,
+      raspberry-pi-nix,
       ...
     }@inputs:
     let
@@ -127,6 +143,7 @@
             stylix.nixosModules.stylix
             impermanence.nixosModules.impermanence
             sops-nix.nixosModules.sops
+            nix-index-database.nixosModules.nix-index
             home-manager.nixosModules.home-manager
             # Apply the overlays
             {
@@ -197,6 +214,13 @@
             }
           ];
 
+        };
+        pix = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = [
+            raspberry-pi-nix.nixosModules.raspberry-pi
+            ./hosts/pix/pi4.nix
+          ];
         };
       };
     };
