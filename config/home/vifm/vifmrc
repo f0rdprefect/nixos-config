@@ -331,11 +331,11 @@ filextype {*.bmp,*.jpg,*.jpeg,*.png,*.xpm},<image/*>
       \ {Edit in NeoVim}
       \ nvim %f,
 fileviewer {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
-      \ exiv2 %f 2> /dev/null | highlight -O ansi --syntax conf,
-      \ exiv2 -PEkt %f 2> /dev/null | highlight -O ansi --syntax conf,
       \ kitten icat --silent --transfer-mode=file --place=%pwx%ph@%pxx%py %c >/dev/tty </dev/tty %N
       \ %pc
       \ kitten icat --clear --silent >/dev/tty </dev/tty %N
+      \ exiv2 %f 2> /dev/null | highlight -O ansi --syntax conf,
+      \ exiv2 -PEkt %f 2> /dev/null | highlight -O ansi --syntax conf,
 
 "  VIDEO
 filextype {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
