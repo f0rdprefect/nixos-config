@@ -5,6 +5,7 @@
   system,
   inputs,
   stylix,
+  nixgl,
   ...
 }:
 
@@ -15,6 +16,10 @@
     ../../config/home/neovim
     ../../config/home/vifm
   ];
+  nixGL = {
+    packages = nixgl.packages; # you must set this or everything will be a noop
+    defaultWrapper = "mesa"; # choose from options
+  };
   nixpkgs.config.allowUnfree = true;
   home.username = "matt";
   home.homeDirectory = "/home/matt";
@@ -41,36 +46,38 @@
     };
 
   };
-  home.packages = [
-
+  home.packages = with pkgs; [
+    (config.lib.nixGL.wrap kitty)
     #inputs.nixvim-conf.packages.${system}.default
-    pkgs.brave
-    pkgs.chromium
-    pkgs.code-cursor
-    pkgs.firefox
-    pkgs.freeplane
-    pkgs.ganttproject-bin
-    pkgs.gimp
-    pkgs.git
-    pkgs.git-credential-oauth
-    pkgs.hamster
-    pkgs.inkscape-with-extensions
-    pkgs.libsForQt5.falkon
-    pkgs.microsoft-edge
-    pkgs.nixfmt-rfc-style
-    pkgs.nomacs
-    pkgs.ollama
-    pkgs.pandoc
-    pkgs.pokeget-rs
-    pkgs.quickemu
-    pkgs.signal-desktop
-    pkgs.texliveBasic
-    pkgs.typst
-    pkgs.uv
-    pkgs.yt-dlp
-    pkgs.zapzap
-    pkgs.rustic
-    pkgs.swaynotificationcenter
+    brave
+    chromium
+    code-cursor
+    firefox
+    freeplane
+    ganttproject-bin
+    gimp
+    git
+    git-credential-oauth
+    hamster
+    inkscape-with-extensions
+    libsForQt5.falkon
+    microsoft-edge
+    nixfmt-rfc-style
+    nomacs
+    ollama
+    pandoc
+    pokeget-rs
+    quickemu
+    signal-desktop
+    texliveBasic
+    typst
+    uv
+    yt-dlp
+    zapzap
+    rustic
+    swaynotificationcenter
+    imagemagick
+    highlight
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -138,6 +145,7 @@
     EDITOR = "nvim";
     LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     LANG = "en_US.UTF-8";
+    TERMINFO_DIRS = "${pkgs.kitty.terminfo.outPath}/share/terminfo:$TERMINFO_DIRS";
     #LC_ALL = "en_US.UTF-8";
   };
 

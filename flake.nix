@@ -61,7 +61,10 @@
     raspberry-pi-nix = {
       url = "github:nix-community/raspberry-pi-nix/v0.4.1";
     };
-
+    nixgl = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   nixConfig = {
     extra-substituters = [
@@ -88,6 +91,7 @@
       sops-nix,
       nix-index-database,
       raspberry-pi-nix,
+      nixgl,
       ...
     }@inputs:
     let
@@ -100,6 +104,9 @@
         config = {
           allowUnfree = true;
         };
+        overlays = [
+          nixgl.overlay
+        ];
       };
       pkgs-stable = import nixpkgs-stable {
         inherit system;
@@ -223,20 +230,21 @@
           ];
         };
       };
-      
+
       homeConfigurations."matt" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        
+
         extraSpecialArgs = {
           inherit nixvim-conf;
+          inherit nixgl;
           inherit inputs;
           inherit system;
         };
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ 
-           stylix.homeManagerModules.stylix
-          ./users/matt/home.nix 
+        modules = [
+          stylix.homeManagerModules.stylix
+          ./users/matt/home.nix
         ];
 
         # Optionally use extraSpecialArgs
