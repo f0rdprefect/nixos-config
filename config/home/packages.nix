@@ -44,7 +44,7 @@ in
     pandoc
     texliveFull
     typst
-    code-cursor
+    xournalpp
     ####Media Ripping###
     asunder
     handbrake

@@ -70,6 +70,7 @@
     # WIP
     extraPlugins = with pkgs.vimPlugins; [
       outline-nvim
+      img-clip-nvim
     ];
     extraConfigLua = ''
       require("outline").setup({})
