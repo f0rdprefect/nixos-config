@@ -50,10 +50,11 @@
     (config.lib.nixGL.wrap kitty)
     #inputs.nixvim-conf.packages.${system}.default
     brave
-    chromium
+        #chromium
     code-cursor
-    firefox
+    (config.lib.nixGL.wrap firefox)
     freeplane
+    fzf
     ganttproject-bin
     gimp
     git

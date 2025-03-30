@@ -269,7 +269,7 @@ fileviewer {*.db,*.sqlite3},
 
 "  CSV
 fileviewer *.csv,
-      \ cat %c | xsv table,
+      \ xan view %c,
       \ sed "s/,,,,/,,-,,/g;s/,,/ /g" %c | column -t | sed "s/ - /  /g" | cut -c -%pw
 
 "  PDF

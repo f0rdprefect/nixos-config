@@ -1,10 +1,11 @@
 { pkgs, config, ... }:
 
 {
-  #home.packages = with pkgs; [
-  #  fzf
-  #  fd
-  #];
+  home.packages = with pkgs; [
+    fzf
+    fd
+    xan
+  ];
   programs.vifm = {
     enable = true;
   };
