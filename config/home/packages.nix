@@ -48,6 +48,7 @@ in
     ####Media Ripping###
     asunder
     handbrake
+    makemkv
     lame
     yt-dlp
     vlc

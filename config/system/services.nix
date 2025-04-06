@@ -89,8 +89,8 @@
     polarity = "dark";
     fonts = {
       monospace = {
-        package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrainsMono Nerd Font Mono";
+        package = pkgs.nerd-fonts.fira-code;
+        name = "FiraCode Nerd Font Mono";
       };
       sansSerif = {
         package = pkgs.montserrat;
@@ -103,13 +103,14 @@
       sizes = {
         applications = 12;
         terminal = 15;
-        desktop = 11;
+        desktop = 12;
         popups = 12;
       };
     };
     cursor = {
       package = pkgs.graphite-cursors;
       name = "graphite-dark-nord";
+      size = 24;
     };
     opacity = {
       terminal = 0.87;

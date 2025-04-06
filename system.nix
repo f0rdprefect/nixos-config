@@ -51,12 +51,6 @@ in
     LC_TELEPHONE = "${theLCVariables}";
     LC_TIME = "${theLCVariables}";
   };
-  i18n.supportedLocales =
-        [
-          "C.UTF-8/UTF-8"
-          "en_US.UTF-8/UTF-8"
-          "de_DE.UTF-8/UTF-8"
-        ];
 
   console.keyMap = "${theKBDLayout}";
 

@@ -21,6 +21,7 @@
     ./swaylock.nix
     ./swaync.nix
     ./vifm
+        #./vlc.nix did not work but make rebuild slow as hell
     ./wezterm.nix
     ./zeroad.nix
     ./zsh.nix

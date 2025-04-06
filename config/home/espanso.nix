@@ -26,7 +26,7 @@
           }
           {
             trigger = ":hello";
-            replace = "line1\nline2";
+            replace = "Hello World";
           }
         ];
       };

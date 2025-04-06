@@ -294,10 +294,6 @@ with lib;
                 bind = ,XF86AudioPrev, exec, playerctl previous
                 bind = ,XF86MonBrightnessDown,exec,brightnessctl set 5%-
                 bind = ,XF86MonBrightnessUp,exec,brightnessctl set +5%
-
-                windowrule = idleinhibit fullscreen, ^(firefox)$
-                windowrule = idleinhibit fullscreen, ^(vlc)$
-                windowrule = idleinhibit fullscreen, ^(Jellyfin)$
                 source = ~/.config/hypr/adhoc.conf
         ''
       ];
