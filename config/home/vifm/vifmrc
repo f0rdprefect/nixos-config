@@ -53,7 +53,7 @@ anoremap <c-i> <CR>
 
 " FILE MANAGEMENT
 nnoremap o :file<CR>
-nnoremap t :touch<SPACE>
+nnoremap <c-t> :touch<SPACE>
 nnoremap M :mkdir<SPACE>
 
 " TAB MANAGEMENT
@@ -84,7 +84,6 @@ nnoremap H <c-w>h
 nnoremap L <c-w>l
 nnoremap J L
 nnoremap K H
-nnoremap v t
 
 " VIEW MODE REMAPS
 nnoremap W <c-w><c-w>a<c-w><c-w>
@@ -92,8 +91,8 @@ qnoremap H <c-w>h
 qnoremap L <c-w>l
 
 " OPEN SHELL IN CURRENT DIR
-nnoremap s :!fish <cr>
-" nnoremap s :shell<cr>
+"nnoremap s :!fish <cr>
+nnoremap s :shell<cr>
 
 " SORTING MENU
 nnoremap S :sort<cr>
