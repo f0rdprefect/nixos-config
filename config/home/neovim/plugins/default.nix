@@ -30,6 +30,7 @@
   programs.nixvim = {
     plugins = {
       web-devicons.enable = true;
+      diagram.enable = true;
       image = {
         enable = true;
         settings = {
@@ -72,6 +73,7 @@
       };
     };
     # WIP
+    extraLuaPackages = ps: [ ps.magick ];
     extraPlugins = with pkgs.vimPlugins; [
       outline-nvim
       img-clip-nvim
