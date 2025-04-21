@@ -8,6 +8,8 @@
     ./espanso.nix
     ./fzf.nix
     #    ./gtk-qt.nix
+    ./git.nix
+    ./vifm
     ./hyprland
     ./kdenlive.nix
     ./kitty.nix
@@ -21,7 +23,7 @@
     ./swaylock.nix
     ./swaync.nix
     ./vifm
-        #./vlc.nix did not work but make rebuild slow as hell
+    #./vlc.nix did not work but make rebuild slow as hell
     ./wezterm.nix
     ./zeroad.nix
     ./zsh.nix

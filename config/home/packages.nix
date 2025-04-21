@@ -94,6 +94,8 @@ in
     spotify
     swayidle
     swaylock-effects
+    sysz
+    navi
     #fonts
     nerd-fonts.jetbrains-mono
     fantasque-sans-mono
