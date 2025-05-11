@@ -31,7 +31,6 @@ in
     nix-search-cli
     nixfmt-rfc-style
     #####python stuff#####
-    poetry
     uv
     ####Office#######
     evince

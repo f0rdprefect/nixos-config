@@ -1,7 +1,9 @@
-{ pkgs, config, lib, host, ... }:
+{
+  pkgs,
+  ...
+}:
 
-let inherit (import ../../hosts/${host}/options.nix) flatpak; in
-lib.mkIf (flatpak == true) {
+{
   services.flatpak.enable = true;
 
   systemd.services.flatpak-repo = {

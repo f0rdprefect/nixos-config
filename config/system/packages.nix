@@ -1,12 +1,17 @@
-{ pkgs, config, inputs, ... }:
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}:
 
 {
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   # Allow Insecure Packages
   nixpkgs.config.permittedInsecurePackages = [
-     "electron-27.3.11"
-     ];
+    "electron-27.3.11"
+  ];
 
   # List System Programs
   environment.systemPackages = with pkgs; [
@@ -60,7 +65,7 @@
     nano.enable = false;
     steam.gamescopeSession.enable = false;
     dconf.enable = true;
-    seahorse.enable=true;
+    seahorse.enable = true;
     hyprland = {
       enable = true;
       xwayland.enable = true;
@@ -74,7 +79,11 @@
     virt-manager.enable = true;
     hamster.enable = true;
   };
-  security.pam.services.hyprlock = { };
+  security.pam.services.hyprlock = {
+    text = ''
+      auth include login
+    '';
+  };
   security.pam.services.swaylock = {
     text = ''
       auth include login
