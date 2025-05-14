@@ -9,6 +9,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../config/system/services.nix
+    ../../config/system/flatpak.nix
   ];
 
   # Bootloader.
@@ -92,7 +93,7 @@
     packages = with pkgs; [
       minetest
       tipp10
-      filet
+      fish-fillets-ng
       git-credential-oauth
     ];
   };
