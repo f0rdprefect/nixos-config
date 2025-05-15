@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  pkgs-stable,
   nixvim-conf,
   system,
   inputs,
@@ -46,56 +47,59 @@
     };
 
   };
-  home.packages = with pkgs; [
-    (config.lib.nixGL.wrap kitty)
-    #inputs.nixvim-conf.packages.${system}.default
-    brave
-        #chromium
-    code-cursor
-    (config.lib.nixGL.wrap firefox)
-    freeplane
-    fzf
-    ganttproject-bin
-    gimp
-    git
-    git-credential-oauth
-    hamster
-    inkscape-with-extensions
-    libsForQt5.falkon
-    microsoft-edge
-    nixfmt-rfc-style
-    nomacs
-    ollama
-    pandoc
-    pokeget-rs
-    quickemu
-    signal-desktop
-    texliveBasic
-    typst
-    uv
-    yt-dlp
-    zapzap
-    rustic
-    swaynotificationcenter
-    imagemagick
-    highlight
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
+  home.packages =
+    (with pkgs; [
+      (config.lib.nixGL.wrap kitty)
+      #inputs.nixvim-conf.packages.${system}.default
+      brave
+      #chromium
+      code-cursor
+      (config.lib.nixGL.wrap firefox)
+      fzf
+      ganttproject-bin
+      gimp
+      git
+      git-credential-oauth
+      hamster
+      inkscape-with-extensions
+      libsForQt5.falkon
+      microsoft-edge
+      nixfmt-rfc-style
+      nomacs
+      ollama
+      pandoc
+      pokeget-rs
+      quickemu
+      signal-desktop
+      texliveBasic
+      typst
+      uv
+      yt-dlp
+      zapzap
+      rustic
+      swaynotificationcenter
+      imagemagick
+      highlight
+      # # Adds the 'hello' command to your environment. It prints a friendly
+      # # "Hello, world!" when run.
+      # pkgs.hello
 
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+      # # It is sometimes useful to fine-tune packages, for example, by applying
+      # # overrides. You can do that directly here, just don't forget the
+      # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+      # # fonts?
+      # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-  ];
+      # # You can also create simple shell scripts directly inside your
+      # # configuration. For example, this adds a command 'my-hello' to your
+      # # environment:
+      # (pkgs.writeShellScriptBin "my-hello" ''
+      #   echo "Hello, ${config.home.username}!"
+      # '')
+    ])
+    ++ (with pkgs-stable; [
+      freeplane
+    ]);
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

@@ -144,7 +144,7 @@
             inputs.nixos-facter-modules.nixosModules.facter
             { config.facter.reportPath = ./hosts/xin/facter.json; }
             ./system.nix
-                        #espanso-fix.nixosModules.espanso-capdacoverride
+            #espanso-fix.nixosModules.espanso-capdacoverride
             # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
             nixos-hardware.nixosModules.lenovo-thinkpad-x1-yoga
             stylix.nixosModules.stylix
@@ -239,6 +239,7 @@
           inherit nixgl;
           inherit inputs;
           inherit system;
+          inherit pkgs-stable;
         };
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
