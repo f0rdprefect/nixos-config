@@ -222,6 +222,29 @@
           ];
 
         };
+        serenity = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit system;
+            inherit inputs;
+            inherit username;
+            inherit hostname;
+            inherit host;
+            inherit nix-colors;
+          };
+          modules = [
+            ./hosts/serenity/configuration.nix
+            # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
+            stylix.nixosModules.stylix
+            # Apply the overlays
+            {
+              nixpkgs.overlays = [
+                overlay-master
+                overlay-stable
+              ];
+            }
+          ];
+
+        };
         pix = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [
