@@ -53,8 +53,8 @@
       #inputs.nixvim-conf.packages.${system}.default
       brave
       #chromium
-      code-cursor
       (config.lib.nixGL.wrap firefox)
+      (config.lib.nixGL.wrap zed-editor)
       fzf
       ganttproject-bin
       gimp
@@ -63,7 +63,6 @@
       hamster
       inkscape-with-extensions
       libsForQt5.falkon
-      microsoft-edge
       nixfmt-rfc-style
       nomacs
       ollama
@@ -99,6 +98,7 @@
     ])
     ++ (with pkgs-stable; [
       freeplane
+      microsoft-edge
     ]);
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
