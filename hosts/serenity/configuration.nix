@@ -106,7 +106,7 @@
   # };
 
   # List services that you want to enable:
-
+  services.qemuGuest.enable = true;
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   virtualisation.docker.enable = true;
