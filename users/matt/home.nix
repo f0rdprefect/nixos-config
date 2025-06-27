@@ -50,11 +50,13 @@
   home.packages =
     (with pkgs; [
       (config.lib.nixGL.wrap kitty)
+      (config.lib.nixGL.wrap weasis)
       #inputs.nixvim-conf.packages.${system}.default
       brave
       #chromium
       (config.lib.nixGL.wrap firefox)
-      (config.lib.nixGL.wrap zed-editor)
+      logseq
+      sleek-todo
       fzf
       ganttproject-bin
       gimp
