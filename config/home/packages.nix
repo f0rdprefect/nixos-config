@@ -33,7 +33,7 @@ in
     #####python stuff#####
     uv
     ####Office#######
-    evince
+    papers
     gimp
     inkscape
     libreoffice
@@ -92,9 +92,9 @@ in
     glib
     spotify
     swayidle
-    swaylock-effects
     sysz
     navi
+    wineWowPackages.waylandFull
     #fonts
     nerd-fonts.jetbrains-mono
     fantasque-sans-mono
@@ -128,4 +128,13 @@ in
 
   programs.direnv.enable = true;
   programs.gh.enable = true;
+  programs.lutris = {
+    enable = true;
+    winePackages = [
+      pkgs.wineWow64Packages.waylandFull
+      pkgs.winePackages.waylandFull
+    ];
+  };
+
+  programs.mangohud.enable = true;
 }

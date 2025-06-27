@@ -78,6 +78,7 @@
     enable = false;
     autodetect = true;
   };
+  virtualisation.waydroid.enable = true;
 
   stylix = {
     enable = true;
