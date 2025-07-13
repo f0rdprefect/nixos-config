@@ -44,6 +44,7 @@ in
     texliveFull
     typst
     xournalpp
+    sleek-todo
     ####Media Ripping###
     asunder
     handbrake
@@ -127,7 +128,6 @@ in
   fonts.fontconfig.enable = true;
 
   programs.direnv.enable = true;
-  programs.gh.enable = true;
   programs.lutris = {
     enable = true;
     winePackages = [

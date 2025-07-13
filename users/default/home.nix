@@ -46,6 +46,7 @@ in
     enable = true;
     userName = "${gitUsername}";
     userEmail = "${gitEmail}";
+
   };
 
   # Create XDG Dirs

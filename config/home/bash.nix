@@ -1,6 +1,6 @@
 { config, lib, pkgs, host, ... }:
 
-let inherit (import ../../hosts/${host}/options.nix) flakeDir flakePrev 
+let inherit (import ../../hosts/${host}/options.nix) flakeDir flakePrev
 	     hostname flakeBackup theShell; in
 lib.mkIf (theShell == "bash") {
   # Configure Bash
@@ -19,7 +19,6 @@ lib.mkIf (theShell == "bash") {
       fi
     '';
     sessionVariables = {
-      ZANEYOS = true;
       FLAKEBACKUP = "${flakeBackup}";
       FLAKEPREV = "${flakePrev}";
     };
@@ -35,7 +34,7 @@ lib.mkIf (theShell == "bash") {
       la="lsd -a";
       lal="lsd -al";
       ".."="cd ..";
-     
+
     };
   };
 }
