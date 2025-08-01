@@ -84,18 +84,15 @@ in
     imv
     mpv
     gimp
-    rustup
-    audacity
+    #  audacity
     pavucontrol
     tree
     nix-tree
     protonup-qt
     glib
     spotify
-    swayidle
     sysz
     navi
-    wineWowPackages.waylandFull
     #fonts
     nerd-fonts.jetbrains-mono
     fantasque-sans-mono
@@ -128,13 +125,4 @@ in
   fonts.fontconfig.enable = true;
 
   programs.direnv.enable = true;
-  programs.lutris = {
-    enable = true;
-    winePackages = [
-      pkgs.wineWow64Packages.waylandFull
-      pkgs.winePackages.waylandFull
-    ];
-  };
-
-  programs.mangohud.enable = true;
 }
