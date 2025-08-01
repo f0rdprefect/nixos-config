@@ -11,32 +11,27 @@ let
 in
 lib.mkIf ("${gpuType}" == "intel") {
   # NixOS configuration for Intel UHD Graphics 620 with Vulkan support
-
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      # Intel media drivers
       intel-media-driver
-      intel-vaapi-driver
-      vaapiVdpau
       libvdpau-va-gl
-      intel-media-sdk
-
-      # Vulkan support for Intel
+      # OpenCL support for intel CPUs before 12th gen
+      # see: https://github.com/NixOS/nixpkgs/issues/356535
+                #intel-compute-runtime-legacy1
+      vpl-gpu-rt # QSV on 11th gen or newer
+      intel-ocl
       intel-compute-runtime # OpenCL support
-      vulkan-loader
-      vulkan-validation-layers
-      vulkan-tools
     ];
 
     # Enable 32-bit support if you need it (e.g., for games)
-    enable32Bit = true;
-    extraPackages32 = with pkgs.pkgsi686Linux; [
-      intel-media-driver
-      intel-vaapi-driver
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
+    #  enable32Bit = true;
+    #  extraPackages32 = with pkgs.pkgsi686Linux; [
+    #    intel-media-driver
+    #    intel-vaapi-driver
+    #    vaapiVdpau
+    #    libvdpau-va-gl
+    #  ];
   };
 
   environment.systemPackages = with pkgs; [
