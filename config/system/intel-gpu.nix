@@ -25,13 +25,13 @@ lib.mkIf ("${gpuType}" == "intel") {
     ];
 
     # Enable 32-bit support if you need it (e.g., for games)
-    #  enable32Bit = true;
-    #  extraPackages32 = with pkgs.pkgsi686Linux; [
-    #    intel-media-driver
-    #    intel-vaapi-driver
-    #    vaapiVdpau
-    #    libvdpau-va-gl
-    #  ];
+     enable32Bit = true;
+      extraPackages32 = with pkgs.pkgsi686Linux; [
+        intel-media-driver
+        intel-vaapi-driver
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
   };
 
   environment.systemPackages = with pkgs; [

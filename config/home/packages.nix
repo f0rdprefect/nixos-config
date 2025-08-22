@@ -16,6 +16,7 @@ in
 {
   # Install Packages For The User
   home.packages = with pkgs; [
+    mcpelauncher-ui-qt
     calibre
     super-slicer
     orca-slicer

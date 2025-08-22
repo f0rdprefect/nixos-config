@@ -25,6 +25,7 @@
     ./vifm
     #./vlc.nix did not work but make rebuild slow as hell
     ./wezterm.nix
+    ./yazi.nix
     ./zeroad.nix
     ./zsh.nix
 
