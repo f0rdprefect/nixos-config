@@ -1,7 +1,7 @@
 { inputs, lib, ... }:
 {
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeModules.nixvim
     ./autocommands.nix
     #./completion.nix
     ./cmp.nix
