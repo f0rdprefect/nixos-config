@@ -8,18 +8,21 @@
   programs.yazi = {
     enable = true;
     enableBashIntegration = true;
+    enableZshIntegration = true;
+    shellWrapperName = "y";
     plugins = {
       mount = pkgs.yaziPlugins.mount;
       git = pkgs.yaziPlugins.git;
     };
     settings = {
-      mgr.ratio = [
-        2
-        4
-        3
-      ];
-      mgr.showhidden = true;
-
+      mgr = {
+        ratio = [
+          2
+          4
+          3
+        ];
+        show_hidden = true;
+      };
       # Git plugin fetchers
       plugin.prepend_fetchers = [
         {
@@ -43,38 +46,92 @@
         }
       ];
     };
-
     # Initialize the git plugin
     initLua = ''
       require("git"):setup()
-
-      -- Optional: Customize git status styling
-      -- th.git = th.git or {}
-      -- th.git.modified = ui.Style():fg("blue")
-      -- th.git.deleted = ui.Style():fg("red"):bold()
-      -- th.git.added = ui.Style():fg("green")
-      -- th.git.untracked = ui.Style():fg("yellow")
-
-      -- Optional: Customize git status signs
-      -- th.git.modified_sign = "M"
-      -- th.git.deleted_sign = "D"
-      -- th.git.added_sign = "A"
-      -- th.git.untracked_sign = "?"
     '';
   };
-  home.packages = with pkgs; [
-    xdg-desktop-portal-termfilechooser
-    (writeShellScriptBin "yazi-file-picker" ''
-      #!/bin/bash
-      TMPFILE=$(mktemp)
-      ${pkgs.kitty}/bin/kitty -e ${pkgs.yazi}/bin/yazi --chooser-file="$TMPFILE" "$@"
 
+  # Use Home Manager's XDG portal configuration
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-termfilechooser
+    ];
+    config = {
+      common = {
+        default = [ "hyprland" ];
+      };
+      hyprland = {
+        default = [ "hyprland" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
+      };
+    };
+  };
+
+  # Enhanced yazi file picker script
+  home.packages = with pkgs; [
+    (writeShellScriptBin "yazi-file-picker" ''
+      # Parse command line arguments for file chooser mode
+      MULTIPLE=""
+      DIRECTORY=""
+      TITLE="Select File"
+
+      while [[ $# -gt 0 ]]; do
+        case $1 in
+          --multiple)
+            MULTIPLE="--choose-files"
+            TITLE="Select Files"
+            shift
+            ;;
+          --directory)
+            DIRECTORY="--choose-dir"
+            TITLE="Select Directory"
+            shift
+            ;;
+          --save)
+            TITLE="Save File"
+            shift
+            ;;
+          --title=*)
+            TITLE="''${1#*=}"
+            shift
+            ;;
+          *)
+            break
+            ;;
+        esac
+      done
+
+      TMPFILE=$(mktemp)
+
+      # Determine yazi chooser mode
+      if [ -n "$DIRECTORY" ]; then
+        CHOOSER_ARG="--chooser-dir=$TMPFILE"
+      elif [ -n "$MULTIPLE" ]; then
+        CHOOSER_ARG="--chooser-files=$TMPFILE"
+      else
+        CHOOSER_ARG="--chooser-file=$TMPFILE"
+      fi
+
+      # Launch yazi in kitty with proper title
+      ${pkgs.kitty}/bin/kitty --title="$TITLE" -e ${pkgs.yazi}/bin/yazi $CHOOSER_ARG "$@"
+
+      # Output selected files/directories
       if [ -f "$TMPFILE" ] && [ -s "$TMPFILE" ]; then
         cat "$TMPFILE"
       fi
       rm -f "$TMPFILE"
     '')
   ];
+
+  # Configure termfilechooser to use yazi
+  xdg.configFile."xdg-desktop-portal-termfilechooser/config".text = ''
+    [file_chooser]
+    cmd=yazi-file-picker
+  '';
+
   # Create desktop entry for yazi as file manager
   xdg.desktopEntries.yazi = {
     name = "Yazi File Manager";
@@ -93,12 +150,16 @@
     terminal = false;
   };
 
-  # Set yazi as default file manager
+  # Set yazi as default file manager todo move to separate file?
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
       "inode/directory" = [ "yazi.desktop" ];
       "application/x-directory" = [ "yazi.desktop" ];
+      "application/pdf" = [ "org.gnome.Papers.desktop" ];
+    };
+    associations.removed = {
+      "application/pdf" = [ "calibre-ebook-viewer.desktop" ];
     };
   };
 }
