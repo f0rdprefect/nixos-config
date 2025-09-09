@@ -15,7 +15,6 @@
   # manage.
   imports = [
     ../../config/home/neovim
-    ../../config/home/vifm
   ];
   nixGL = {
     packages = nixgl.packages; # you must set this or everything will be a noop

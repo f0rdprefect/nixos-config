@@ -22,7 +22,7 @@ pkgs.writeShellScriptBin "list-hypr-bindings" ''
   " + SHIFT + W" "Search Websites Like Nix Packages" "web-search" \
   " + SHIFT + N" "Reload SwayNC Styling" "swaync-client -rs" \
   " + W" "Launch Web Browser" "${browser}" \
-  " + E" "Cosmic File Manager" "cosmic-files" \
+  " + E" "Yazi File Manager" "yazi-file-picker" \
   " + S" "Take Screenshot" "screenshootin" \
   " + D" "Launch Discord" "discord" \
   " + O" "Launch OBS" "obs" \

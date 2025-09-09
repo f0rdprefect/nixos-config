@@ -67,9 +67,5 @@ in
       uris = [ "qemu:///system" ];
     };
   };
-  nixpkgs.config.permittedInsecurePackages = [
-    "libsoup-2.74.3"
-  ];
-
   programs.home-manager.enable = true;
 }

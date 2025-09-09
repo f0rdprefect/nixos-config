@@ -36,7 +36,6 @@ with lib;
     xwayland.enable = true;
     systemd.enable = true;
     plugins = [
-      pkgs.hyprlandPlugins.hyprtrails
       pkgs.hyprlandPlugins.hyprgrass
     ];
     extraConfig =
@@ -203,7 +202,6 @@ with lib;
           exec-once = iio-hyprland
           exec-once = wl-paste --type text --watch cliphist store #Stores only text data
           exec-once = wl-paste --type image --watch cliphist store #Stores only image data
-
           dwindle {
             pseudotile = true
             preserve_split = true
@@ -212,7 +210,7 @@ with lib;
           #  new_is_master = true
           #}
           bind = CTRLALT,P,exec,rofi-rbw
-          bind = ${modifier}, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy
+          bind = CTRLALT, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy
           bind = ${modifier},Return,exec,${terminal}
           bind = ${modifier},D,exec,rofi-launcher
           bind = ${modifier}SHIFT,W,exec,web-search
@@ -227,7 +225,7 @@ with lib;
                 bind = ${modifier},W,exec,${browser}
               ''
           }
-          bind = ${modifier},E,exec,cosmic-files
+          bind = ${modifier},E,exec,yazi-file-picker
           bind = ${modifier},S,exec,screenshootin
           bind = ${modifier},O,exec,obs
           bind = ${modifier},G,exec,gimp

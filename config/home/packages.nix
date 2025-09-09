@@ -46,6 +46,7 @@ in
     typst
     xournalpp
     sleek-todo
+    opencode
     ####Media Ripping###
     asunder
     handbrake
@@ -73,7 +74,6 @@ in
     dotool
     cliphist
     #######
-    cosmic-files
     pkgs."${browser}"
     libvirt
     swww
