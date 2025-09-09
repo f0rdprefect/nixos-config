@@ -25,6 +25,7 @@
     ./vifm
     #./vlc.nix did not work but make rebuild slow as hell
     ./wezterm.nix
+    ./xdg      # XDG configuration (portal, mime apps)
     ./yazi.nix
     ./zeroad.nix
     ./zsh.nix

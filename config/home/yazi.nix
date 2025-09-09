@@ -52,24 +52,6 @@
     '';
   };
 
-  # Use Home Manager's XDG portal configuration
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal-termfilechooser
-    ];
-    config = {
-      common = {
-        default = [ "hyprland" ];
-      };
-      hyprland = {
-        default = [ "hyprland" ];
-        "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
-      };
-    };
-  };
-
   # Enhanced yazi file picker script
   home.packages = with pkgs; [
     (writeShellScriptBin "yazi-file-picker" ''
@@ -126,12 +108,6 @@
     '')
   ];
 
-  # Configure termfilechooser to use yazi
-  xdg.configFile."xdg-desktop-portal-termfilechooser/config".text = ''
-    [file_chooser]
-    cmd=yazi-file-picker
-  '';
-
   # Create desktop entry for yazi as file manager
   xdg.desktopEntries.yazi = {
     name = "Yazi File Manager";
@@ -148,18 +124,5 @@
       "application/x-directory"
     ];
     terminal = false;
-  };
-
-  # Set yazi as default file manager todo move to separate file?
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "inode/directory" = [ "yazi.desktop" ];
-      "application/x-directory" = [ "yazi.desktop" ];
-      "application/pdf" = [ "org.gnome.Papers.desktop" ];
-    };
-    associations.removed = {
-      "application/pdf" = [ "calibre-ebook-viewer.desktop" ];
-    };
   };
 }
