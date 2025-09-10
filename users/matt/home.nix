@@ -15,6 +15,8 @@
   # manage.
   imports = [
     ../../config/home/neovim
+    ../../config/home/xdg
+    ../../config/home/yazi.nix
   ];
   nixGL = {
     packages = nixgl.packages; # you must set this or everything will be a noop
@@ -63,7 +65,7 @@
       git-credential-oauth
       hamster
       inkscape-with-extensions
-      libsForQt5.falkon
+      kdePackages.falkon
       nixfmt-rfc-style
       nomacs
       ollama
