@@ -13,6 +13,7 @@
     plugins = {
       mount = pkgs.yaziPlugins.mount;
       git = pkgs.yaziPlugins.git;
+      recycle-bin = pkgs.yaziPlugins.recycle-bin;
     };
     settings = {
       mgr = {
@@ -44,11 +45,60 @@
           run = "plugin mount";
           desc = "Mount/unmount devices";
         }
+        {
+          on = [
+            "R"
+            "b"
+          ];
+          run = "plugin recycle-bin";
+          desc = "Open Recycle Bin menu";
+        }
+        {
+          on = [
+            "R"
+            "o"
+          ];
+          run = "plugin recycle-bin -- open";
+          desc = "Open Trash";
+        }
+        {
+          on = [
+            "R"
+            "r"
+          ];
+          run = "plugin recycle-bin -- restore";
+          desc = "Restore from Trash";
+        }
+        {
+          on = [
+            "R"
+            "d"
+          ];
+          run = "plugin recycle-bin -- delete";
+          desc = "Delete from Trash";
+        }
+        {
+          on = [
+            "R"
+            "e"
+          ];
+          run = "plugin recycle-bin -- empty";
+          desc = "Empty Trash";
+        }
+        {
+          on = [
+            "R"
+            "D"
+          ];
+          run = "plugin recycle-bin -- emptyDays";
+          desc = "Empty by Days";
+        }
       ];
     };
-    # Initialize the git plugin
+    # Initialize the  plugins
     initLua = ''
       require("git"):setup()
+      require("recycle-bin"):setup()
     '';
   };
 
@@ -106,6 +156,7 @@
       fi
       rm -f "$TMPFILE"
     '')
+    trash-cli
   ];
 
   # Create desktop entry for yazi as file manager
