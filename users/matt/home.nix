@@ -51,11 +51,13 @@
   home.packages =
     (with pkgs; [
       (config.lib.nixGL.wrap kitty)
-      (config.lib.nixGL.wrap weasis)
+      #(config.lib.nixGL.wrap weasis)
       #inputs.nixvim-conf.packages.${system}.default
       brave
       #chromium
       (config.lib.nixGL.wrap firefox)
+      libreoffice
+      opencode
       logseq
       sleek-todo
       fzf
@@ -82,6 +84,9 @@
       swaynotificationcenter
       imagemagick
       highlight
+      mate.engrampa
+      xfce.thunar
+      blueman
       # # Adds the 'hello' command to your environment. It prints a friendly
       # # "Hello, world!" when run.
       # pkgs.hello
