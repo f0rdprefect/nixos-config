@@ -8,7 +8,7 @@ let
 in {
   # No Change Needed Below
   username = "${setUsername}";
-  hostname = "${setHostname}";
+  host = "${setHostname}";
   userHome = "/home/${setUsername}";
   flakeDir = "/home/${setUsername}/nixos-config";
   wallpaperGit = "https://github.com/f0rdprefect/my-wallpaper.git";# Can be changed IF you know what your doing

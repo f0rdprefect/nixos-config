@@ -96,8 +96,6 @@
     }@inputs:
     let
       system = "x86_64-linux";
-      host = "xin";
-      inherit (import ./hosts/${host}/options.nix) username hostname;
 
       pkgs = import nixpkgs {
         inherit system;
@@ -131,56 +129,102 @@
     in
     {
       nixosConfigurations = {
-        xin = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit system;
-            inherit inputs;
-            inherit username;
-            inherit hostname;
-            inherit host;
-            inherit nix-colors;
+        xin =
+          let
+            inherit (import ./hosts/xin/options.nix) username host;
+          in
+          nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              inherit system;
+              inherit inputs;
+              inherit username;
+              inherit host;
+              inherit nix-colors;
+            };
+            modules = [
+              inputs.nixos-facter-modules.nixosModules.facter
+              { config.facter.reportPath = ./hosts/xin/facter.json; }
+              ./system.nix
+              #espanso-fix.nixosModules.espanso-capdacoverride
+              # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
+              nixos-hardware.nixosModules.lenovo-thinkpad-x1-yoga
+              stylix.nixosModules.stylix
+              impermanence.nixosModules.impermanence
+              sops-nix.nixosModules.sops
+              nix-index-database.nixosModules.nix-index
+              home-manager.nixosModules.home-manager
+              # Apply the overlays
+              {
+                nixpkgs.overlays = [
+                  overlay-master
+                  overlay-stable
+                ];
+              }
+              {
+                home-manager.extraSpecialArgs = {
+                  inherit username;
+                  inherit host;
+                  inherit inputs;
+                  inherit nixvim-conf;
+                  inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
+                };
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.backupFileExtension = "backup";
+                home-manager.users.${username} = import ./users/default/home.nix;
+              }
+            ];
           };
-          modules = [
-            inputs.nixos-facter-modules.nixosModules.facter
-            { config.facter.reportPath = ./hosts/xin/facter.json; }
-            ./system.nix
-            #espanso-fix.nixosModules.espanso-capdacoverride
-            # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
-            nixos-hardware.nixosModules.lenovo-thinkpad-x1-yoga
-            stylix.nixosModules.stylix
-            impermanence.nixosModules.impermanence
-            sops-nix.nixosModules.sops
-            nix-index-database.nixosModules.nix-index
-            home-manager.nixosModules.home-manager
-            # Apply the overlays
-            {
-              nixpkgs.overlays = [
-                overlay-master
-                overlay-stable
-              ];
-            }
-            {
-              home-manager.extraSpecialArgs = {
-                inherit username;
-                inherit inputs;
-                inherit host;
-                inherit nixvim-conf;
-                inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
-              };
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "backup";
-              home-manager.users.${username} = import ./users/default/home.nix;
-            }
-          ];
-        };
+
+        xenity =
+          let
+            inherit (import ./hosts/xenity/options.nix) username host;
+          in
+          nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              inherit system;
+              inherit inputs;
+              inherit username;
+              inherit host;
+              inherit nix-colors;
+            };
+            modules = [
+              #inputs.nixos-facter-modules.nixosModules.facter
+              #{ config.facter.reportPath = ./hosts/xin/facter.json; }
+              ./system.nix
+              #espanso-fix.nixosModules.espanso-capdacoverride
+              # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
+              stylix.nixosModules.stylix
+              impermanence.nixosModules.impermanence
+              sops-nix.nixosModules.sops
+              nix-index-database.nixosModules.nix-index
+              home-manager.nixosModules.home-manager
+              # Apply the overlays
+              {
+                nixpkgs.overlays = [
+                  overlay-master
+                  overlay-stable
+                ];
+              }
+              {
+                home-manager.extraSpecialArgs = {
+                  inherit username;
+                  inherit host;
+                  inherit inputs;
+                  inherit nixvim-conf;
+                  inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
+                };
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.backupFileExtension = "backup";
+                home-manager.users.${username} = import ./users/default/home.nix;
+              }
+            ];
+          };
         yakari = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit system;
             inherit inputs;
-            inherit username;
-            inherit hostname;
-            inherit host;
             inherit nix-colors;
           };
           modules = [
@@ -203,9 +247,6 @@
           specialArgs = {
             inherit system;
             inherit inputs;
-            inherit username;
-            inherit hostname;
-            inherit host;
             inherit nix-colors;
           };
           modules = [
@@ -226,9 +267,6 @@
           specialArgs = {
             inherit system;
             inherit inputs;
-            inherit username;
-            inherit hostname;
-            inherit host;
             inherit nix-colors;
           };
           modules = [

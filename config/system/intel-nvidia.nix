@@ -1,7 +1,7 @@
 { pkgs, config, lib, host, ... }:
 
 let inherit (import ../../hosts/${host}/options.nix) intel-bus-id nvidia-bus-id gpuType; in
-lib.mkIf ("${gpuType}" == "intel-nvidia") { 
+lib.mkIf ("${gpuType}" == "intel-nvidia") {
   nixpkgs.config.packageOverrides =
     pkgs: {
       vaapiIntel = pkgs.vaapiIntel.override {

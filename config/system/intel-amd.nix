@@ -1,7 +1,7 @@
 { pkgs, config, lib, host, ... }:
 
 let inherit (import ../../hosts/${host}/options.nix) gpuType; in
-lib.mkIf ("${gpuType}" == "intel-amd") { 
+lib.mkIf ("${gpuType}" == "intel-amd") {
   nixpkgs.config.packageOverrides =
     pkgs: {
       vaapiIntel = pkgs.vaapiIntel.override {

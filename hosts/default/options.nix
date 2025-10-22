@@ -8,7 +8,7 @@ let
 in {
   # No Change Needed Below
   username = "${setUsername}";
-  hostname = "${setHostname}";
+  host = "${setHostname}";
   userHome = "/home/${setUsername}";
   flakeDir = "/home/${setUsername}/zaneyos";
   wallpaperGit = "https://gitlab.com/Zaney/my-wallpapers.git"; # Can be changed IF you know what your doing

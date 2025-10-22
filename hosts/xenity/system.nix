@@ -9,9 +9,9 @@
 }:
 
 let
-  inherit (import ./hosts/${host}/options.nix)
+  inherit (import ./options.nix)
     theLocale
-    theTimezone
+    theTime:zone
     gitUsername
     theShell
     wallpaperDir
@@ -24,10 +24,10 @@ let
 in
 {
   imports = [
-    ./hosts/${host}/hardware.nix
-    ./hosts/${host}/backup.nix
-    ./config/system
-    ./users/users.nix
+    ./hardware.nix
+    ./backup.nix
+    ../../config/system
+    ../../users/users.nix
   ];
 
   # Enable networking
