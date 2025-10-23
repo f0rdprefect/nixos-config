@@ -6,12 +6,49 @@
 
     # Specify the providers you want to use
     providers = [
-      "spotify" # For your Spotify Premium account
-      "filesystem_local" # For your local MP3 collection
-      "hass" # Home Assistant integration
-      "hass_players" # Home Assistant players
-      "squeezelite" # Squeezelite protocol support
-      "dlna" # For MoOde discovery via DLNA/UPnP
+            #"airplay"
+      "apple_music"
+      "audible"
+      "audiobookshelf"
+      "bluesound"
+      "builtin"
+      "builtin_player"
+      "chromecast"
+      "deezer"
+      "dlna"
+      "fanarttv"
+      "filesystem_local"
+      "filesystem_smb"
+      "fully_kiosk"
+      "gpodder"
+      "hass"
+      "hass_players"
+      "ibroadcast"
+      "itunes_podcasts"
+      "jellyfin"
+      "lastfm_scrobble"
+      "listenbrainz_scrobble"
+      "musicbrainz"
+      "opensubsonic"
+      "player_group"
+      "plex"
+      "podcastfeed"
+      "qobuz"
+      "radiobrowser"
+      "siriusxm"
+      "snapcast"
+      "sonos"
+      "sonos_s1"
+      "soundcloud"
+      "spotify"
+      "spotify_connect"
+      "squeezelite"
+      "template_player_provider"
+      "test"
+      "theaudiodb"
+      "tidal"
+      "tunein"
+      "ytmusic"
     ];
 
     # Optional: Add extra command line options

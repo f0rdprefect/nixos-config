@@ -36,7 +36,7 @@ with lib;
     xwayland.enable = true;
     systemd.enable = true;
     plugins = [
-      pkgs.hyprlandPlugins.hyprgrass
+            #pkgs.hyprlandPlugins.hyprgrass
     ];
     extraConfig =
       let
@@ -115,8 +115,6 @@ with lib;
               ''''
           }
           gestures {
-            workspace_swipe = true
-            workspace_swipe_fingers = 3
             workspace_swipe_distance = 500
             workspace_swipe_invert = true
             workspace_swipe_min_speed_to_force = 30
@@ -177,11 +175,7 @@ with lib;
               special = true
             }
           }
-          plugin {
-            hyprtrails {
-              color = rgba(${theme.base0A}ff)
-            }
-          }
+
 
           binds {
             workspace_back_and_forth = true
@@ -191,7 +185,7 @@ with lib;
           exec-once = $POLKIT_BIN
           exec-once = dbus-update-activation-environment --systemd --all
           exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-          exec-once = swww init
+          exec-once = swww-daemon
           exec-once = waybar
           exec-once = swaync
           exec-once = wallsetter
@@ -225,7 +219,7 @@ with lib;
                 bind = ${modifier},W,exec,${browser}
               ''
           }
-          bind = ${modifier},E,exec,yazi-file-picker
+          bind = ${modifier},E,exec,kitty --title "File Manager" -e yazi
           bind = ${modifier},S,exec,screenshootin
           bind = ${modifier},O,exec,obs
           bind = ${modifier},G,exec,gimp

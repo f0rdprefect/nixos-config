@@ -63,7 +63,9 @@ in
     signal-desktop
     zapzap
     fractal
-    paper-plane
+    #paper-plane
+        materialgram
+
     wl-mirror
     ####bitwarden related###
     bitwarden # will be replaced by bitwarden-desktop
@@ -81,7 +83,7 @@ in
     slurp
     file-roller
     swaynotificationcenter
-    rofi-wayland
+    rofi
     imv
     mpv
     gimp

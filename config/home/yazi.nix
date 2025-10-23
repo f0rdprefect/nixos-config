@@ -14,6 +14,7 @@
       mount = pkgs.yaziPlugins.mount;
       git = pkgs.yaziPlugins.git;
       recycle-bin = pkgs.yaziPlugins.recycle-bin;
+      restore = pkgs.yaziPlugins.restore;
     };
     settings = {
       mgr = {
@@ -48,10 +49,10 @@
         {
           on = [
             "R"
-            "b"
+            "z"
           ];
-          run = "plugin recycle-bin";
-          desc = "Open Recycle Bin menu";
+          run = "plugin restore";
+          desc = "Restore from Trash";
         }
         {
           on = [
