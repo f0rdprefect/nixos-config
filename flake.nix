@@ -189,8 +189,8 @@
               inherit nix-colors;
             };
             modules = [
-              #inputs.nixos-facter-modules.nixosModules.facter
-              #{ config.facter.reportPath = ./hosts/xin/facter.json; }
+              inputs.nixos-facter-modules.nixosModules.facter
+              { config.facter.reportPath = ./hosts/${host}/facter.json; }
               ./system.nix
               #espanso-fix.nixosModules.espanso-capdacoverride
               # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
