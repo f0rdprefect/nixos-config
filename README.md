@@ -23,18 +23,31 @@ mount | grep /mnt
 
 ```sh
 nixos-generate-config --show-hardware-config > <your hardware.nix>
-# edit mount starting with /mnt and remove /mnt. 
+# edit mount starting with /mnt and remove /mnt.
 # All other mount points can be removed
 nixos-install --flake .#<host>
 ```
 
 ### Post-install
 
-TBD
+#### rbw
 
-```sh
-nixos-enter
-mkdir /persist/secrets
-mkpasswordfile /persist/secrets/root
-mkpasswordfile /persist/secrets/katexochen
 ```
+rbw config set email <email>
+rbw config set base_url <url>
+rbw login
+```
+
+#### dotool
+
+Hopefully merged soon...
+
+#### fido keys
+
+```
+nix shell nixpkgs#pam_u2f
+pamu2fcfg >> config/home/files/u2f_keys
+```
+to add a new one.
+
+add new Products to `fido.nix`

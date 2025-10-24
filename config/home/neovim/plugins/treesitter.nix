@@ -15,11 +15,13 @@
 
     treesitter-refactor = {
       enable = true;
-      highlightDefinitions = {
-        # enabled makes nvim choke on some flakes
-        enable = false;
-        # Set to false if you have an `updatetime` of ~100.
-        clearOnCursorMove = false;
+      settings = {
+        highlight_definitions = {
+          # enabled makes nvim choke on some flakes
+          enable = false;
+          # Set to false if you have an `updatetime` of ~100.
+          clear_on_cursor_move = false;
+        };
       };
     };
     treesitter-context = {

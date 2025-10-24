@@ -163,6 +163,7 @@
               {
                 home-manager.extraSpecialArgs = {
                   inherit username;
+                  inherit pkgs-stable;
                   inherit host;
                   inherit inputs;
                   inherit nixvim-conf;
@@ -192,8 +193,6 @@
               inputs.nixos-facter-modules.nixosModules.facter
               { config.facter.reportPath = ./hosts/${host}/facter.json; }
               ./system.nix
-              #espanso-fix.nixosModules.espanso-capdacoverride
-              # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
               stylix.nixosModules.stylix
               impermanence.nixosModules.impermanence
               sops-nix.nixosModules.sops
@@ -209,6 +208,7 @@
               {
                 home-manager.extraSpecialArgs = {
                   inherit username;
+                  inherit pkgs-stable;
                   inherit host;
                   inherit inputs;
                   inherit nixvim-conf;

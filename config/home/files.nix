@@ -9,6 +9,7 @@
   home.file.".config/rofi/rofi.jpg".source = ./files/rofi.jpg;
   #  home.file.".config/starship.toml".source = ./files/starship.toml;
   home.file.".config/rofi-rbw.rc".source = ./files/rofi-rbw.rc;
+  home.file.".config/Yubico/u2f_keys".source = ./files/u2f_keys;
   home.file.".local/share/fonts" = {
     source = ./files/fonts;
     recursive = true;
