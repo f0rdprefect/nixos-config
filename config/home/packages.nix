@@ -77,6 +77,7 @@ in
       pinentry-rofi
       pinentry-gnome3
       dotool
+      wtype
       cliphist
       #######
       pkgs."${browser}"
