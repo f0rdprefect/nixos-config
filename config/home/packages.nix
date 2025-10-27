@@ -18,13 +18,12 @@ in
   # Install Packages For The User
   home.packages =
     (with pkgs-stable; [
-      calibre
-      nextcloud-client
 
     ])
     ++ (with pkgs; [
+      calibre
+      nextcloud-client
       mcpelauncher-ui-qt
-      super-slicer
       orca-slicer
       #####system maintenance stuff
       gparted
