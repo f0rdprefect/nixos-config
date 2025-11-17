@@ -13,16 +13,20 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
+    #targets.genericLinux.enable = true;
   imports = [
     ../../config/home/neovim
     ../../config/home/xdg
     ../../config/home/yazi.nix
   ];
-  nixGL = {
+  targets.genericLinux.nixGL = {
     packages = nixgl.packages; # you must set this or everything will be a noop
     defaultWrapper = "mesa"; # choose from options
   };
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [ "gradle-7.6.6" ];
+  };
   home.username = "matt";
   home.homeDirectory = "/home/matt";
 
@@ -61,7 +65,6 @@
       logseq
       sleek-todo
       fzf
-      ganttproject-bin
       gimp
       git
       git-credential-oauth
@@ -107,6 +110,7 @@
     ++ (with pkgs-stable; [
       freeplane
       microsoft-edge
+      ganttproject-bin
     ]);
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

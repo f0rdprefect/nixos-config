@@ -36,9 +36,8 @@
 
       # Documents - PDF (multiple options as fallbacks)
       "application/pdf" = [
-        "org.gnome.Papers.desktop"
-        "org.kde.okular.desktop"
         "org.gnome.Evince.desktop"
+        "org.kde.okular.desktop"
       ];
 
       # Images
