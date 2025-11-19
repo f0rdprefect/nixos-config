@@ -44,9 +44,6 @@
     stylix = {
       url = "github:danth/stylix";
     };
-    espanso-fix = {
-      url = "github:pitkling/nixpkgs/espanso-fix-capabilities-export";
-    };
     nixos-facter-modules = {
       url = "github:nix-community/nixos-facter-modules";
     };
@@ -65,6 +62,10 @@
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    chaotic = {
+      url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # IMPORTANT
+    };
+    ptouch-driver.url = "github:f0rdprefect/ptouch-driver-fix";
   };
   nixConfig = {
     extra-substituters = [
@@ -85,27 +86,18 @@
       impermanence,
       nixos-hardware,
       stylix,
-      espanso-fix,
       nixvim-conf,
       nix-colors,
       sops-nix,
       nix-index-database,
       raspberry-pi-nix,
       nixgl,
+      chaotic,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
 
-      pkgs = import nixpkgs {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
-        overlays = [
-          nixgl.overlay
-        ];
-      };
       pkgs-stable = import nixpkgs-stable {
         inherit system;
         config = {
@@ -140,40 +132,44 @@
               inherit username;
               inherit host;
               inherit nix-colors;
+
             };
             modules = [
               inputs.nixos-facter-modules.nixosModules.facter
               { config.facter.reportPath = ./hosts/xin/facter.json; }
               ./system.nix
-              #espanso-fix.nixosModules.espanso-capdacoverride
-              # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
               nixos-hardware.nixosModules.lenovo-thinkpad-x1-yoga
               stylix.nixosModules.stylix
               impermanence.nixosModules.impermanence
               sops-nix.nixosModules.sops
               nix-index-database.nixosModules.nix-index
               home-manager.nixosModules.home-manager
+              chaotic.nixosModules.default
               # Apply the overlays
               {
                 nixpkgs.overlays = [
                   overlay-master
                   overlay-stable
+                  inputs.ptouch-driver.overlay
                 ];
               }
-              {
-                home-manager.extraSpecialArgs = {
-                  inherit username;
-                  inherit pkgs-stable;
-                  inherit host;
-                  inherit inputs;
-                  inherit nixvim-conf;
-                  inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
-                };
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.backupFileExtension = "backup";
-                home-manager.users.${username} = import ./users/default/home.nix;
-              }
+              (
+                { pkgs, ... }:
+                {
+                  home-manager.extraSpecialArgs = {
+                    inherit username;
+                    inherit pkgs-stable;
+                    inherit host;
+                    inherit inputs;
+                    inherit nixvim-conf;
+                    inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
+                  };
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = true;
+                  home-manager.backupFileExtension = "backup";
+                  home-manager.users.${username} = import ./users/default/home.nix;
+                }
+              )
             ];
           };
 
@@ -205,20 +201,23 @@
                   overlay-stable
                 ];
               }
-              {
-                home-manager.extraSpecialArgs = {
-                  inherit username;
-                  inherit pkgs-stable;
-                  inherit host;
-                  inherit inputs;
-                  inherit nixvim-conf;
-                  inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
-                };
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.backupFileExtension = "backup";
-                home-manager.users.${username} = import ./users/default/home.nix;
-              }
+              (
+                { pkgs, ... }:
+                {
+                  home-manager.extraSpecialArgs = {
+                    inherit username;
+                    inherit pkgs-stable;
+                    inherit host;
+                    inherit inputs;
+                    inherit nixvim-conf;
+                    inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
+                  };
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = true;
+                  home-manager.backupFileExtension = "backup";
+                  home-manager.users.${username} = import ./users/default/home.nix;
+                }
+              )
             ];
           };
         yakari = nixpkgs.lib.nixosSystem {
@@ -293,8 +292,15 @@
       };
 
       homeConfigurations."matt" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-
+        pkgs = import nixpkgs {
+          inherit system;
+          config = {
+            allowUnfree = true;
+          };
+          overlays = [
+            nixgl.overlay
+          ];
+        };
         extraSpecialArgs = {
           inherit nixvim-conf;
           inherit nixgl;
