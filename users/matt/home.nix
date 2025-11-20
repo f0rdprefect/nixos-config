@@ -19,10 +19,10 @@
     ../../config/home/xdg
     ../../config/home/yazi.nix
   ];
-  targets.genericLinux.nixGL = {
-    packages = nixgl.packages; # you must set this or everything will be a noop
-    defaultWrapper = "mesa"; # choose from options
-  };
+    #targets.genericLinux.nixGL = {
+    #  packages = nixgl.packages; # you must set this or everything will be a noop
+    #  defaultWrapper = "mesa"; # choose from options
+    #};
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [ "gradle-7.6.6" ];

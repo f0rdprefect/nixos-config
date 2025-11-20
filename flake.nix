@@ -65,10 +65,6 @@
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # IMPORTANT
     };
     ptouch-driver.url = "github:f0rdprefect/ptouch-driver-fix";
-    nonNixosGpu = {
-      url = "github:exzombie/non-nixos-gpu";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
   nixConfig = {
     extra-substituters = [
@@ -96,7 +92,6 @@
       raspberry-pi-nix,
       nixgl,
       chaotic,
-      nonNixosGpu,
       ...
     }@inputs:
     let
@@ -316,7 +311,6 @@
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
         modules = [
-          nonNixosGpu.homeManagerModule
           stylix.homeModules.stylix
           ./users/matt/home.nix
         ];
