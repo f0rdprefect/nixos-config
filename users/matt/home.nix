@@ -13,16 +13,16 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-    #targets.genericLinux.enable = true;
+  #targets.genericLinux.enable = true;
   imports = [
     ../../config/home/neovim
     ../../config/home/xdg
     ../../config/home/yazi.nix
   ];
-    #targets.genericLinux.nixGL = {
-    #  packages = nixgl.packages; # you must set this or everything will be a noop
-    #  defaultWrapper = "mesa"; # choose from options
-    #};
+  #targets.genericLinux.nixGL = {
+  #  packages = nixgl.packages; # you must set this or everything will be a noop
+  #  defaultWrapper = "mesa"; # choose from options
+  #};
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [ "gradle-7.6.6" ];
@@ -55,11 +55,12 @@
   home.packages =
     (with pkgs; [
       (config.lib.nixGL.wrap kitty)
+            #kitty
       #(config.lib.nixGL.wrap weasis)
       #inputs.nixvim-conf.packages.${system}.default
       brave
       #chromium
-      (config.lib.nixGL.wrap firefox)
+      firefox
       libreoffice
       opencode
       logseq
@@ -181,6 +182,11 @@
     enableBashIntegration = true;
     enableZshIntegration = true;
   };
+  targets.genericLinux.nixGL = {
+    packages = nixgl.packages; # you must set this or everything will be a noop
+    defaultWrapper = "mesa"; # choose from options
+  };
+
   targets.genericLinux.enable = true;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
