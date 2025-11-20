@@ -27,7 +27,6 @@
     };
     nixvim-conf = {
       url = "github:f0rdprefect/nixvim-config";
-      #url = "git+file:///home/matt/src/nixvim-config";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     #    disko = {
@@ -132,6 +131,7 @@
               inherit username;
               inherit host;
               inherit nix-colors;
+              cfgoptions = import ./hosts/xin/options.nix;
 
             };
             modules = [

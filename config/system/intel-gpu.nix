@@ -3,13 +3,14 @@
   config,
   lib,
   host,
+  cfgoptions,
   ...
 }:
 
-let
-  inherit (import ../../hosts/${host}/options.nix) gpuType;
-in
-lib.mkIf ("${gpuType}" == "intel") {
+#let
+#  inherit (import ../../hosts/${host}/options.nix) gpuType;
+#in
+lib.mkIf ("${cfgoptions.gpuType}" == "intel") {
   # NixOS configuration for Intel UHD Graphics 620 with Vulkan support
   hardware.graphics = {
     enable = true;
@@ -18,20 +19,20 @@ lib.mkIf ("${gpuType}" == "intel") {
       libvdpau-va-gl
       # OpenCL support for intel CPUs before 12th gen
       # see: https://github.com/NixOS/nixpkgs/issues/356535
-                #intel-compute-runtime-legacy1
+      #intel-compute-runtime-legacy1
       vpl-gpu-rt # QSV on 11th gen or newer
       intel-ocl
       intel-compute-runtime # OpenCL support
     ];
 
     # Enable 32-bit support if you need it (e.g., for games)
-     enable32Bit = true;
-      extraPackages32 = with pkgs.pkgsi686Linux; [
-        intel-media-driver
-        intel-vaapi-driver
-        vaapiVdpau
-        libvdpau-va-gl
-      ];
+    enable32Bit = true;
+    extraPackages32 = with pkgs.pkgsi686Linux; [
+      intel-media-driver
+      intel-vaapi-driver
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
   };
 
   environment.systemPackages = with pkgs; [
