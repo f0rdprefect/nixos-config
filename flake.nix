@@ -184,6 +184,7 @@
               inherit username;
               inherit host;
               inherit nix-colors;
+              cfgoptions = import ./hosts/xenity/options.nix;
             };
             modules = [
               inputs.nixos-facter-modules.nixosModules.facter
@@ -193,6 +194,53 @@
               impermanence.nixosModules.impermanence
               sops-nix.nixosModules.sops
               nix-index-database.nixosModules.nix-index
+              home-manager.nixosModules.home-manager
+              # Apply the overlays
+              {
+                nixpkgs.overlays = [
+                  overlay-master
+                  overlay-stable
+                ];
+              }
+              (
+                { pkgs, ... }:
+                {
+                  home-manager.extraSpecialArgs = {
+                    inherit username;
+                    inherit pkgs-stable;
+                    inherit host;
+                    inherit inputs;
+                    inherit nixvim-conf;
+                    inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
+                  };
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = true;
+                  home-manager.backupFileExtension = "backup";
+                  home-manager.users.${username} = import ./users/default/home.nix;
+                }
+              )
+            ];
+
+          };
+        uhura =
+          let
+            inherit (import ./hosts/uhura/options.nix) username host;
+          in
+          nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              inherit system;
+              inherit inputs;
+              inherit username;
+              inherit host;
+              inherit nix-colors;
+              cfgoptions = import ./hosts/uhura/options.nix;
+            };
+            modules = [
+              #./system.nix
+              ./hosts/uhura/configuration.nix
+              stylix.nixosModules.stylix
+              impermanence.nixosModules.impermanence
+              sops-nix.nixosModules.sops
               home-manager.nixosModules.home-manager
               # Apply the overlays
               {

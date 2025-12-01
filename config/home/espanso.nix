@@ -1,20 +1,20 @@
-{ pkgs, config,  ... }:
+{ pkgs, config, ... }:
 
 {
-  #home.packages = with pkgs; [
-  #  fzf
-  #  fd
-  #];
+  home.packages = with pkgs; [
+    kdotool
+    #  fd
+  ];
   services.espanso = {
     enable = true;
     #package = pkgs.espanso-wayland;
     package = pkgs.espanso-wayland;
     configs = {
       default = {
-         toggle_key = "ALT";
-         keyboard_layout = {
-            layout = "us";
-         };
+        toggle_key = "ALT";
+        keyboard_layout = {
+          layout = "us";
+        };
       };
     };
     matches = {
@@ -35,12 +35,16 @@
           {
             name = "currentdate";
             type = "date";
-            params = {format = "%d/%m/%Y";};
+            params = {
+              format = "%d/%m/%Y";
+            };
           }
           {
             name = "currenttime";
             type = "date";
-            params = {format = "%R";};
+            params = {
+              format = "%R";
+            };
           }
         ];
       };

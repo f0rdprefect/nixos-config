@@ -6,11 +6,7 @@
   host,
   ...
 }:
-
-let
-  inherit (import ../../hosts/${host}/options.nix) printer;
-in
-lib.mkIf (printer == true) {
+{
   services = {
     printing = {
       enable = true;
@@ -22,7 +18,7 @@ lib.mkIf (printer == true) {
         pkgs.cups-filters
         pkgs.cups-browsed
         pkgs.ghostscript
-        pkgs.poppler_utils
+        pkgs.poppler-utils
         pkgs.cups-pdf-to-pdf
       ];
       extraConf = ''

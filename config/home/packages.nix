@@ -19,9 +19,10 @@ in
   home.packages =
     (with pkgs-stable; [
 
+      fractal
+      calibre
     ])
     ++ (with pkgs; [
-      calibre
       nextcloud-client
       mcpelauncher-ui-qt
       orca-slicer
@@ -65,12 +66,11 @@ in
       ####Communication####
       signal-desktop
       zapzap
-      fractal
       materialgram
 
       wl-mirror
       ####bitwarden related###
-      bitwarden # will be replaced by bitwarden-desktop
+      bitwarden-desktop # will be replaced by bitwarden-desktop
       rofi-rbw
       rbw
       pinentry-rofi
