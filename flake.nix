@@ -65,6 +65,9 @@
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # IMPORTANT
     };
     ptouch-driver.url = "github:f0rdprefect/ptouch-driver-fix";
+    espanso-fix = {
+      url = "github:pitkling/nixpkgs/espanso-fix-capabilities-export";
+    };
   };
   nixConfig = {
     extra-substituters = [
@@ -92,6 +95,7 @@
       raspberry-pi-nix,
       nixgl,
       chaotic,
+      espanso-fix,
       ...
     }@inputs:
     let
@@ -143,6 +147,7 @@
               impermanence.nixosModules.impermanence
               sops-nix.nixosModules.sops
               nix-index-database.nixosModules.nix-index
+              espanso-fix.nixosModules.espanso-capdacoverride
               home-manager.nixosModules.home-manager
               chaotic.nixosModules.default
               # Apply the overlays
@@ -194,6 +199,7 @@
               impermanence.nixosModules.impermanence
               sops-nix.nixosModules.sops
               nix-index-database.nixosModules.nix-index
+              espanso-fix.nixosModules.espanso-capdacoverride
               home-manager.nixosModules.home-manager
               # Apply the overlays
               {
@@ -238,6 +244,7 @@
             modules = [
               #./system.nix
               ./hosts/uhura/configuration.nix
+              espanso-fix.nixosModules.espanso-capdacoverride
               stylix.nixosModules.stylix
               impermanence.nixosModules.impermanence
               sops-nix.nixosModules.sops
@@ -264,6 +271,7 @@
                   home-manager.useUserPackages = true;
                   home-manager.backupFileExtension = "backup";
                   home-manager.users.${username} = import ./users/default/home.nix;
+                  home-manager.users.berenice = import ./users/berenice/home.nix;
                 }
               )
             ];

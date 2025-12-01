@@ -2,7 +2,6 @@
   config,
   pkgs,
   inputs,
-  username,
   lib,
   host,
   gtkThemeFromScheme,
@@ -19,6 +18,8 @@ let
     flakeDir
     waybarStyle
     ;
+  username = "berenice";
+
 in
 {
   # Home Manager Settings
@@ -34,22 +35,12 @@ in
     inputs.sops-nix.homeManagerModules.sops
     inputs.nix-colors.homeManagerModules.default
     ./../../config/home
+    ./packages.nix
   ];
 
   # Define Settings For Xresources
   xresources.properties = {
     "Xcursor.size" = lib.mkDefault 24;
-  };
-
-  # Install & Configure Git
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        name = "${gitUsername}";
-        email = "${gitEmail}";
-      };
-    };
   };
 
   # Create XDG Dirs
