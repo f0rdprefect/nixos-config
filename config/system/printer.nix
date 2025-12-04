@@ -7,6 +7,29 @@
   ...
 }:
 {
+  hardware.printers = {
+    ensurePrinters = [
+      {
+        name = "Brother-QL-600";
+        deviceUri = "usb://Brother/QL-600?serial=000G2G887410";
+        location = "Desk Matt";
+        description = "Brother QL-600";
+        model = "ptouch-driver/Brother-QL-600-ptouch-ql.ppd.gz";
+        # Alternative if the above doesn't work:
+        # model = "drv:///sample.drv/generic.ppd";
+      }
+      {
+        name = "Kyocera-ECOSYS-M5521cdw";
+        deviceUri = "dnssd://Kyocera%20ECOSYS%20M5521cdw._ipp._tcp.local/?uuid=4509a320-00dd-0108-006c-002507526632";
+        location = "Office Bérénice";
+        description = "Kyocera ECOSYS M5521cdw";
+        model = "everywhere"; # Modern Kyocera printers support IPP Everywhere
+        # Alternative: model = "kyocera-ecosys-m5521cdw.ppd";
+      }
+    ];
+
+    ensureDefaultPrinter = "Kyocera-ECOSYS-M5521cdw";
+  };
   services = {
     printing = {
       enable = true;
