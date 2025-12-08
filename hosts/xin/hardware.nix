@@ -16,16 +16,29 @@
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
   services.scx.enable = true; # by default uses scx_rustland scheduler
 
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "nvme"
-  ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.kernelParams = [ "quiet" ];
-  boot.extraModulePackages = [ ];
-  boot.plymouth.enable = true;
-  #boot.initrd.systemd.enable = true;
+  boot = {
+    initrd = {
+      availableKernelModules = [
+        "xhci_pci"
+        "nvme"
+      ];
+      kernelModules = [ ];
+      systemd.enable = false;
+    };
+    kernelModules = [ "kvm-intel" ];
+    kernelParams = [
+      "quiet"
+      "splash"
+      #      "intremap=on"
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=auto"
+    ];
+    extraModulePackages = [ ];
+    plymouth.enable = true;
+    plymouth.font = "${pkgs.hack-font}/share/fonts/truetype/Hack-Regular.ttf";
+    plymouth.logo = "${pkgs.nixos-icons}/share/icons/hicolor/128x128/apps/nix-snowflake.png";
+  };
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/47197c13-0937-4b85-ae31-2b973f45f70f";

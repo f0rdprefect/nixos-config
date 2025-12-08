@@ -17,6 +17,7 @@ lib.mkIf ("${cfgoptions.gpuType}" == "intel") {
     extraPackages = with pkgs; [
       intel-media-driver
       libvdpau-va-gl
+      libva-vdpau-driver
       # OpenCL support for intel CPUs before 12th gen
       # see: https://github.com/NixOS/nixpkgs/issues/356535
       #intel-compute-runtime-legacy1
@@ -30,7 +31,7 @@ lib.mkIf ("${cfgoptions.gpuType}" == "intel") {
     extraPackages32 = with pkgs.pkgsi686Linux; [
       intel-media-driver
       intel-vaapi-driver
-      vaapiVdpau
+      libva-vdpau-driver
       libvdpau-va-gl
     ];
   };
@@ -43,7 +44,6 @@ lib.mkIf ("${cfgoptions.gpuType}" == "intel") {
 
     # Mesa utilities
     mesa-demos
-    glxinfo
   ];
 
   environment.sessionVariables = {

@@ -10,6 +10,7 @@
     ./hardware-configuration.nix
     #../../config/system/homebox.nix
     ../../modules/unifi.nix
+    ../../modules/audiobookshelf
 
   ];
 
