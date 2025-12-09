@@ -26,6 +26,12 @@
         model = "everywhere"; # Modern Kyocera printers support IPP Everywhere
         # Alternative: model = "kyocera-ecosys-m5521cdw.ppd";
       }
+      {
+        name = "Canon-IR-OG1";
+        deviceUri = "socket://pr-do-og1";
+        location = "Raith HQ OG1";
+        model = "CNRCUPSIRADVC3525ZK.ppd";
+      }
     ];
 
     ensureDefaultPrinter = "Kyocera-ECOSYS-M5521cdw";
@@ -37,6 +43,7 @@
 
       drivers = [
         pkgs.cups-kyocera-ecosys-m552x-p502x
+        pkgs.canon-cups-ufr2
         pkgs.ptouch-driver
         pkgs.cups-filters
         pkgs.cups-browsed
