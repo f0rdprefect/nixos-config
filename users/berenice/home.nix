@@ -29,6 +29,10 @@ in
 
   # Set The Colorscheme
   colorScheme = inputs.nix-colors.colorSchemes."${theme}";
+  stylix.targets.gnome = {
+    enable = true;
+    useWallpaper = false;
+  };
 
   # Import Program Configurations
   imports = [
