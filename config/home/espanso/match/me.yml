@@ -1,0 +1,10 @@
+global_vars:
+  - name: myname
+    type: echo
+    params:
+      echo: Matthias
+  
+  - name: mylastname
+    type: echo
+    params:
+      echo: Berse

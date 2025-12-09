@@ -1,0 +1,42 @@
+
+matches:
+  - trigger: "ytdone"
+    replace: |
+              ## Done Checklist
+
+              * [ ] Link to internal documentation
+                 * 📋 [txt](https://tecdoc.raith.de/)
+                 * 📋 status / done by
+              * [ ] Releasenotes
+                 *  📋 status / done by
+              * [ ] Releasepresentation
+                 *  📋 status / done by
+                 *  📋 [link to ppt page](https://support.microsoft.com/en-us/office/share-a-link-to-a-specific-slide-4f5f3d5e-1674-4742-8cf1-9623050c19ef)
+              * [ ] Minimum Build Numbers
+                 * 📋 `22.01.xxx.yyy`
+              * [ ] New VDB Value / parameter space
+                 * 📋 
+              
+              Legend: 📋(todo) 🚧(wip)  ✅(done)
+
+
+  - trigger: "ytnt"
+    replace: "tag REVIEWED  add Board SW Kanban add Board SW Refinement  State " 
+
+  - trigger: "swrev"
+    replace: "# SW-Review"
+  
+  - trigger: "swref"
+    replace: "# SW-Refinement"
+
+  - trigger: "swdis"
+    replace: "# SW-Discovery"
+
+  - trigger: "debugsnap"
+    replace: "Please use `CTRL-ALT-SHIFT-F12` to provide necessary information to work on this issue."
+  
+  - trigger: "ytall"
+    replace: "tag VELION tag Voyager tag CSHS tag RAITH150-TWO"
+
+  - trigger: "ytup"
+    replace: "Please update to latest supported release and test again -> can't reproduce"

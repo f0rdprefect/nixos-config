@@ -1,0 +1,78 @@
+matches:
+  - trigger: ":noc"
+    replace: |
+              Dear Colleagues,
+
+              please receive the Notification of Change concerning the hardware issue HW-$|$.
+
+              Best regards,
+
+              {{myname}}
+
+  - regex: "::\\((?P<where>.*)\\)"
+    replace: "# {{today}}\n  ::@{{where}}::\n"
+    vars:
+      - name: today
+        type: date
+        params:
+          format: "%Y-%b-%d"
+
+  - regex: ":due\\((?P<days>.*)\\)"
+    replace: "{{mytime}}"
+    vars:
+    - name: mytime
+      type: date
+      params:
+        format: "%Y-%b-%d"
+        offset: -86400 * {{days}}
+
+  - trigger: ":rmail"
+    replace: "matthias.berse@raith.com"
+
+  - trigger: ":opty"
+    replace: "opportunity"
+    propagate_case: true
+
+  - trigger: ":im1"
+    replace: "IONMASTER ONE"
+    propagate_case: false
+
+  - trigger: ":imctrl"
+    replace: "ionmaster control software"
+    propagate_case: true
+
+  - trigger: ":pc"
+    replace: "Process Control"
+    propagate_case: false
+
+  - trigger: ":propp"
+    replace: "1000291"
+    propagate_case: false
+
+  - trigger: ":prim1"
+    replace: "1000330"
+    propagate_case: false
+
+
+  - trigger: ":kbr"
+    replace: "Kindly be reminded"
+    propagate_case: false
+
+  - trigger: "ra:order"
+    replace: |
+             Lieferant:
+             Hersteller-Artikelnummer:
+             Bestellnummer*:
+             Artikelbeschreibung*:
+             Link:
+             Menge in Stück/VPE/Länge*:
+             Ort/Besteller*:
+             Kostenstelle/Kostenträger*:
+
+  - trigger: ";quote"
+    replace: |
+      Hier ist ein Zitat:
+      > {{clipboard}}
+    vars:
+      - name: "clipboard"
+        type: "clipboard"

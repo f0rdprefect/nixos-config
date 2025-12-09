@@ -1,0 +1,13 @@
+matches:
+
+  - trigger: ":oat"
+    replace: "On another topic"
+
+  - trigger: ":iirc"
+    replace: "if I recall correctly"
+
+  - trigger: ":afaik"
+    replace: "As far as I know"
+
+  - trigger: ":imho"
+    replace: "In my humble opinion"

@@ -1,0 +1,5 @@
+name: "relative-date"
+title: "Relative Date Expansion"
+description: Use +2d -4w etc to expand to the date relative to today. d=day, w=week, m=month and y=year. Only integer numbers! Now with week number expansion. Type wk<nn> to get the date range of the week in the current year.
+version: 0.3.0
+author: Matthias Berse

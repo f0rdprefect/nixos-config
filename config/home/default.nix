@@ -5,7 +5,7 @@
     # Enable &/ Configure Programs
     ./alacritty.nix
     ./bash.nix
-    ./espanso.nix
+    ./espanso
     ./fzf.nix
     #    ./gtk-qt.nix
     ./git.nix

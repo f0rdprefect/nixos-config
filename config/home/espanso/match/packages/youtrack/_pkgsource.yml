@@ -1,0 +1,5 @@
+---
+git:
+  repo_url: "https://gitea.raith.de/Raith-Global/espanso"
+  repo_branch: ~
+  use_native_git: false

@@ -1,0 +1,4 @@
+matches:
+  - trigger: ":gitdep"
+    replace: "git clone https://update.raith.de/berse/deployment" 
+

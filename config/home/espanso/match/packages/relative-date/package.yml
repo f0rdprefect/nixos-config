@@ -1,0 +1,33 @@
+matches:
+  - regex: "(?P<reldate>[+-][1-9][0-9]*[dwmy])"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: script
+        params:
+          args: 
+            - python
+            - "%CONFIG%/match/packages/relative-date/relative-date.py" 
+            - "{{reldate}}"
+            
+  - regex: "wk(?P<week>[1-9][0-9]*)\\."
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: script
+        params:
+          args: 
+            - python
+            - "%CONFIG%/match/packages/relative-date/week.py" 
+            - "{{week}}"
+  
+  - regex: "d2w(?P<date>\\d{4}-\\d{2}(-\\d{2})?)\\."
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: script
+        params:
+          args: 
+            - python
+            - "%CONFIG%/match/packages/relative-date/date2week.py" 
+            - "{{date}}"
