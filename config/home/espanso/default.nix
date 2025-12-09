@@ -23,9 +23,9 @@
       };
     };
   };
-  home.file.espanso-cfg = {
-    source = "./match";
-    target = "~/.config/espanso/match";
+  home.file.".config/espanso/match" = {
+        source = ./match;
+        recursive = true;
+    };
 
-  };
 }
