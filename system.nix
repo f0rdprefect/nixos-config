@@ -33,6 +33,7 @@ in
   # Enable networking
   networking.hostName = "${host}"; # Define your hostname
   networking.networkmanager.enable = true;
+  networking.firewall.enable = true;
 
   # Set your time zone
   time.timeZone = "${theTimezone}";

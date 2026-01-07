@@ -13,6 +13,9 @@
     ++ (with pkgs; [
       pdfarranger
       ocrmypdf
+      gnomeExtensions.dash-to-dock
+      gnomeExtensions.gsconnect
+      gnomeExtensions.workday-reminder
     ]);
 
 }

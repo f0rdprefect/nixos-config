@@ -64,6 +64,14 @@ in
       autoconnect = [ "qemu:///system" ];
       uris = [ "qemu:///system" ];
     };
+    "org/gnome/shell" = {
+      disable-user-extensions = false;
+      enabled-extensions = with pkgs.gnomeExtensions; [
+        dash-to-dock.extensionUuid
+        gsconnect.extensionUuid
+        workday-reminder.extensionUuid
+      ];
+    };
   };
   programs.home-manager.enable = true;
 }

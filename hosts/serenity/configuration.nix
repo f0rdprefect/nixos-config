@@ -27,7 +27,26 @@
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+# Static network configuration for ens3
+  networking = {
+    useDHCP = false;
+    interfaces.ens3 = {
+      useDHCP = false;
+      ipv4.addresses = [{
+        address = "185.170.115.84";
+        prefixLength = 22;
+      }];
+    };
 
+    defaultGateway = "185.170.112.1";
+
+    nameservers = [
+      "5.9.164.112"     # Digitalcourage DNS1
+      "46.182.19.48"    # Digitalcourage DNS2
+      "9.9.9.9"         # Quad9 primary
+      "149.112.112.112" # Quad9 secondary
+    ];
+  };
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 

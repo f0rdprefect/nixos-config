@@ -6,7 +6,7 @@
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
     nixpkgs-stable = {
-      url = "github:nixos/nixpkgs/release-24.11";
+      url = "github:nixos/nixpkgs/release-25.11";
     };
     nixpkgs-master = {
       url = "github:nixos/nixpkgs/master";
@@ -45,6 +45,9 @@
     };
     nixos-facter-modules = {
       url = "github:nix-community/nixos-facter-modules";
+    };
+    disko = {
+      url = "github:nix-community/disko";
     };
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -95,7 +98,9 @@
       raspberry-pi-nix,
       nixgl,
       chaotic,
+      disko,
       espanso-fix,
+      nixos-facter-modules,
       ...
     }@inputs:
     let
@@ -337,6 +342,22 @@
             }
           ];
 
+        };
+        bib = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            disko.nixosModules.disko
+            { disko.devices.disk.disk1.device = "/dev/sda"; }
+            ./hosts/bib/configuration.nix
+            nixos-facter-modules.nixosModules.facter
+            {
+              config.facter.reportPath =
+                if builtins.pathExists ./hosts/bib/facter.json then
+                  ./hosts/bib/facter.json
+                else
+                  throw "Have you forgotten to run nixos-anywhere with `--generate-hardware-config nixos-facter ./hosts/bib/facter.json`?";
+            }
+          ];
         };
         pix = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";

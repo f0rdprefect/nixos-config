@@ -57,6 +57,10 @@
     nh
     podman-compose
     adwaita-icon-theme
+    exfat
+    exfatprogs
+    ntfs3g
+    ntfsprogs
   ];
 
   programs = {
