@@ -10,11 +10,11 @@
         highlight.enable = true;
         indent.enable = true;
       };
-      folding = true;
+      folding.enable = true;
     };
 
     treesitter-refactor = {
-      enable = true;
+      enable = false;
       settings = {
         highlight_definitions = {
           # enabled makes nvim choke on some flakes

@@ -14,7 +14,7 @@
     };
 
     plugins.neorg = {
-      enable = true;
+      enable = false;
 
       settings.load = {
         "core.defaults".__empty = null;
