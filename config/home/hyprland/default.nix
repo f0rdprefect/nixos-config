@@ -33,7 +33,7 @@ with lib;
   stylix.targets.hyprlock.enable = false;
   wayland.windowManager.hyprland = {
     enable = true;
-    xwayland.enable = true;
+        #    xwayland.enable = true;
     systemd.enable = true;
     plugins = [
             #pkgs.hyprlandPlugins.hyprgrass

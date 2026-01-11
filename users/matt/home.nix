@@ -72,7 +72,7 @@
       hamster
       inkscape-with-extensions
       kdePackages.falkon
-      nixfmt-rfc-style
+      nixfmt
       nomacs
       ollama
       pandoc

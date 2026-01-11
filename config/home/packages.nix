@@ -35,7 +35,7 @@ in
       #####shell stuff####
       fd
       nix-search-cli
-      nixfmt-rfc-style
+      nixfmt
       #####python stuff#####
       uv
       ####Office#######
