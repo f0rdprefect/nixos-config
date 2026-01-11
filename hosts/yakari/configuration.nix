@@ -91,7 +91,8 @@
       "wheel"
     ];
     packages = with pkgs; [
-      minetest
+      luanti
+      localsend
       tipp10
       fish-fillets-ng
       git-credential-oauth
