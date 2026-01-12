@@ -10,6 +10,7 @@
     ./hardware-configuration.nix
     ../../config/system/services.nix
     ../../config/system/flatpak.nix
+    ../../config/system/printer.nix
   ];
 
   # Bootloader.
@@ -92,6 +93,7 @@
     ];
     packages = with pkgs; [
       luanti
+      pingus
       localsend
       tipp10
       fish-fillets-ng
