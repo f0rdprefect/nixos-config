@@ -11,15 +11,20 @@ nix shell nixpkgs#git
 git clone https://github.com/f0rdprefect/nixos-config
 cd nixos-config
 ```
+### Nixos Anywhere Install
 
-### Partitioning
+nix run github:nix-community/nixos-anywhere -- --flake .#<output> --target-host root@nixos -i <sshkey> --generate-hardware-config nixos-facter <path-to-in-config>/facter.json
+
+### Semi Manual Install
+
+#### Partitioning
 
 ```sh
 nix run github:nix-community/disko -- -m disko modules/disko/btrfs-luks.nix --arg disk '"/dev/nvme0n1"'
 mount | grep /mnt
 ```
 
-### Install
+#### Install
 
 ```sh
 nixos-generate-config --show-hardware-config > <your hardware.nix>
