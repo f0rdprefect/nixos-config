@@ -336,17 +336,17 @@
           ];
 
         };
-        bib = nixpkgs.lib.nixosSystem {
+        ook = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             disko.nixosModules.disko
-            { disko.devices.disk.disk1.device = "/dev/sda"; }
-            ./hosts/bib/configuration.nix
+            { disko.devices.disk.disk1.device = "/dev/nvme0n1"; }
+            ./hosts/ook/configuration.nix
             nixos-facter-modules.nixosModules.facter
             {
               config.facter.reportPath =
-                if builtins.pathExists ./hosts/bib/facter.json then
-                  ./hosts/bib/facter.json
+                if builtins.pathExists ./hosts/ook/facter.json then
+                  ./hosts/ook/facter.json
                 else
                   throw "Have you forgotten to run nixos-anywhere with `--generate-hardware-config nixos-facter ./hosts/bib/facter.json`?";
             }
