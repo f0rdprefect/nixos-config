@@ -13,7 +13,7 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
-  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
+    #boot.kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
   services.scx.enable = true; # by default uses scx_rustland scheduler
 
   boot = {
