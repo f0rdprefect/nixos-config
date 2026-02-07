@@ -8,6 +8,7 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     ../../modules/disko/btrfs-simple.nix
+    ./immich.nix
   ];
   boot.loader.grub = {
     # no need to set devices, disko will add all devices that have a EF02 partition to the list already

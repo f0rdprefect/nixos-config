@@ -4,7 +4,7 @@
     disk = {
       disk1 = {
         type = "disk";
-        device = lib.mkDefault "/dev/disk/by-diskseq/1";
+        device = lib.mkDefault "/dev/nvme0n1";
         content = {
           type = "gpt";
           partitions = {
