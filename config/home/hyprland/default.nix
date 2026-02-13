@@ -193,6 +193,7 @@ with lib;
           exec-once = hypridle
           exec-once = wayland-pipewire-idle-inhibit
           exec-once = nextcloud
+          exec-once = blueman-applet
           exec-once = iio-hyprland
           exec-once = wl-paste --type text --watch cliphist store #Stores only text data
           exec-once = wl-paste --type image --watch cliphist store #Stores only image data
