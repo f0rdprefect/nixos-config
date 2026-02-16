@@ -303,9 +303,8 @@
             inherit nix-colors;
           };
           modules = [
+            sops-nix.nixosModules.sops
             ./hosts/nix/configuration.nix
-            # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
-            stylix.nixosModules.stylix
             # Apply the overlays
             {
               nixpkgs.overlays = [
@@ -341,7 +340,7 @@
           modules = [
             disko.nixosModules.disko
             { disko.devices.disk.disk1.device = "/dev/nvme0n1"; }
-            ./hosts/ook/configuration.nix
+            sops-nix.nixosModules.sops
             nixos-facter-modules.nixosModules.facter
             {
               config.facter.reportPath =
@@ -350,6 +349,7 @@
                 else
                   throw "Have you forgotten to run nixos-anywhere with `--generate-hardware-config nixos-facter ./hosts/bib/facter.json`?";
             }
+            ./hosts/ook/configuration.nix
           ];
         };
         pix = nixpkgs.lib.nixosSystem {

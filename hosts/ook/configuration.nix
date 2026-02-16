@@ -9,6 +9,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     ../../modules/disko/btrfs-simple.nix
     ./immich.nix
+    ../../modules/newt.nix
   ];
   boot.loader.grub = {
     # no need to set devices, disko will add all devices that have a EF02 partition to the list already
@@ -38,6 +39,8 @@
     pkgs.fastfetch
     pkgs.bcachefs-tools
     pkgs.btrfs-progs
+    pkgs.tmux
+    pkgs.pv
   ];
 
   users.users.root = {

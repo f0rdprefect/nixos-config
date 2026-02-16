@@ -11,6 +11,7 @@
     #../../config/system/homebox.nix
     ../../modules/unifi.nix
     ../../modules/audiobookshelf
+    ../../modules/newt.nix
 
   ];
 
