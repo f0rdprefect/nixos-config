@@ -21,6 +21,7 @@ in
 
       fractal
       calibre
+      inkscape-with-extensions
     ])
     ++ (with pkgs; [
       nextcloud-client
@@ -41,7 +42,6 @@ in
       ####Office#######
       papers
       gimp
-      inkscape
       libreoffice
       mupdf
       nomacs

@@ -96,6 +96,7 @@
       tipp10
       fish-fillets-ng
       git-credential-oauth
+      scummvm
     ];
   };
   users.users.root = {

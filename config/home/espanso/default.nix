@@ -1,18 +1,16 @@
 {
   pkgs,
-  config,
+  pkgs-stable,
   ...
 }:
 
 {
-  home.packages = with pkgs; [
+  home.packages = with pkgs-stable; [
     kdotool
-    #  fd
   ];
 
   services.espanso = {
     enable = true;
-    #package = pkgs.espanso-wayland;
     package = pkgs.espanso-wayland;
     configs = {
       default = {
@@ -24,8 +22,8 @@
     };
   };
   home.file.".config/espanso/match" = {
-        source = ./match;
-        recursive = true;
-    };
+    source = ./match;
+    recursive = true;
+  };
 
 }

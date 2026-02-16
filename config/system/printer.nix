@@ -20,7 +20,7 @@
       }
       {
         name = "Kyocera-ECOSYS-M5521cdw";
-        deviceUri = "dnssd://Kyocera%20ECOSYS%20M5521cdw._ipp._tcp.local/?uuid=4509a320-00dd-0108-006c-002507526632";
+        deviceUri = "ipp://Kyocera%20ECOSYS%20M5521cdw._ipp._tcp.local/?uuid=4509a320-00dd-0108-006c-002507526632"; #dnssd did not work when not at home
         location = "Office Bérénice";
         description = "Kyocera ECOSYS M5521cdw";
         model = "everywhere"; # Modern Kyocera printers support IPP Everywhere
