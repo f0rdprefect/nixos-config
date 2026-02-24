@@ -15,6 +15,8 @@
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
+    plugins.web-devicons.enable = true;
+
     performance = {
       combinePlugins = {
         enable = true;

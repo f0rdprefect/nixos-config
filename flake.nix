@@ -276,33 +276,28 @@
               )
             ];
           };
-        yakari =
-          let
-            inherit (import ./hosts/yakari/options.nix) username host;
-          in
-          nixpkgs.lib.nixosSystem {
-            specialArgs = {
-              inherit system;
-              inherit inputs;
-              inherit nix-colors;
-              inherit username;
-            };
-            modules = [
-              inputs.nixos-facter-modules.nixosModules.facter
-              { config.facter.reportPath = ./hosts/yakari/facter.json; }
-              ./hosts/yakari/configuration.nix
-              # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
-              stylix.nixosModules.stylix
-              # Apply the overlays
-              {
-                nixpkgs.overlays = [
-                  overlay-master
-                  overlay-stable
-                ];
-              }
-            ];
-
+        yakari = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit system;
+            inherit inputs;
+            inherit nix-colors;
           };
+          modules = [
+            inputs.nixos-facter-modules.nixosModules.facter
+            { config.facter.reportPath = ./hosts/yakari/facter.json; }
+            ./hosts/yakari/configuration.nix
+            # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
+            stylix.nixosModules.stylix
+            # Apply the overlays
+            {
+              nixpkgs.overlays = [
+                overlay-master
+                overlay-stable
+              ];
+            }
+          ];
+
+        };
         nix = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit system;
