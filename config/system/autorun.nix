@@ -1,6 +1,14 @@
-{ pkgs, config, username, host, ... }:
+{
+  pkgs,
+  config,
+  username,
+  ...
+}:
 
-let inherit (import ../../hosts/${host}/options.nix) wallpaperDir wallpaperGit; in
+let
+  host = config.networking.hostName;
+  inherit (import ../../hosts/${host}/options.nix) wallpaperDir wallpaperGit;
+in
 {
   # system.userActivationScripts = {
   #   gitwallpapers.text = ''

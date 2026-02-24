@@ -1,11 +1,21 @@
-{ pkgs, config, host, inputs,... }:
+{
+  pkgs,
+  config,
+  ...
+}:
 
-let inherit (import ../../hosts/${host}/options.nix) theKBDVariant
-theKBDLayout theSecondKBDLayout; in
+let
+  host = config.networking.hostName;
+  inherit (import ../../hosts/${host}/options.nix)
+    theKBDVariant
+    theKBDLayout
+    theSecondKBDLayout
+    ;
+in
 {
   services.libinput.enable = true;
   environment.systemPackages = [
-        pkgs.iio-hyprland
+    pkgs.iio-hyprland
   ];
   services.xserver = {
     enable = true;

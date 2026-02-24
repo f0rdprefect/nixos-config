@@ -352,6 +352,60 @@
             ./hosts/ook/configuration.nix
           ];
         };
+        cw-0262 =
+          let
+            inherit (import ./hosts/cw-0262/options.nix) username host;
+          in
+          nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              inherit system;
+              inherit inputs;
+              inherit nix-colors;
+              cfgoptions = import ./hosts/${host}/options.nix;
+              #Todo in all modules where options are used use cfgoptions instead
+            };
+            system = "x86_64-linux";
+            modules = [
+              disko.nixosModules.disko
+              { disko.devices.disk.disk1.device = "/dev/vda"; }
+              sops-nix.nixosModules.sops
+              nixos-facter-modules.nixosModules.facter
+              {
+                config.facter.reportPath =
+                  if builtins.pathExists ./hosts/${host}/facter.json then
+                    ./hosts/${host}/facter.json
+                  else
+                    throw "Have you forgotten to run nixos-anywhere with `--generate-hardware-config nixos-facter ./hosts/bib/facter.json`?";
+              }
+              stylix.nixosModules.stylix
+              ./hosts/${host}/configuration.nix
+              home-manager.nixosModules.home-manager
+              {
+                nixpkgs.overlays = [
+                  overlay-master
+                  overlay-stable
+                  inputs.ptouch-driver.overlay
+                ];
+              }
+              (
+                { pkgs, ... }:
+                {
+                  home-manager.extraSpecialArgs = {
+                    inherit username;
+                    inherit pkgs-stable;
+                    inherit host;
+                    inherit inputs;
+                    inherit nixvim-conf;
+                    inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
+                  };
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = true;
+                  home-manager.backupFileExtension = "backup";
+                  home-manager.users.matt = import ./users/matt/work.nix;
+                }
+              )
+            ];
+          };
         pix = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [

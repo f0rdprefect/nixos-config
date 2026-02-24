@@ -15,7 +15,7 @@
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
-    colorschemes.dracula.enable = lib.mkForce true;
+        #colorschemes.dracula.enable = lib.mkDefault true;
     plugins.web-devicons.enable = true;
 
     performance = {

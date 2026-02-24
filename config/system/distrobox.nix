@@ -1,11 +1,19 @@
-{ config, lib, pkgs, host, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let inherit (import ../../hosts/${host}/options.nix) distrobox; in
+let
+  host = config.networking.hostName;
+  inherit (import ../../hosts/${host}/options.nix) distrobox;
+in
 lib.mkIf (distrobox == true) {
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;
     defaultNetwork.settings.dns_enabled = true;
   };
-  environment.systemPackages = [pkgs.distrobox];
+  environment.systemPackages = [ pkgs.distrobox ];
 }

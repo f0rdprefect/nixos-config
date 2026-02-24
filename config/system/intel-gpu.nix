@@ -1,15 +1,10 @@
 {
   pkgs,
-  config,
   lib,
-  host,
   cfgoptions,
   ...
 }:
 
-#let
-#  inherit (import ../../hosts/${host}/options.nix) gpuType;
-#in
 lib.mkIf ("${cfgoptions.gpuType}" == "intel") {
   # NixOS configuration for Intel UHD Graphics 620 with Vulkan support
   hardware.graphics = {

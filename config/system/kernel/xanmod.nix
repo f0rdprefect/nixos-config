@@ -1,6 +1,14 @@
-{ config, lib, pkgs, host, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let inherit (import ../../../hosts/${host}/options.nix) theKernel; in
+let
+  host = config.networking.hostName;
+  inherit (import ../../../hosts/${host}/options.nix) theKernel;
+in
 lib.mkIf (theKernel == "xanmod") {
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 }

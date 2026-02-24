@@ -1,6 +1,13 @@
-{ config, lib, host, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 
-let inherit (import ../../hosts/${host}/options.nix) nfs nfsMountPoint nfsDevice; in
+let
+  host = config.networking.hostName;
+  inherit (import ../../hosts/${host}/options.nix) nfs nfsMountPoint nfsDevice;
+in
 lib.mkIf (nfs == true) {
   fileSystems."${nfsMountPoint}" = {
     device = "${nfsDevice}";

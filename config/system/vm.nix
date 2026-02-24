@@ -1,6 +1,13 @@
-{ pkgs, config, lib, host, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 
-let inherit (import ../../hosts/${host}/options.nix) cpuType; in
+let
+  host = config.networking.hostName;
+  inherit (import ../../hosts/${host}/options.nix) cpuType;
+in
 lib.mkIf ("${cpuType}" == "vm") {
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;

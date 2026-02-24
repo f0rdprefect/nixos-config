@@ -24,6 +24,7 @@
     ./polkit.nix
     ./python.nix
     ./printer.nix
+    ./quickemu.nix
     ./services.nix
     ./tailscale.nix
     ./steam.nix

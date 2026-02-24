@@ -1,9 +1,7 @@
 {
-  config,
-  lib,
   pkgs,
-  username,
-  host,
+lib,
+config,
   ...
 }:
 {
@@ -18,14 +16,14 @@
         # Alternative if the above doesn't work:
         # model = "drv:///sample.drv/generic.ppd";
       }
-      {
-        name = "Kyocera-ECOSYS-M5521cdw";
-        deviceUri = "ipp://Kyocera%20ECOSYS%20M5521cdw._ipp._tcp.local/?uuid=4509a320-00dd-0108-006c-002507526632"; #dnssd did not work when not at home
-        location = "Office Bérénice";
-        description = "Kyocera ECOSYS M5521cdw";
-        model = "everywhere"; # Modern Kyocera printers support IPP Everywhere
-        # Alternative: model = "kyocera-ecosys-m5521cdw.ppd";
-      }
+            #      {
+            #        name = "Kyocera-ECOSYS-M5521cdw";
+            #        deviceUri = "ipp://Kyocera%20ECOSYS%20M5521cdw._ipp._tcp.local/?uuid=4509a320-00dd-0108-006c-002507526632"; #dnssd did not work when not at home
+            #        location = "Office Bérénice";
+            #        description = "Kyocera ECOSYS M5521cdw";
+            #        model = "everywhere"; # Modern Kyocera printers support IPP Everywhere
+            #        # Alternative: model = "kyocera-ecosys-m5521cdw.ppd";
+            #      }
       {
         name = "Canon-IR-OG1";
         deviceUri = "socket://pr-do-og1";
@@ -34,7 +32,7 @@
       }
     ];
 
-    ensureDefaultPrinter = "Kyocera-ECOSYS-M5521cdw";
+        #    ensureDefaultPrinter = "Kyocera-ECOSYS-M5521cdw";
   };
   services = {
     printing = {
@@ -70,8 +68,11 @@
     disabledDefaultBackends = [ "escl" ];
   };
   programs.system-config-printer.enable = true;
-  users.users.${username}.extraGroups = [
-    "scanner"
-    "lp"
-  ];
+
+  users.groups.lp.members = builtins.attrNames (
+  lib.filterAttrs (_: u: u.isNormalUser) config.users.users
+);
+users.groups.scanner.members = builtins.attrNames (
+  lib.filterAttrs (_: u: u.isNormalUser) config.users.users
+);
 }

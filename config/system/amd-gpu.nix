@@ -1,6 +1,14 @@
-{ pkgs, config, lib, host, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
-let inherit (import ../../hosts/${host}/options.nix) gpuType; in
+let
+  host = config.networking.hostName;
+  inherit (import ../../hosts/${host}/options.nix) gpuType;
+in
 lib.mkIf ("${gpuType}" == "amd") {
   systemd.tmpfiles.rules = [
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
