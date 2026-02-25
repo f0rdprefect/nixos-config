@@ -202,6 +202,9 @@ in
     TERMINFO_DIRS = "${pkgs.kitty.terminfo.outPath}/share/terminfo:$TERMINFO_DIRS";
     #LC_ALL = "en_US.UTF-8";
   };
+  home.shellAliases = {
+    microsoft-edge-stable = "microsoft-edge";
+  };
 
   programs.nh = {
     enable = true;
