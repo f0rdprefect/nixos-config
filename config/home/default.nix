@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, inputs, ... }:
 
 {
   imports = [
@@ -22,10 +22,11 @@
     ./swappy.nix
     ./swaylock.nix
     ./swaync.nix
+    ./stylix.nix
     ./vifm
     #./vlc.nix did not work but make rebuild slow as hell
     ./wezterm.nix
-    ./xdg      # XDG configuration (portal, mime apps)
+    ./xdg # XDG configuration (portal, mime apps)
     ./yazi.nix
     ./zeroad.nix
     ./zsh.nix
@@ -33,4 +34,5 @@
     # Place Home Files Like Pictures
     ./files.nix
   ];
+
 }

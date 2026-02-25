@@ -29,8 +29,8 @@ with lib;
     hyprlock
     wayland-pipewire-idle-inhibit
   ];
-  stylix.targets.hyprland.enable = false;
-  stylix.targets.hyprlock.enable = false;
+  stylix.targets.hyprland.enable = true;
+  stylix.targets.hyprlock.enable = true;
   wayland.windowManager.hyprland = {
     enable = true;
         #    xwayland.enable = true;

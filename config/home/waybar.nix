@@ -109,9 +109,9 @@ with lib;
             portable = "";
             car = "";
             default = [
-              ""
-              " "
-              "  "
+              "󰕿"
+              "󰖀"
+              "󰕾"
             ];
           };
           on-click = "sleep 0.1 && pavucontrol";
@@ -141,17 +141,16 @@ with lib;
           tooltip = "true";
         };
         "custom/notification" = {
-          tooltip = false;
-          format = "{icon} {}";
+          format = "{icon}";
           format-icons = {
-            notification = "<span foreground='red'><sup></sup></span>";
-            none = "";
-            dnd-notification = "<span foreground='red'><sup></sup></span>";
-            dnd-none = "";
-            inhibited-notification = "<span foreground='red'><sup></sup></span>";
-            inhibited-none = "";
-            dnd-inhibited-notification = "<span foreground='red'><sup></sup></span>";
-            dnd-inhibited-none = "";
+            notification = "<span foreground='green'>🗪</span>"; # 󰃳 nf-md-bell-badge
+            none = "🗪"; # 󰖔 nf-md-bell-outline
+            dnd-notification = "<span foreground='gray'>🗪</span>";
+            dnd-none = "🗪"; # nf-md-bell-cancel
+            inhibited-notification = "<span foreground='red'>🗪</span>";
+            inhibited-none = "🗪";
+            dnd-inhibited-notification = "<span foreground='red'>🗪</span>";
+            dnd-inhibited-none = "🗪";
           };
           return-type = "json";
           exec-if = "which swaync-client";
@@ -184,7 +183,21 @@ with lib;
         };
       }
     ];
-
+    style = ''
+      * {
+        font-size: 20px;
+      }
+      .modules-right * {
+        margin: 4px 2px;
+        padding: 0px 8px;
+      }
+      #tray {
+        padding: 0px 10px;
+      }
+      #tray > .passive {
+        -gtk-icon-effect: dim;
+      }
+    '';
     #      style = concatStrings [
     #      ''
     #        * {

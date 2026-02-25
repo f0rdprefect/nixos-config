@@ -68,6 +68,8 @@
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # IMPORTANT
     };
     ptouch-driver.url = "github:f0rdprefect/ptouch-driver-fix";
+    apple-fonts.url= "github:Lyndeno/apple-fonts.nix";
+
   };
   nixConfig = {
     extra-substituters = [
@@ -367,7 +369,7 @@
             system = "x86_64-linux";
             modules = [
               disko.nixosModules.disko
-              { disko.devices.disk.disk1.device = "/dev/vda"; }
+              { disko.devices.disk.disk1.device = "/dev/nvme0n1"; }
               sops-nix.nixosModules.sops
               nixos-facter-modules.nixosModules.facter
               {

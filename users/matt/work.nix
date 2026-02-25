@@ -15,7 +15,7 @@ let
     theme
     wallpaperDir
     wallpaperGit
-    flakeDir #refactor me away
+    flakeDir # refactor me away
     ;
 in
 {
@@ -41,6 +41,7 @@ in
     ../../config/home/swappy.nix
     ../../config/home/swaylock.nix
     ../../config/home/swaync.nix
+    ../../config/home/stylix.nix
     #../../config/home/vlc.nix did not work but make rebuild slow as hell
     ../../config/home/xdg # XDG configuration (portal, mime apps)
     ../../config/home/yazi.nix
@@ -50,17 +51,6 @@ in
     ../../config/home/files.nix
 
   ];
-  stylix = {
-    enable = true;
-    polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-    #base16Scheme = "${pkgs.base16-schemes}/share/themes/greenscreen.yaml";
-    image = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/f0rdprefect/my-wallpaper/e97260d56e008664febd7309b912b41c4ea507dc/Neon_Cities_4-C0750.jpg";
-      sha256 = "GGAACIUFyDGvwG2dgE02aMK46I3yo0+r+BtrV199emU=";
-    };
-
-  };
   home.username = "${username}";
   home.homeDirectory = "/home/${username}";
   colorScheme = inputs.nix-colors.colorSchemes."${theme}";
