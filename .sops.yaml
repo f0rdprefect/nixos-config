@@ -7,6 +7,7 @@ keys:
   - &xin age1m2ee7vdxgrzmda4zrndv3976cplhk37l3t7gudfjt6vgjdtume3skngvpm
   - &nix age12c3jn7vrrxf5vqwgaqwqaxj77ng6cgn9gd6g6kssz0g72pmvap5sr9cfp6
   - &ook age10hnkh38x5zwwepuu74j5xnsrf36eezhwtkj4gf449lqv0h0dpvjqwhrstj
+  - &cw-0262 age12y4vnwymtus48kkd3xrmdfscjamsnepk7j35w5wuj4zlqsqh54tsqxlx36
   - &recovery age1er4cnhc2j6s8et8rslexx8k0kdehlxnelq63nrj95w024nkzsgts76dpve
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
@@ -16,4 +17,5 @@ creation_rules:
         - *xin
         - *nix
         - *ook
+        - *cw-0262
         - *recovery
