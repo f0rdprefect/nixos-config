@@ -1,19 +1,47 @@
 {
   pkgs,
+  lib,
   ...
 }:
-
 {
+  security.pam.u2f = {
+    enable = true;
+    settings = {
+      #to add more keys
+      # `pamu2fcfg -n -o pam://yubi`
+      origin = "pam://yubi";
+      #debug = true;
+      authfile = pkgs.writeText "u2f-mappings" (
+        lib.concatStrings [
+          "matt"
+          #black solo
+          ":owBYs/wdXNi6JblFN/JE0sqYjr0X3w9gGh9hnWv8njQeIV2O9Dhh6KBejlrZmGxgkZxd1+OmOzq2UiJxHhObm4tPqgKWdGiOBnnO6U9beEiOUUy3RtpcQKtUUSMny406TDThCcwRd6e/rKQEmvVPqd6NQV0stAtoPLN8Nns1FjNtwO/hY9tZ/t+jNdsAngQtuYA2jbHBna81v4zinh6Yk4lz7Psw1giouMn5PH63Ts0fwn1ta2y6AUx3sAfZpGONmjAchzcCUJs3IqcRdYu6Hr8YmPWTTSs=,wdxZXbCUE7crVLRsChOWwhA80XeqPrfYXHt/3WifoZULbxR9yutjSRUd7BTvKzaJjdoLuQpRelnuYqzHVgIZhQ==,es256,+presence"
+          ":owBYel7SgTfH3KKhJAMfLkRpYoa6gAMJO4j0XwpSlAMyV1WqMATnD0qyVTx8sQI16lp744E4vR6nXrkcH3WF/JJ9TTcnGdvKhbTQnW7bnW6BgAAxAENbtM9AGhAekcFFU24mnufYG87jWyhEeV4znmd2JGxkabVPHTvaWTJVAUz2Bd8T/576O90oDpACUPmx6d5N1rxN1WU8oj2cGBg=,O4LCXtox6zEg+tG12dzzESoRE0O4yVnjI7ISPz4A7T873DErtDGOr1T4umEkaucLrBjWkQZ1E6qmQPZ4HMgbEg==,es256,+presence"
+          ":8dACAs03ZZQUUMtKVydhdd4pEyAQAEIM9TuQ0j2wMYWMMYiEuRPP6v2zS/vTmzX5qD+LwwwocsFkay64YoE0TwNiuroC9HAeUVVi0VnXUSEmFfQTG+R29BXIQNoYKPfpSz/flt1n9aetqe/Q9CZmhIUegKd4n6caux/JksfG3z0W1Q+IwjKY81Y36wFtPfcLde2d2c+QwdjwkGN6Lm1hxGMhah5X0Q==,kev6Od1h7uMZR107hZIIzHM3zSNGQYdDT24wt88b5D2P+DNTyzPMx+z2TQlc12/IH7ev5fvbaSuV096cz+rUNA==,es256,+presence"
+        ]
+      );
+
+      cue = true;
+      interactive = false;
+    };
+  };
+
   security.pam.services = {
+    ly.fprintAuth = false;
+    ly.u2fAuth = false;
     login.u2fAuth = true;
     sudo.u2fAuth = true;
-    ly.fprintAuth = false;
     sudo.fprintAuth = true;
-    hyprlock.fprintAuth = true;
   };
+
   services.udev.extraRules = ''
+    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="beee", TAG+="uaccess", GROUP="plugdev", MODE="0660"
+    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0030", TAG+="uaccess", GROUP="plugdev", MODE="0660"
     KERNEL=="hidraw*", SUBSYSTEM=="usb", ENV{PRODUCT}=="1209/beee/3c4", TAG+="uaccess", GROUP="plugdev", MODE="0660"
     ACTION=="remove", SUBSYSTEM=="usb", ENV{PRODUCT}=="1209/beee/3c4" RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
+    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="20a0", ATTRS{idProduct}=="42b2", TAG+="uaccess", GROUP="plugdev", MODE="0660"
+    KERNEL=="hidraw*", SUBSYSTEM=="usb", ENV{PRODUCT}=="20a0/42b2/107" TAG+="uaccess", GROUP="plugdev", MODE="0660"
+    ACTION=="remove", SUBSYSTEM=="usb", ENV{PRODUCT}=="20a0/42b2/107" RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
   '';
   services.pcscd.enable = true;
 }

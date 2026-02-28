@@ -84,21 +84,11 @@
     };
     virt-manager.enable = true;
     hamster.enable = true;
-    #    dotool = {
-    #      enable = true;
-    #      allowedUsers = [ "matt" ];
-    #    };
   };
   security.pam.services.hyprlock = {
     text = ''
       auth include login
     '';
   };
-  security.pam.services.swaylock = {
-    text = ''
-      auth include login
-    '';
-  };
-
   virtualisation.libvirtd.enable = true;
 }

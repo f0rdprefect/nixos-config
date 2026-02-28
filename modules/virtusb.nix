@@ -1,10 +1,16 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 
 let
   cfg = config.modules.virtusb;
-in {
+in
+{
   options.modules.virtusb = {
     enable = mkEnableOption "virtviewer/quickemu USB passthrough";
 
@@ -30,17 +36,21 @@ in {
     virtualisation.spiceUSBRedirection.enable = true;
 
     # User in die nötigen Gruppen packen
-    users.groups.plugdev = {};
+    users.groups.plugdev = { };
 
     users.users.${cfg.username} = {
-      extraGroups = [ "libvirtd" "kvm" "plugdev" ];
+      extraGroups = [
+        "libvirtd"
+        "kvm"
+        "plugdev"
+      ];
     };
 
     # udev-Regel: USB-Geräte für plugdev freigeben + uaccess Tag
     # damit systemd-logind dem eingeloggten User direkten Zugriff gibt
-    services.udev.extraRules = ''
-      SUBSYSTEM=="usb", MODE="0664", GROUP="plugdev", TAG+="uaccess"
-    '';
+    #    services.udev.extraRules = ''
+    #SUBSYSTEM=="usb", MODE="0664", GROUP="plugdev", TAG+="uaccess"
+    #'';
 
     # polkit: libvirt-Verwaltung für libvirtd-Gruppe erlauben
     security.polkit.enable = true;
@@ -54,12 +64,15 @@ in {
     '';
 
     # Optionale Pakete
-    environment.systemPackages = mkIf cfg.extraPackages (with pkgs; [
-      quickemu
-      virt-viewer
-      # spice-gtk wird bereits von spiceUSBRedirection installiert,
-      # hier nochmal explizit für spice-vdagent etc.
-      spice-gtk
-    ]);
+    environment.systemPackages = mkIf cfg.extraPackages (
+      with pkgs;
+      [
+        quickemu
+        virt-viewer
+        # spice-gtk wird bereits von spiceUSBRedirection installiert,
+        # hier nochmal explizit für spice-vdagent etc.
+        spice-gtk
+      ]
+    );
   };
 }

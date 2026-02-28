@@ -23,7 +23,7 @@
           4
           3
         ];
-        show_hidden = true;
+        show_hidden = false;
       };
       # Git plugin fetchers
       plugin.prepend_fetchers = [

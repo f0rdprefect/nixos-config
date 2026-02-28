@@ -56,7 +56,7 @@
       package = pkgs.zfs_unstable;
       requestEncryptionCredentials = true;
     };
-    kernelPackages = lib.mkOverride 0 pkgs.linuxPackages_latest;
+    kernelPackages = lib.mkOverride 0 pkgs.linuxPackages_zen;
     kernel.sysctl."vm.swappiness" = 10;
   };
   zramSwap = {
@@ -76,7 +76,14 @@
     pkgs.tmux
     pkgs.pv
   ];
-
+  programs = {
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+    };
+    nano.enable = false;
+    ydotool.enable = true;
+  };
   users.users.root = {
     openssh.authorizedKeys.keys = [
       # change this to your ssh key
@@ -102,6 +109,8 @@
         "libvirtd"
         "input"
         "cdrom"
+        "uinput"
+        "ydotool"
       ];
       shell = pkgs.bash;
       ignoreShellProgramCheck = true;

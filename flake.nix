@@ -397,7 +397,6 @@
                     inherit pkgs-stable;
                     inherit host;
                     inherit inputs;
-                    inherit nixvim-conf;
                     inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
                   };
                   home-manager.useGlobalPkgs = true;

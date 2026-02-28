@@ -22,6 +22,7 @@ in
       fractal
       calibre
       inkscape-with-extensions
+      makemkv
     ])
     ++ (with pkgs; [
       nextcloud-client
@@ -55,7 +56,6 @@ in
       ####Media Ripping###
       asunder
       handbrake
-      makemkv
       lame
       yt-dlp
       vlc

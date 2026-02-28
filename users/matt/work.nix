@@ -34,6 +34,7 @@ in
     ../../config/home/hyprland
     ../../config/home/kitty.nix
     ../../config/home/neovim
+    ../../config/home/packages.nix
     ../../config/home/rofi.nix
     ../../config/home/starship.nix
     ../../config/home/waybar.nix
@@ -107,7 +108,7 @@ in
       swaynotificationcenter
       imagemagick
       highlight
-      mate.engrampa
+      engrampa
       thunar
       blueman
       wl-mirror
