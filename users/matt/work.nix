@@ -34,7 +34,6 @@ in
     ../../config/home/hyprland
     ../../config/home/kitty.nix
     ../../config/home/neovim
-    ../../config/home/packages.nix
     ../../config/home/rofi.nix
     ../../config/home/starship.nix
     ../../config/home/waybar.nix
@@ -220,7 +219,7 @@ in
   programs.direnv = {
     enable = true;
     enableBashIntegration = true;
-    enableZshIntegration = true;
+    enableZshIntegration = false;
   };
 
   # Define Settings For Xresources

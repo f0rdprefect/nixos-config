@@ -77,10 +77,6 @@
     pkgs.pv
   ];
   programs = {
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
     nano.enable = false;
     ydotool.enable = true;
   };
@@ -115,8 +111,6 @@
       shell = pkgs.bash;
       ignoreShellProgramCheck = true;
       packages = with pkgs; [
-        yazi
-        neovim
       ];
     };
   };
