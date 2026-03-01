@@ -6,6 +6,9 @@
   programs.starship = {
     enable = true;
     package = pkgs.starship;
-    settings = builtins.fromTOML (builtins.readFile ./files/starship-matt.toml);
+    presets = [
+      "nerd-font-symbols"
+      "catppuccin-powerline"
+    ];
   };
 }
