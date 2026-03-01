@@ -49,6 +49,7 @@ in
 
     #Place Home Files Like Pictures
     ../../config/home/files.nix
+    ../../modules/vdb.nix
 
   ];
   home.username = "${username}";
@@ -221,7 +222,10 @@ in
     enableBashIntegration = true;
     enableZshIntegration = false;
   };
+programs.raith.vdb = {
+        enable = true;
 
+    };
   # Define Settings For Xresources
   xresources.properties = {
     "Xcursor.size" = lib.mkDefault 24;
