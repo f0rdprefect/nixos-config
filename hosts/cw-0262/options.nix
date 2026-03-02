@@ -19,7 +19,7 @@ in {
 
   # Git Configuration ( For Pulling Software Repos )
   gitUsername = "Matthias Berse";
-  gitEmail = "matthias@berse.xyz";
+  gitEmail = "matthias.berse@raith.com";
 
   # Base16 Theme
   theme = "gruvbox-material-dark-medium";
