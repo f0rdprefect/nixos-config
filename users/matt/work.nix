@@ -137,6 +137,10 @@ in
       font-awesome
       roboto
       source-sans-pro
+      # No more xterm please
+      (pkgs.writeShellScriptBin "xterm" ''
+        exec ''${TERMINAL:-${lib.getExe pkgs.kitty}} "$@"
+      '')
     ])
     ++ (with pkgs-stable; [
       freeplane
@@ -201,10 +205,8 @@ in
     LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     LANG = "en_US.UTF-8";
     TERMINFO_DIRS = "${pkgs.kitty.terminfo.outPath}/share/terminfo:$TERMINFO_DIRS";
+    TERMINAL = lib.getExe pkgs.kitty;
     #LC_ALL = "en_US.UTF-8";
-  };
-  home.shellAliases = {
-    microsoft-edge-stable = "microsoft-edge";
   };
 
   programs.nh = {
@@ -222,10 +224,10 @@ in
     enableBashIntegration = true;
     enableZshIntegration = false;
   };
-programs.raith.vdb = {
-        enable = true;
+  programs.raith.vdb = {
+    enable = true;
 
-    };
+  };
   # Define Settings For Xresources
   xresources.properties = {
     "Xcursor.size" = lib.mkDefault 24;
