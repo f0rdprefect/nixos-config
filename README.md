@@ -43,16 +43,16 @@ rbw config set base_url <url>
 rbw login
 ```
 
-#### dotool
+#### ydotool
 
 Hopefully merged soon...
 
-#### fido keys
+#### fido keys (u2f)
 
-```
-nix shell nixpkgs#pam_u2f
-pamu2fcfg >> config/home/files/u2f_keys
-```
-to add a new one.
+see comments in  `fido.nix`
 
-add new Products to `fido.nix`
+# Lessons learnt
+
+Packages added to users in system section precede the ones added by homemanger.
+
+This can lead to really hard to understand error messages during runtime.
