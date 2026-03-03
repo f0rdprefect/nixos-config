@@ -131,6 +131,7 @@
   services.tailscale = {
     enable = true;
   };
+  services.teamviewer.enable = true;
 
   time.timeZone = "Europe/Berlin";
 
