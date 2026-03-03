@@ -8,7 +8,7 @@
     package = pkgs.starship;
     presets = [
       "nerd-font-symbols"
-      "catppuccin-powerline"
+      "gruvbox-rainbow"
     ];
   };
 }

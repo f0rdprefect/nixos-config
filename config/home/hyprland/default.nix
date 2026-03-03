@@ -221,6 +221,7 @@ with lib;
               ''
           }
           bind = ${modifier},E,exec,kitty --title "File Manager" -e yazi
+          bind = ${modifier}SHIFT,E,exec,systemctl restart --user espanso
           bind = ${modifier},S,exec,screenshootin
           bind = ${modifier},O,exec,obs
           bind = ${modifier},G,exec,gimp

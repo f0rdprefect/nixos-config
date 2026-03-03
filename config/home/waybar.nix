@@ -58,7 +58,7 @@ with lib;
           tooltip-format = "<big>{:%A, %d.%B %Y }</big>\n<tt><small>{calendar}</small></tt>";
         };
         "hyprland/window" = {
-          max-length = 22;
+          max-length = 32;
           separate-outputs = false;
           rewrite = {
             "" = " 🙈 No Windows? ";
@@ -66,16 +66,16 @@ with lib;
         };
         "memory" = {
           interval = 5;
-          format = "  {}%";
+          format = " {}% ";
           tooltip = true;
         };
         "cpu" = {
           interval = 5;
-          format = "  {usage:2}%";
+          format = " {usage:2} % ";
           tooltip = true;
         };
         "disk" = {
-          format = "  {free}";
+          format = " {free} ";
           tooltip = true;
         };
         "network" = {
@@ -86,28 +86,28 @@ with lib;
             "󰤥"
             "󰤨"
           ];
-          format-ethernet = " {bandwidthDownOctets}";
+          format-ethernet = "{bandwidthDownOctets} ";
           format-wifi = "{icon} {signalStrength}%";
           format-disconnected = "󰤮";
           tooltip = false;
         };
         "tray" = {
-          spacing = 12;
+          spacing = 1;
         };
         "pulseaudio" = {
-          format = "{icon} {volume}% {format_source}";
-          format-bluetooth = "{volume}% {icon} {format_source}";
-          format-bluetooth-muted = " {icon} {format_source}";
-          format-muted = " {format_source}";
-          format-source = " {volume}%";
-          format-source-muted = "";
+          format = "{icon} {volume}% {format_source}";
+          format-bluetooth = "{volume}% {icon} {format_source} ";
+          format-bluetooth-muted = " {icon} {format_source} ";
+          format-muted = " {format_source} ";
+          format-source = " {volume}% ";
+          format-source-muted = " ";
           format-icons = {
-            headphone = "";
-            hands-free = "";
-            headset = "";
-            phone = "";
-            portable = "";
-            car = "";
+            headphone = " ";
+            hands-free = " ";
+            headset = " ";
+            phone = " ";
+            portable = " ";
+            car = " ";
             default = [
               "󰕿"
               "󰖀"
@@ -123,7 +123,7 @@ with lib;
         };
         "custom/startmenu" = {
           tooltip = false;
-          format = "";
+          format = " ";
           # exec = "rofi -show drun";
           on-click = "sleep 0.1 && rofi-launcher";
         };
@@ -163,9 +163,9 @@ with lib;
             warning = 30;
             critical = 15;
           };
-          format = "{icon} {capacity}%";
-          format-charging = "󰂄 {capacity}%";
-          format-plugged = "󱘖 {capacity}%";
+          format = "{icon}{capacity}%";
+          format-charging = "󰂄 {capacity}%";
+          format-plugged = "󱘖 { capacity}%";
           format-icons = [
             "󰁺"
             "󰁻"
