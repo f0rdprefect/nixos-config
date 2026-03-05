@@ -51,11 +51,9 @@ with lib;
              force_zero_scaling = false
           }
           general {
-            gaps_in = 6
-            gaps_out = 8
+            gaps_in = 3
+            gaps_out = 4
             border_size = 2
-            col.active_border = rgba(${theme.base0C}ff) rgba(${theme.base0D}ff) rgba(${theme.base0B}ff) rgba(${theme.base0E}ff) 45deg
-            col.inactive_border = rgba(${theme.base00}cc) rgba(${theme.base01}cc) 45deg
             layout = dwindle
             resize_on_border = true
           }
@@ -162,8 +160,6 @@ with lib;
               enabled = true
               range = 6
               render_power = 1
-
-              color =  rgba(${theme.base0A}ff)
               color_inactive = 0x50000000
             }
             blur {
