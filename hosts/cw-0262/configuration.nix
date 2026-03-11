@@ -25,7 +25,7 @@
     extraModulePackages = [ ];
     initrd.systemd.enable = true;
     initrd.verbose = false;
-    initrd.kernelModules = [ "virtio_gpu" ]; # amdgpu auf dem echten eisen
+    initrd.kernelModules = [ "amdgpu" ]; # amdgpu auf dem echten eisen
     consoleLogLevel = 0;
     plymouth.enable = true;
     plymouth.font = "${pkgs.hack-font}/share/fonts/truetype/Hack-Regular.ttf";
@@ -64,6 +64,27 @@
     memoryPercent = 50;
     algorithm = "zstd";
     priority = 100;
+  };
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true; # für 32bit-Apps/Wine
+    extraPackages = with pkgs; [
+      rocmPackages.clr.icd
+      mesa
+      vulkan-loader
+      vulkan-validation-layers
+      libva-vdpau-driver
+    ];
+
+  };
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    VK_ICD_FILENAMES = lib.mkForce "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
+    LIBVA_DRIVER_NAME = lib.mkForce "radeonsi";
+  };
+  services.xserver = {
+    enable = true; # still needed even for Wayland on NixOS
+    videoDrivers = [ "amdgpu" ];
   };
   services.openssh.enable = true;
   environment.systemPackages = map lib.lowPrio [
