@@ -112,6 +112,8 @@ in
       thunar
       blueman
       wl-mirror
+            net-tools
+            arp-scan-rs
 
       ####bitwarden related###
       bitwarden-desktop # will be replaced by bitwarden-desktop
@@ -201,6 +203,7 @@ in
     base = "en_US.UTF-8";
   };
   home.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
     EDITOR = "nvim";
     LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     LANG = "en_US.UTF-8";
