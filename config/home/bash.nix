@@ -1,7 +1,19 @@
-{ config, lib, pkgs, host, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  host,
+  ...
+}:
 
-let inherit (import ../../hosts/${host}/options.nix) flakeDir flakePrev
-	     flakeBackup theShell; in
+let
+  inherit (import ../../hosts/${host}/options.nix)
+    flakeDir
+    flakePrev
+    flakeBackup
+    theShell
+    ;
+in
 lib.mkIf (theShell == "bash") {
   # Configure Bash
   programs.bash = {
@@ -13,7 +25,11 @@ lib.mkIf (theShell == "bash") {
       #fi
     '';
     initExtra = ''
-      fastfetch
+      if [[ $(pgrep -c bash) -eq 1 ]]; then
+          ${lib.getExe pkgs.fastfetch}
+      else
+          ${lib.getExe pkgs.pokeget-rs} random
+      fi
       if [ -f $HOME/.bashrc-personal ]; then
         source $HOME/.bashrc-personal
       fi
@@ -23,17 +39,17 @@ lib.mkIf (theShell == "bash") {
       FLAKEPREV = "${flakePrev}";
     };
     shellAliases = {
-      sv="sudo nvim";
-      flake-rebuild="nh os switch --hostname ${host}";
-      flake-update="nh os switch --hostname ${host} --update";
-      gcCleanup="nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
-      v="nvim";
-      vi="nvim";
-      ls="lsd";
-      ll="lsd -l";
-      la="lsd -a";
-      lal="lsd -al";
-      ".."="cd ..";
+      sv = "sudo nvim";
+      flake-rebuild = "nh os switch --hostname ${host}";
+      flake-update = "nh os switch --hostname ${host} --update";
+      gcCleanup = "nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
+      v = "nvim";
+      vi = "nvim";
+      ls = "lsd";
+      ll = "lsd -l";
+      la = "lsd -a";
+      lal = "lsd -al";
+      ".." = "cd ..";
 
     };
   };
