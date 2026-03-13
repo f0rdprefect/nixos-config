@@ -33,10 +33,10 @@ with lib;
   stylix.targets.hyprlock.enable = true;
   wayland.windowManager.hyprland = {
     enable = true;
-        #    xwayland.enable = true;
+    #    xwayland.enable = true;
     systemd.enable = true;
     plugins = [
-            #pkgs.hyprlandPlugins.hyprgrass
+      #pkgs.hyprlandPlugins.hyprgrass
     ];
     extraConfig =
       let
@@ -102,7 +102,7 @@ with lib;
                 env = WLR_RENDERER_ALLOW_SOFTWARE,1
               ''
             else
-              ''''
+              ""
           }
           ${
             if gpuType == "nvidia" then
@@ -110,7 +110,7 @@ with lib;
                 env = WLR_NO_HARDWARE_CURSORS,1
               ''
             else
-              ''''
+              ""
           }
           gestures {
             workspace_swipe_distance = 500
@@ -141,7 +141,7 @@ with lib;
                   animation = borderangle, 1, 30, liner, loop
                 ''
               else
-                ''''
+                ""
             }
             animation = fade, 1, 10, default
             animation = workspaces, 1, 5, wind
@@ -290,147 +290,91 @@ with lib;
         ''
       ];
   };
-
   programs.hyprlock = {
     enable = true;
-    extraConfig = concatStrings [
-      ''
+    settings = {
+      general = {
+        grace = 1;
+        hide_cursor = true;
+        ignore_empty_input = false;
+      };
 
-        general {
-            grace = 1
+      animations = {
+        enabled = true;
+        fade_in = {
+          duration = 300;
+          bezier = "easeOutQuint";
+        };
+        fade_out = {
+          duration = 300;
+          bezier = "easeOutQuint";
+        };
+      };
+
+      background = lib.mkForce [
+        {
+          path = "screenshot";
+          blur_passes = 2;
+          blur_size = 5;
+          noise = 0.0117;
+          contrast = 1.3000; # Vibrant!!!
+          brightness = 0.8000;
+          vibrancy = 0.2100;
+          vibrancy_darkness = 0.0;
+        }
+      ];
+      label = [
+        {
+
+          text = "cmd[update:18000000] echo \"<b> \"$(date +'%A, %-d %B %Y')\" </b>\"";
+          font_size = 34;
+          position = "0, -80";
+          halign = "center";
+          valign = "top";
         }
 
-        background {
-            monitor =
-            # NOTE: use only 1 path
-        	path = screenshot   # screenshot of your desktop
-        	#path = $HOME/.config/hypr/wallpaper_effects/.wallpaper_modified   # NOTE only png supported for now
-            #path = $HOME/.config/hypr/wallpaper_effects/.wallpaper_current # current wallpaper
-
-            #color = $color7
-
-            # all these options are taken from hyprland, see https://wiki.hyprland.org/Configuring/Variables/#blur for explanations
-            blur_size = 5
-            blur_passes = 2 # 0 disables blurring
-            noise = 0.0117
-            contrast = 1.3000 # Vibrant!!!
-            brightness = 0.8000
-            vibrancy = 0.2100
-            vibrancy_darkness = 0.0
+        {
+          text = "cmd[update:60000] echo \"$(date +\"%H:%M\")\"";
+          font_size = 80;
+          position = "0, -300";
+          halign = "center";
+          valign = "top";
         }
+        {
+          text = "   $USER";
+          color = "rgba(${theme.base0A}ff)";
+          font_size = 24;
+          font_family = "Inter Display Medium";
 
-        input-field {
-            monitor =
-            size = 250, 50
-            outline_thickness = 3
-            dots_size = 0.33 # Scale of input-field height, 0.2 - 0.8
-            dots_spacing = 0.15 # Scale of dots' absolute size, 0.0 - 1.0
-            dots_center = true
-            outer_color = rgba(${theme.base05}ff)
-            inner_color = rgba(${theme.base00}ff)
-            font_color = rgba(${theme.base0C}ff)
-            fade_on_empty = true
-            placeholder_text = <i>Password...</i> # Text rendered in the input box when it's empty.
-            hide_input = false
-
-            position = 0, 80
-            halign = center
-            valign = bottom
-        }
-
-        # Date
-        label {
-            monitor =
-            text = cmd[update:18000000] echo "<b> "$(date +'%A, %-d %B %Y')" </b>"
-            color = rgba(${theme.base0C}ff)
-            font_size = 34
-            font_family = JetBrains Mono Nerd Font 10
-            position = 0, -80
-            halign = center
-            valign = top
-        }
-
-        # Hour-Time
-        label {
-            monitor =
-            text = cmd[update:1000] echo "$(date +"%H")"
-        #    text = cmd[update:1000] echo "$(date +"%I")" #AM/PM
-            color = rgba(255, 185, 0, .8)
-            font_size = 150
-            font_family = JetBrains Mono Nerd Font Mono ExtraBold
-            position = 0, -200
-            halign = center
-            valign = top
-        }
-
-        # Minute-Time
-        label {
-            monitor =
-            text = cmd[update:1000] echo "$(date +"%M")"
-            color = rgba(15, 10, 222, .8)
-            font_size = 150
-            font_family = JetBrains Mono Nerd Font Mono ExtraBold
-            position = 0, -450
-            halign = center
-            valign = top
-        }
-
-        # Seconds-Time
-        label {
-            monitor =
-            text = cmd[update:1000] echo "$(date +"%S")"
-        #    text = cmd[update:1000] echo "$(date +"%S %p")" #AM/PM
-            color = rgba(${theme.base07}ff)
-            font_size = 20
-            font_family = JetBrains Mono Nerd Font Mono ExtraBold
-            position = 0, -450
-            halign = center
-            valign = top
-        }
-
-        # User
-        label {
-            monitor =
-            text =    $USER
-            color = rgba(${theme.base0A}ff)
-            font_size = 18
-            font_family = Inter Display Medium
-
-            position = 0, 20
-            halign = center
-            valign = bottom
+          position = "0, 20";
+          halign = "center";
+          valign = "bottom";
         }
 
         # uptime
-        label {
-            monitor =
-            text = cmd[update:60000] echo "<b> "$(uptime | cut -f 1 -d "," |cut -f 4-8 -d " ")" </b>"
-            color = rgba(${theme.base0A}ff)
-            font_size = 24
-            font_family = JetBrains Mono Nerd Font 10
-            position = 0, 0
-            halign = right
-            valign = bottom
+        {
+          text = "cmd[update:60000] echo \"<b> \"$(uptime | cut -f 1 -d \",\" |cut -f 4-8 -d \" \")\" </b>\"";
+          color = "rgba(${theme.base0A}ff)";
+          font_size = 24;
+          position = "0, 0";
+          halign = "right";
+          valign = "bottom";
+        }
+        {
+          text = "cmd[update:160000] echo \"<b> \"$(curl wttr.in?format=4)\" </b>\"";
+          color = "rgba(${theme.base0A}ff)";
+          font_size = 24;
+          position = "0, 0";
+          halign = "left";
+          valign = "bottom";
         }
 
-        # weather edit the scripts for locations
-        # weather scripts are located in ~/.config/hypr/UserScripts Weather.sh and/or Weather.py
-        # see https://github.com/JaKooLit/Hyprland-Dots/wiki/TIPS#%EF%B8%8F-weather-app-related-for-waybar-and-hyprlock
-        label {
-            monitor =
-            text = cmd[update:3600000] [ -f ~/.cache/.weather_cache ] && cat  ~/.cache/.weather_cache
-            color = rgba(${theme.base0A}ff)
-            font_size = 24
-            font_family = JetBrains Mono Nerd Font 10
-            position = 50, 0
-            halign = left
-            valign = bottom
-        }
+      ];
 
-      ''
-    ];
+    };
 
   };
+
   services = {
     hypridle = {
       enable = true;
