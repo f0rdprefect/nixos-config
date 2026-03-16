@@ -22,7 +22,12 @@
 #       ...
 #     }
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.services.wttr-cache;
@@ -35,15 +40,17 @@ let
     ++ lib.optional (cfg.format != null) cfg.format
     ++ lib.optional (cfg.lang != null) "lang=${cfg.lang}"
   );
+  pngSuffix = if imageOptions == "" then ".png" else "_${imageOptions}.png";
 
   # Build the wttr.in PNG URL for a given location string.
   # Empty string = auto-detect from IP.
-  mkUrl = location:
+  mkUrl =
+    location:
     let
       locPart = if location == "" then "" else "/${location}";
       optPart = if imageOptions == "" then ".png" else "_${imageOptions}.png";
     in
-      "https://wttr.in${locPart}${optPart}";
+    "https://wttr.in${locPart}${optPart}";
 
   # The update script — embedded as a Nix-managed derivation so all deps
   # (curl, python3, coreutils) come from the Nix store, not PATH.
@@ -133,13 +140,8 @@ let
       ENCODED_LOC=$(${pkgs.python3}/bin/python3 -c \
         "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" \
         "$SAVED_LOC")
-      SAVED_URL="${
-        # We can't call mkUrl with a shell var, so reconstruct inline
-        let base = "https://wttr.in";
-            opt  = if imageOptions == "" then ".png" else "_${imageOptions}.png";
-        in "${base}/$ENCODED_LOC${opt}"
-      }"
-      if fetch_png "$SAVED_URL" && is_valid_png; then
+      SAVED_URL="https://wttr.in/''${ENCODED_LOC}${pngSuffix}"
+        if fetch_png "$SAVED_URL" && is_valid_png; then
         commit_png
         log "OK (saved: $SAVED_LOC) — geo-detection was blocked"
         exit 0
@@ -152,12 +154,13 @@ let
     exit 0   # always exit 0 so systemd doesn't flag this as a failure
   '';
 
-in {
+in
+{
   options.services.wttr-cache = {
     enable = lib.mkEnableOption "wttr.in weather PNG cache for hyprlock";
 
     interval = lib.mkOption {
-      type    = lib.types.str;
+      type = lib.types.str;
       default = "30min";
       description = ''
         How often to refresh the weather PNG.
@@ -166,7 +169,7 @@ in {
     };
 
     format = lib.mkOption {
-      type    = lib.types.nullOr lib.types.str;
+      type = lib.types.nullOr lib.types.str;
       default = "v2";
       description = ''
         wttr.in image variant. Common values:
@@ -179,25 +182,25 @@ in {
     };
 
     transparent = lib.mkOption {
-      type    = lib.types.bool;
+      type = lib.types.bool;
       default = true;
       description = "Request a transparent PNG background (recommended for lockscreen overlays).";
     };
 
     lang = lib.mkOption {
-      type    = lib.types.nullOr lib.types.str;
+      type = lib.types.nullOr lib.types.str;
       default = "en";
       description = "Language code for wttr.in output, e.g. \"de\", \"nl\", \"fr\".";
     };
 
     timeoutSeconds = lib.mkOption {
-      type    = lib.types.int;
+      type = lib.types.int;
       default = 15;
       description = "curl timeout in seconds per fetch attempt.";
     };
 
     resumeDelay = lib.mkOption {
-      type    = lib.types.str;
+      type = lib.types.str;
       default = "20s";
       description = ''
         How long to wait after suspend resume before fetching.
@@ -207,8 +210,8 @@ in {
     };
 
     cacheDir = lib.mkOption {
-      type    = lib.types.str;
-      default = "%h/.cache/wttr";   # %h = $HOME in systemd user units
+      type = lib.types.str;
+      default = "%h/.cache/wttr"; # %h = $HOME in systemd user units
       description = "Directory where the PNG and metadata are cached. %h expands to $HOME.";
     };
   };
@@ -219,12 +222,12 @@ in {
     systemd.user.services.wttr-cache = {
       Unit = {
         Description = "Update wttr.in weather PNG cache";
-        After       = [ "network-online.target" ];
-        Wants       = [ "network-online.target" ];
+        After = [ "network-online.target" ];
+        Wants = [ "network-online.target" ];
       };
       Service = {
-        Type       = "oneshot";
-        ExecStart  = "${updateScript}";
+        Type = "oneshot";
+        ExecStart = "${updateScript}";
         # Don't let a stale tmp file linger on crash
         ExecStartPre = "-${pkgs.coreutils}/bin/rm -f ${cfg.cacheDir}/weather.png.tmp";
       };
@@ -232,11 +235,11 @@ in {
 
     # Timer: on login + every N minutes
     systemd.user.timers.wttr-cache = {
-      Unit.Description  = "Refresh wttr.in weather PNG every ${cfg.interval}";
+      Unit.Description = "Refresh wttr.in weather PNG every ${cfg.interval}";
       Timer = {
-        OnBootSec        = "2min";
-        OnUnitActiveSec  = cfg.interval;
-        Unit             = "wttr-cache.service";
+        OnBootSec = "2min";
+        OnUnitActiveSec = cfg.interval;
+        Unit = "wttr-cache.service";
       };
       Install.WantedBy = [ "timers.target" ];
     };
@@ -245,7 +248,7 @@ in {
     systemd.user.services.wttr-cache-resume = {
       Unit = {
         Description = "Refresh wttr.in cache after suspend resume";
-        After       = [
+        After = [
           "suspend.target"
           "hibernate.target"
           "hybrid-sleep.target"
@@ -253,9 +256,9 @@ in {
         ];
       };
       Service = {
-        Type           = "oneshot";
-        ExecStartPre   = "${pkgs.coreutils}/bin/sleep ${cfg.resumeDelay}";
-        ExecStart      = "${updateScript}";
+        Type = "oneshot";
+        ExecStartPre = "${pkgs.coreutils}/bin/sleep ${cfg.resumeDelay}";
+        ExecStart = "${updateScript}";
       };
       Install.WantedBy = [
         "suspend.target"
