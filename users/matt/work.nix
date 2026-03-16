@@ -50,6 +50,7 @@ in
     #Place Home Files Like Pictures
     ../../config/home/files.nix
     ../../modules/vdb.nix
+    ../../modules/wttr-cache.nix
 
   ];
   home.username = "${username}";
@@ -112,8 +113,8 @@ in
       thunar
       blueman
       wl-mirror
-            net-tools
-            arp-scan-rs
+      net-tools
+      arp-scan-rs
 
       ####bitwarden related###
       bitwarden-desktop # will be replaced by bitwarden-desktop
@@ -230,6 +231,15 @@ in
   programs.raith.vdb = {
     enable = true;
 
+  };
+  services.wttr-cache = {
+    enable = true;
+    format = "v2"; # or "1", null (standard), "v2d", "v2n", ...
+    transparent = true; # already default
+    lang = "en"; # "de" if you want German labels
+    interval = "30min";
+    timeoutSeconds = 15;
+    resumeDelay = "20s";
   };
   # Define Settings For Xresources
   xresources.properties = {
