@@ -24,11 +24,17 @@ let
 in
 with lib;
 {
+  imports = [
+    ../../../modules/wttr-cache.nix
+  ];
   home.packages = with pkgs; [
     hypridle
     hyprlock
     wayland-pipewire-idle-inhibit
   ];
+  services.wttr-cache = {
+    enable = true;
+  };
   stylix.targets.hyprland.enable = true;
   stylix.targets.hyprlock.enable = true;
   wayland.windowManager.hyprland = {
