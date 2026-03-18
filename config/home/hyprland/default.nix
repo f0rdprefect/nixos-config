@@ -367,7 +367,7 @@ with lib;
           valign = "bottom";
         }
         {
-          text = "cmd[update:160000] echo \"<b> \"$(curl wttr.in?format=4)\" </b>\"";
+          text = "cmd[update:160000] echo \"<b> \"$(cat ~/.cache/wttr/weather.txt)\" </b>\"";
           color = "rgba(${theme.base0A}ff)";
           font_size = 24;
           position = "0, 0";
