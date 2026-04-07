@@ -23,7 +23,6 @@
     git
     cmatrix
     lolcat
-    neofetch
     macchina
     fastfetch
     htop

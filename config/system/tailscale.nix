@@ -27,7 +27,7 @@ lib.mkIf (tailscale == true) {
     ];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.bash}/bin/bash -c 'sleep 3 && ${pkgs.tailscale}/bin/tailscale down && sleep 3 && ${pkgs.tailscale}/bin/tailscale up'";
+      ExecStart = "${pkgs.bash}/bin/bash -c 'sleep 5 && ${pkgs.tailscale}/bin/tailscale down && sleep 5 && ${pkgs.tailscale}/bin/tailscale up'";
     };
   };
 }

@@ -187,10 +187,11 @@ with lib;
           exec-once = $POLKIT_BIN
           exec-once = dbus-update-activation-environment --systemd --all
           exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-          exec-once = swww-daemon
+          #exec-once = swww-daemon
           exec-once = waybar
           exec-once = swaync
-          exec-once = wallsetter
+          #exec-once = wallsetter
+          #exec-once = ${lib.getExe pkgs.hyprpaper}
           exec-once = nm-applet --indicator
           exec-once = hypridle
           exec-once = wayland-pipewire-idle-inhibit
@@ -400,6 +401,16 @@ with lib;
             timeout = 1200;
             on-timeout = "hyprctl dispatch dpms off";
             on-resume = "hyprctl dispatch dpms on";
+          }
+        ];
+      };
+    };
+    hyprpaper = {
+      settings = {
+        wallpaper = [
+          {
+            path = "${wallpaperDir}";
+            timeout = 900;
           }
         ];
       };
