@@ -9,7 +9,6 @@
     ./fzf.nix
     #    ./gtk-qt.nix
     ./git.nix
-    ./vifm
     ./hyprland
     ./kdenlive.nix
     ./kitty.nix
@@ -23,7 +22,6 @@
     ./swaylock.nix
     ./swaync.nix
     ./stylix.nix
-    ./vifm
     #./vlc.nix did not work but make rebuild slow as hell
     ./wezterm.nix
     ./xdg # XDG configuration (portal, mime apps)

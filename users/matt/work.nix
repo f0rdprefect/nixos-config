@@ -124,7 +124,6 @@ in
       dotool
       wtype
       cliphist
-      swww
       grim
       slurp
       file-roller

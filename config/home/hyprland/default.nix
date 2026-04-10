@@ -187,7 +187,6 @@ with lib;
           exec-once = $POLKIT_BIN
           exec-once = dbus-update-activation-environment --systemd --all
           exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-          #exec-once = swww-daemon
           exec-once = waybar
           exec-once = swaync
           #exec-once = wallsetter
@@ -226,11 +225,7 @@ with lib;
           bind = ${modifier},E,exec,kitty --title "File Manager" -e yazi
           bind = ${modifier}SHIFT,E,exec,systemctl restart --user espanso
           bind = ${modifier},S,exec,screenshootin
-          bind = ${modifier},O,exec,obs
-          bind = ${modifier},G,exec,gimp
-          bind = ${modifier}SHIFT,G,exec,godot4
           bind = ${modifier},T,exec,thunar
-          bind = ${modifier},M,exec,spotify
           bind = ${modifier},Q,killactive,
           bind = ${modifier},P,pseudo,
           bind = ${modifier}SHIFT,I,togglesplit,
@@ -251,6 +246,7 @@ with lib;
           bind = ${modifier},down,movefocus,d
           bind = ${modifier},h,movefocus,l
           bind = ${modifier},l,exec,pidof hyprlock || hyprlock
+          bind = ${modifier}SHIFT,l,exec,systemctl suspend
           bind = ${modifier},k,movefocus,u
           bind = ${modifier},j,movefocus,d
           bind = ${modifier},1,workspace,1

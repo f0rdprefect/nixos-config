@@ -32,6 +32,6 @@
     };
     rainbow-delimiters.enable = true;
 
-    hmts.enable = true;
+    hmts.enable = false;
   };
 }

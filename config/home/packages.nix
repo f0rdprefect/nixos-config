@@ -81,7 +81,6 @@ in
       #######
       pkgs."${browser}"
       libvirt
-      swww
       grim
       slurp
       file-roller
