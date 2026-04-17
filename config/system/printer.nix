@@ -40,11 +40,11 @@
       #logLevel = "debug";
 
       drivers = [
+        pkgs.cups-browsed
         pkgs.cups-kyocera-ecosys-m552x-p502x
         pkgs.canon-cups-ufr2
         pkgs.ptouch-driver
         pkgs.cups-filters
-        pkgs.cups-browsed
         pkgs.ghostscript
         pkgs.poppler-utils
         pkgs.cups-pdf-to-pdf
@@ -58,6 +58,7 @@
     avahi = {
       enable = true;
       nssmdns4 = true;
+      nssmdns6 = true;
       openFirewall = true;
     };
     ipp-usb.enable = true;
@@ -69,6 +70,9 @@
   };
   programs.system-config-printer.enable = true;
 
+  users.groups.lpadmin.members = builtins.attrNames (
+    lib.filterAttrs (_: u: u.isNormalUser) config.users.users
+  );
   users.groups.lp.members = builtins.attrNames (
     lib.filterAttrs (_: u: u.isNormalUser) config.users.users
   );
