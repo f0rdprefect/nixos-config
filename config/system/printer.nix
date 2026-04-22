@@ -70,6 +70,24 @@
   };
   programs.system-config-printer.enable = true;
 
+  systemd.services.cups-browsed-resume = {
+    description = "Restart cups-browsed after resume from suspend";
+    after = [
+      "suspend.target"
+      "hibernate.target"
+      "hybrid-sleep.target"
+    ];
+    wantedBy = [
+      "suspend.target"
+      "hibernate.target"
+      "hybrid-sleep.target"
+    ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "systemctl restart cups-browsed";
+    };
+  };
+
   users.groups.lpadmin.members = builtins.attrNames (
     lib.filterAttrs (_: u: u.isNormalUser) config.users.users
   );
