@@ -67,6 +67,8 @@ in
       signal-desktop
       zapzap
       materialgram
+      thunderbird
+      aerc
 
       wl-mirror
       ####bitwarden related###
