@@ -39,6 +39,7 @@ with lib;
   stylix.targets.hyprlock.enable = true;
   wayland.windowManager.hyprland = {
     enable = true;
+    configType = "hyprlang";
     #    xwayland.enable = true;
     systemd.enable = true;
     plugins = [
@@ -50,7 +51,7 @@ with lib;
       in
       concatStrings [
         ''
-          monitor = eDP-1,preferred,0x0,1.2500
+          monitor = desc:AU Optronics 0x2236,preferred,0x0,1.2500
           monitor = desc:BNQ BenQ PD3205U,3840x2160@60,-3840x-1378,1.00
           monitor = ,preferred,auto-left,1
           xwayland {
@@ -200,7 +201,6 @@ with lib;
           exec-once = wl-paste --type text --watch cliphist store #Stores only text data
           exec-once = wl-paste --type image --watch cliphist store #Stores only image data
           dwindle {
-            pseudotile = true
             preserve_split = true
           }
           #master {
@@ -228,7 +228,6 @@ with lib;
           bind = ${modifier},T,exec,thunar
           bind = ${modifier},Q,killactive,
           bind = ${modifier},P,pseudo,
-          bind = ${modifier}SHIFT,I,togglesplit,
           bind = ${modifier},F,fullscreen,
           bind = ${modifier}SHIFT,F,togglefloating,
           bind = ${modifier}SHIFT,C,exit,
