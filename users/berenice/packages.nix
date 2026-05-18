@@ -9,6 +9,7 @@
   home.packages =
     (with pkgs-stable; [
       chromium
+      audacity
     ])
     ++ (with pkgs; [
       pdfarranger
