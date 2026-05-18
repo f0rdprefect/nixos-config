@@ -16,7 +16,7 @@
     enable = true;
     defaultEditor = true;
     plugins.web-devicons.enable = true;
-
+    nixpkgs.config.allowUnfree = true;
     performance = {
       combinePlugins = {
         enable = true;
