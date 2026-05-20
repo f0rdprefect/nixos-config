@@ -29,6 +29,9 @@
         deviceUri = "socket://pr-do-og1";
         location = "Raith HQ OG1";
         model = "CNRCUPSIRADVC3525ZK.ppd";
+        ppdOptions = {
+          PageSize = "A4";
+        };
       }
     ];
 
