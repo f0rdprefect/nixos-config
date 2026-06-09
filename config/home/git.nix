@@ -8,4 +8,6 @@
       enable = true;
     };
   };
+  programs.difftastic.git.enable = true;
+  programs.mergiraf.enableGitIntegration = true;
 }
