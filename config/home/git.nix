@@ -4,6 +4,7 @@
   programs.git = {
     enable = true;
     package = pkgs.gitSVN;
+    # @TODO find out conflict with gitFull
     settings = {
       credential = {
         helper = [ "cache --timeout=28800" ]; # Timeout in Sekunden
