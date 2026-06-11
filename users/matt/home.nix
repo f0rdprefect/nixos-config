@@ -67,8 +67,6 @@
       sleek-todo
       fzf
       gimp
-      git
-      git-credential-oauth
       hamster
       inkscape-with-extensions
       kdePackages.falkon

@@ -10,8 +10,8 @@
   nixpkgs.config.allowUnfree = true;
   # Allow Insecure Packages
   nixpkgs.config.permittedInsecurePackages = [
-    #    "electron-27.3.11"
     "libsoup-2.74.3"
+    "electron-39.8.10"
 
   ];
 
