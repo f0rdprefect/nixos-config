@@ -26,18 +26,20 @@
         show_hidden = false;
       };
       # Git plugin fetchers
-      plugin.prepend_fetchers = [
-        {
-          id = "git";
-          name = "*";
-          run = "git";
-        }
-        {
-          id = "git";
-          name = "*/";
-          run = "git";
-        }
-      ];
+            #  plugin.prepend_fetchers = [
+            #    {
+            #      group = "git";
+            #      id = "git";
+            #      name = "*";
+            #      run = "git";
+            #    }
+            #    {
+            #      group = "git";
+            #      id = "git";
+            #      name = "*/";
+            #      run = "git";
+            #    }
+            #  ];
     };
     keymap = {
       mgr.prepend_keymap = [
