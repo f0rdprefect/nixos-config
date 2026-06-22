@@ -55,6 +55,7 @@
       devNodes = "/dev/disk/by-partlabel";
       package = pkgs.zfs_unstable;
       requestEncryptionCredentials = true;
+      forceImportRoot = false;
     };
     kernelPackages = lib.mkOverride 0 pkgs.linuxPackages_zen;
     kernel.sysctl."vm.swappiness" = 10;

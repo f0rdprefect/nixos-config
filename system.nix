@@ -107,5 +107,5 @@ in
     #sops.age.keyFile = "/var/lib/sops-nix/key.txt";
   # This will generate a new key if the key specified above does not exist
     #sops.age.generateKey = true;
-  system.stateVersion = "26.05";
+  system.stateVersion = "26.11";
 }
