@@ -27,6 +27,7 @@ in
     inputs.sops-nix.homeManagerModules.sops
     inputs.nix-colors.homeManagerModules.default
     ../../config/home/bash.nix
+    ../../config/home/ashell.nix
     ../../config/home/espanso
     ../../config/home/fzf.nix
     #../../config/home/gtk-qt.nix
@@ -36,11 +37,7 @@ in
     ../../config/home/neovim
     ../../config/home/rofi.nix
     ../../config/home/starship.nix
-    ../../config/home/waybar.nix
-    ../../config/home/wlogout.nix
     ../../config/home/swappy.nix
-    ../../config/home/swaylock.nix
-    ../../config/home/swaync.nix
     ../../config/home/stylix.nix
     #../../config/home/vlc.nix did not work but make rebuild slow as hell
     ../../config/home/xdg # XDG configuration (portal, mime apps)

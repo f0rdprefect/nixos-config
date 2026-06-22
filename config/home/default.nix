@@ -4,6 +4,7 @@
   imports = [
     # Enable &/ Configure Programs
     ./alacritty.nix
+    ./ashell.nix
     ./bash.nix
     ./espanso
     ./fzf.nix

@@ -30,10 +30,15 @@ with lib;
   home.packages = with pkgs; [
     hypridle
     hyprlock
+    hyprmon
     wayland-pipewire-idle-inhibit
   ];
   services.wttr-cache = {
     enable = true;
+  };
+  services.kdeconnect = {
+    enable = true;
+    package = pkgs.valent;
   };
   stylix.targets.hyprland.enable = true;
   stylix.targets.hyprlock.enable = true;
@@ -188,15 +193,16 @@ with lib;
           exec-once = $POLKIT_BIN
           exec-once = dbus-update-activation-environment --systemd --all
           exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+          exec-once = ashell
           exec-once = waybar
           exec-once = swaync
           #exec-once = wallsetter
           #exec-once = ${lib.getExe pkgs.hyprpaper}
-          exec-once = nm-applet --indicator
+          #exec-once = nm-applet --indicator
           exec-once = hypridle
           exec-once = wayland-pipewire-idle-inhibit
           exec-once = nextcloud
-          exec-once = blueman-applet
+          #exec-once = blueman-applet
           exec-once = iio-hyprland
           exec-once = wl-paste --type text --watch cliphist store #Stores only text data
           exec-once = wl-paste --type image --watch cliphist store #Stores only image data
@@ -206,6 +212,8 @@ with lib;
           #master {
           #  new_is_master = true
           #}
+          bind = ${modifier}SHIFT,T,exec, ${lib.getExe pkgs.todofi-sh} -d ~/Nextcloud/todo/todo.cfg
+          #bind = ${modifier}SHIFT,T,exec todofi.sh -d ~/Nextcloud/todo/todo.cfg
           bind = CTRLALT,P,exec,rofi-rbw
           bind = CTRLALT, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy
           bind = ${modifier},Return,exec,${terminal}

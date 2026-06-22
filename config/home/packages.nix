@@ -52,6 +52,7 @@ in
       typst
       xournalpp
       sleek-todo
+      todofi-sh
       opencode
       ####Media Ripping###
       asunder
