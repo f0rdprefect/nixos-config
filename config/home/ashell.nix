@@ -12,8 +12,17 @@
       log_level = "warn";
       region = "de-DE";
       position = "Top";
+      indicators = [
+        "Battery"
+        "Bluetooth"
+        "Network"
+        "Audio"
+        "Microphone"
+        "Brightness"
+      ];
+      battery_format = "IconAndTime";
       appearance = {
-        scale_factor = 1.5;
+        scale_factor = 1.3;
       };
       notifications = {
         format = "%m/%d %H:%M";
