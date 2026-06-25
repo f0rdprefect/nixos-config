@@ -6,7 +6,7 @@
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
     nixpkgs-stable = {
-      url = "github:nixos/nixpkgs/release-25.11";
+      url = "github:nixos/nixpkgs/release-26.05";
     };
     nixpkgs-master = {
       url = "github:nixos/nixpkgs/master";
@@ -363,6 +363,7 @@
               inherit system;
               inherit inputs;
               inherit nix-colors;
+              inherit pkgs-stable;
               cfgoptions = import ./hosts/${host}/options.nix;
               #Todo in all modules where options are used use cfgoptions instead
             };

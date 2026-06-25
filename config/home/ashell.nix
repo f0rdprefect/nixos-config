@@ -70,6 +70,10 @@
         mode = "Title";
         truncate_title_after_length = 42;
       };
+      workspaces = {
+        visibility_mode = "MonitorSpecific";
+        enable_workspace_filling = false;
+      };
     };
   };
 }

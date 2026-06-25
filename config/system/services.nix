@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-stable,
   config,
   lib,
   inputs,
@@ -71,8 +72,11 @@
   services.gvfs.enable = true;
   services.tumbler.enable = true;
   services.gnome.gnome-keyring.enable = true;
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  hardware.bluetooth = {
+    enable = true; # enables support for Bluetooth
+    powerOnBoot = true; # powers up the default Bluetooth controller on boot
+    package = pkgs-stable.bluez; # mitigate regression in bluez 5.86
+  };
   services.blueman.enable = true;
   services.upower.enable = true;
   services.smartd = {
@@ -121,7 +125,7 @@
 
   };
   services.kanata = {
-    enable = true;
+    enable = false;
     keyboards = {
       internalKeyboard = {
         #  devices = [
