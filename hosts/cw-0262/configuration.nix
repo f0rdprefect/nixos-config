@@ -58,7 +58,7 @@
       forceImportRoot = false;
     };
     kernelPackages = lib.mkOverride 0 pkgs.linuxPackages_zen;
-    kernel.sysctl."vm.swappiness" = 10;
+    kernel.sysctl."vm.swappiness" = 40;
   };
   zramSwap = {
     enable = true;
@@ -174,6 +174,8 @@
         "cdrom"
         "uinput"
         "ydotool"
+        "dialout"
+        "tty"
       ];
       shell = pkgs.bash;
       ignoreShellProgramCheck = true;
