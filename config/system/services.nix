@@ -75,7 +75,15 @@
   hardware.bluetooth = {
     enable = true; # enables support for Bluetooth
     powerOnBoot = true; # powers up the default Bluetooth controller on boot
-    package = pkgs-stable.bluez; # mitigate regression in bluez 5.86
+    package = pkgs.bluez.overrideAttrs (old: { # TODO remove once bluez 5.87 becomes available or
+                                               # nixpkgs incorporates the patch
+      patches = (old.patches or [ ]) ++ [
+        (pkgs.fetchpatch {
+          url = "https://github.com/bluez/bluez/commit/066a164.patch";
+          hash = "sha256-I1WoBJZEZJ05hwGuksp52I4FLJ+jbG9t7U2sLTFmU0w=";
+        })
+      ];
+    });
   };
   services.blueman.enable = true;
   services.upower.enable = true;
