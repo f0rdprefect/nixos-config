@@ -123,7 +123,7 @@
   environment.etc."request-key.conf" = {
     text =
       let
-        upcall = "${pkgs.cifs-utils}/bin/cifs.upcall";
+        upcall = "${pkgs.cifs-utils.bin}/bin/cifs.upcall";
         keyctl = "${pkgs.keyutils}/bin/keyctl";
       in
       ''
@@ -204,6 +204,22 @@
 
   time.timeZone = "Europe/Berlin";
 
+  services.pipewire.wireplumber.extraConfig."51-disable-devices" = {
+    "monitor.alsa.rules" = [
+      {
+        matches = [
+          { "device.name" = "alsa_card.pci-0000_07_00.1"; }
+          { "device.name" = "alsa_card.usb-Lenovo_ThinkPad_USB-C_Dock_Audio_000000000000-00"; }
+        ];
+        actions = {
+          update-props = {
+            "device.disabled" = true;
+          };
+        };
+      }
+    ];
+  };
+
   nix = {
     settings = {
       trusted-users = [
@@ -235,7 +251,10 @@
     };
 
   };
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [ "electron-39.8.10" ];
+  };
 
-  system.stateVersion = "26.05";
+  system.stateVersion = "26.11";
 }
