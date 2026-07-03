@@ -74,7 +74,7 @@ with lib;
     package = pkgs.valent;
   };
 
-  stylix.targets.hyprland.enable = false;
+  stylix.targets.hyprland.enable = true;
   stylix.targets.hyprlock.enable = true;
 
   wayland.windowManager.hyprland = {
@@ -494,27 +494,12 @@ with lib;
                   hl.exec_cmd("nextcloud")
                   hl.exec_cmd("iio-hyprland")
 
-                  hl.exec_cmd("${lib.getExe pkgs.wl-clipboard} --type text --watch ${lib.getExe pkgs.cliphist} store")
-                  hl.exec_cmd("${lib.getExe pkgs.wl-clipboard} --type image --watch ${lib.getExe pkgs.cliphist} store")
+                  hl.exec_cmd("${lib.getExe' pkgs.wl-clipboard "wl-paste"} --type text --watch ${lib.getExe pkgs.cliphist} store")
+                  hl.exec_cmd("${lib.getExe' pkgs.wl-clipboard "wl-paste"} --type image --watch ${lib.getExe pkgs.cliphist} store")
 
                   local polkit = os.getenv("POLKIT_BIN")
                   if polkit and polkit ~= "" then
                       hl.exec_cmd(polkit)
-                  end
-              end
-            '')
-          ];
-        }
-        {
-          _args = [
-            "hyprland.start"
-            (mkLuaInline ''
-              function()
-                  local mod = "SUPER"
-                  for i = 1, 10 do
-                      local key = tostring(i % 10)
-                      hl.bind(mod .. " + " .. key,        hl.dsp.focus({ workspace = i }))
-                      hl.bind(mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
                   end
               end
             '')
@@ -528,7 +513,29 @@ with lib;
       # "SUPER + SHIFT + h" ist korrekt. hl.bindm existiert nicht — Maus-
       # Drag/Resize läuft über normales hl.bind(..., { mouse = true }).
       bind = [
+                # Workspace-Keybind
+        (mkBind (mkLuaInline ''mod .. " + 1 "'') "hl.dsp.focus({ workspace = 1 })" null)
+        (mkBind (mkLuaInline ''mod .. " + SHIFT + 1 "'') "hl.dsp.window.move({ workspace = 1 })" null)
+        (mkBind (mkLuaInline ''mod .. " + 2 "'') "hl.dsp.focus({ workspace = 2 })" null)
+        (mkBind (mkLuaInline ''mod .. " + SHIFT + 2 "'') "hl.dsp.window.move({ workspace = 2 })" null)
+        (mkBind (mkLuaInline ''mod .. " + 3 "'') "hl.dsp.focus({ workspace = 3 })" null)
+        (mkBind (mkLuaInline ''mod .. " + SHIFT + 3 "'') "hl.dsp.window.move({ workspace = 3 })" null)
+        (mkBind (mkLuaInline ''mod .. " + 4 "'') "hl.dsp.focus({ workspace = 4 })" null)
+        (mkBind (mkLuaInline ''mod .. " + SHIFT + 4 "'') "hl.dsp.window.move({ workspace = 4 })" null)
+        (mkBind (mkLuaInline ''mod .. " + 5 "'') "hl.dsp.focus({ workspace = 5 })" null)
+        (mkBind (mkLuaInline ''mod .. " + SHIFT + 5 "'') "hl.dsp.window.move({ workspace = 5 })" null)
+        (mkBind (mkLuaInline ''mod .. " + 6 "'') "hl.dsp.focus({ workspace = 6 })" null)
+        (mkBind (mkLuaInline ''mod .. " + SHIFT + 6 "'') "hl.dsp.window.move({ workspace = 6 })" null)
+        (mkBind (mkLuaInline ''mod .. " + 7 "'') "hl.dsp.focus({ workspace = 7 })" null)
+        (mkBind (mkLuaInline ''mod .. " + SHIFT + 7 "'') "hl.dsp.window.move({ workspace = 7 })" null)
+        (mkBind (mkLuaInline ''mod .. " + 8 "'') "hl.dsp.focus({ workspace = 8 })" null)
+        (mkBind (mkLuaInline ''mod .. " + SHIFT + 8 "'') "hl.dsp.window.move({ workspace = 8 })" null)
+        (mkBind (mkLuaInline ''mod .. " + 9 "'') "hl.dsp.focus({ workspace = 9 })" null)
+        (mkBind (mkLuaInline ''mod .. " + SHIFT + 9 "'') "hl.dsp.window.move({ workspace = 9 })" null)
+        (mkBind (mkLuaInline ''mod .. " + 0 "'') "hl.dsp.focus({ workspace = 0 })" null)
+        (mkBind (mkLuaInline ''mod .. " + SHIFT + 0 "'') "hl.dsp.window.move({ workspace = 0 })" null)
         # Anwendungen
+
         (mkExecBind (mkLuaInline ''mod .. " + Return"'') terminalCmd null)
         (mkExecBind (mkLuaInline ''mod .. " + W"'') browserCmd null)
         (mkExecBind (mkLuaInline ''mod .. " + E"'')
@@ -549,7 +556,7 @@ with lib;
         (mkExecBind (mkLuaInline ''mod .. " + SHIFT + E"'') "systemctl restart --user espanso" null)
         (mkExecBind "CTRL + ALT + P" "rofi-rbw" null)
         (mkExecBind "CTRL + ALT + V"
-          "${lib.getExe pkgs.cliphist} list | rofi -dmenu | ${lib.getExe pkgs.cliphist} decode | ${lib.getExe pkgs.wl-clipboard}"
+          "${lib.getExe pkgs.cliphist} list | rofi -dmenu | ${lib.getExe pkgs.cliphist} decode | ${lib.getExe' pkgs.wl-clipboard "wl-copy"}"
           null
         )
 
@@ -625,24 +632,25 @@ with lib;
 
         # Lautstärke / Media (mit locked/repeating Flags)
         (mkExecBind "XF86AudioRaiseVolume"
-          "${lib.getExe pkgs.wireplumber} set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+          "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 5%+"
           {
             locked = true;
             repeating = true;
           }
         )
         (mkExecBind "XF86AudioLowerVolume"
-          "${lib.getExe pkgs.wireplumber} set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+          "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 5%-"
           {
             locked = true;
             repeating = true;
           }
         )
-        (mkExecBind "XF86AudioMute" "${lib.getExe pkgs.wireplumber} set-mute @DEFAULT_AUDIO_SINK@ toggle" {
-          locked = true;
-        })
+        (mkExecBind "XF86AudioMute"
+          "${lib.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          { locked = true; }
+        )
         (mkExecBind "XF86AudioMicMute"
-          "${lib.getExe pkgs.wireplumber} set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+          "${lib.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
           { locked = true; }
         )
         (mkExecBind "XF86AudioPlay" "${lib.getExe pkgs.playerctl} play-pause" { locked = true; })
