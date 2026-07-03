@@ -40,21 +40,6 @@ let
 
   inherit (lib.generators) mkLuaInline;
 
-  # Helper: erzeugt einen hl.bind(...)-Eintrag über _args (positionale Argumente,
-  # nicht ein Tabellen-Argument). Optional ein 3. Argument (flags-Tabelle).
-  mkBind = keys: dispatcher: flags: {
-    _args = [
-      keys
-      (mkLuaInline dispatcher)
-    ]
-    ++ lib.optional (flags != null) flags;
-  };
-
-  # Helper: erzeugt einen hl.bind(...)-Eintrag mit exec_cmd-Dispatcher.
-  mkExecBind =
-    keys: cmd: flags:
-    mkBind keys ''hl.dsp.exec_cmd("${cmd}")'' flags;
-
 in
 with lib;
 {
@@ -512,162 +497,172 @@ with lib;
       # und dem nächsten Modifier. "SUPER SHIFT + h" ist UNGÜLTIG,
       # "SUPER + SHIFT + h" ist korrekt. hl.bindm existiert nicht — Maus-
       # Drag/Resize läuft über normales hl.bind(..., { mouse = true }).
-      bind = [
-                # Workspace-Keybind
-        (mkBind (mkLuaInline ''mod .. " + 1 "'') "hl.dsp.focus({ workspace = 1 })" null)
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + 1 "'') "hl.dsp.window.move({ workspace = 1 })" null)
-        (mkBind (mkLuaInline ''mod .. " + 2 "'') "hl.dsp.focus({ workspace = 2 })" null)
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + 2 "'') "hl.dsp.window.move({ workspace = 2 })" null)
-        (mkBind (mkLuaInline ''mod .. " + 3 "'') "hl.dsp.focus({ workspace = 3 })" null)
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + 3 "'') "hl.dsp.window.move({ workspace = 3 })" null)
-        (mkBind (mkLuaInline ''mod .. " + 4 "'') "hl.dsp.focus({ workspace = 4 })" null)
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + 4 "'') "hl.dsp.window.move({ workspace = 4 })" null)
-        (mkBind (mkLuaInline ''mod .. " + 5 "'') "hl.dsp.focus({ workspace = 5 })" null)
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + 5 "'') "hl.dsp.window.move({ workspace = 5 })" null)
-        (mkBind (mkLuaInline ''mod .. " + 6 "'') "hl.dsp.focus({ workspace = 6 })" null)
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + 6 "'') "hl.dsp.window.move({ workspace = 6 })" null)
-        (mkBind (mkLuaInline ''mod .. " + 7 "'') "hl.dsp.focus({ workspace = 7 })" null)
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + 7 "'') "hl.dsp.window.move({ workspace = 7 })" null)
-        (mkBind (mkLuaInline ''mod .. " + 8 "'') "hl.dsp.focus({ workspace = 8 })" null)
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + 8 "'') "hl.dsp.window.move({ workspace = 8 })" null)
-        (mkBind (mkLuaInline ''mod .. " + 9 "'') "hl.dsp.focus({ workspace = 9 })" null)
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + 9 "'') "hl.dsp.window.move({ workspace = 9 })" null)
-        (mkBind (mkLuaInline ''mod .. " + 0 "'') "hl.dsp.focus({ workspace = 0 })" null)
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + 0 "'') "hl.dsp.window.move({ workspace = 0 })" null)
-        # Anwendungen
+      #
+      # Helper sind lokal hier definiert (statt oben im File-let), damit sie
+      # direkt neben ihrer einzigen Verwendungsstelle stehen:
+      #   mkBind keys dispatcher flags   — Basis-Helper, _args-basiert
+      #   mkExecBind keys cmd flags      — mkBind + exec_cmd-Wrapper
+      #   mkModBind key dispatcher flags — mkBind mit "mod .. \" + key\"" vorgebaut
+      #   mkModExecBind key cmd flags    — exec-Variante von mkModBind
+      # mkModBind/mkModExecBind decken den Großteil der Binds ab (alles was
+      # mit SUPER/mod anfängt); mkBind/mkExecBind bleiben für Sonderfälle
+      # wie CTRL+ALT+... oder XF86-Mediakeys ohne mod.
+      bind =
+        let
+          mkBind = keys: dispatcher: flags: {
+            _args = [
+              keys
+              (mkLuaInline dispatcher)
+            ]
+            ++ lib.optional (flags != null) flags;
+          };
 
-        (mkExecBind (mkLuaInline ''mod .. " + Return"'') terminalCmd null)
-        (mkExecBind (mkLuaInline ''mod .. " + W"'') browserCmd null)
-        (mkExecBind (mkLuaInline ''mod .. " + E"'')
-          "${lib.getExe pkgs.kitty} --title 'File Manager' -e ${lib.getExe pkgs.yazi}"
-          null
-        )
-        (mkExecBind (mkLuaInline ''mod .. " + T"'') "${lib.getExe pkgs.xfce.thunar}" null)
-        (mkExecBind (mkLuaInline ''mod .. " + S"'') "screenshootin" null)
-        (mkExecBind (mkLuaInline ''mod .. " + D"'') "rofi-launcher" null)
+          mkExecBind = keys: cmd: flags: mkBind keys ''hl.dsp.exec_cmd("${cmd}")'' flags;
 
-        # Tools / Rofi
-        (mkExecBind (mkLuaInline ''mod .. " + SHIFT + W"'') "web-search" null)
-        (mkExecBind (mkLuaInline ''mod .. " + SHIFT + N"'') "swaync-client -rs" null)
-        (mkExecBind (mkLuaInline ''mod .. " + SHIFT + T"'')
-          "${lib.getExe pkgs.todofi-sh} -d ~/Nextcloud/todo/todo.cfg"
-          null
-        )
-        (mkExecBind (mkLuaInline ''mod .. " + SHIFT + E"'') "systemctl restart --user espanso" null)
-        (mkExecBind "CTRL + ALT + P" "rofi-rbw" null)
-        (mkExecBind "CTRL + ALT + V"
-          "${lib.getExe pkgs.cliphist} list | rofi -dmenu | ${lib.getExe pkgs.cliphist} decode | ${lib.getExe' pkgs.wl-clipboard "wl-copy"}"
-          null
-        )
+          mkModBind =
+            key: dispatcher: flags:
+            mkBind (mkLuaInline ''mod .. " + ${key}"'') dispatcher flags;
 
-        # Fensterverwaltung
-        (mkBind (mkLuaInline ''mod .. " + Q"'') "hl.dsp.window.close()" null)
-        (mkBind (mkLuaInline ''mod .. " + P"'') "hl.dsp.window.pseudo()" null)
-        (mkBind (mkLuaInline ''mod .. " + F"'') "hl.dsp.window.fullscreen()" null)
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + F"'') ''hl.dsp.window.float({ action = "toggle" })'' null)
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + C"'') "hl.dsp.exit()" null)
+          mkModExecBind =
+            key: cmd: flags:
+            mkExecBind (mkLuaInline ''mod .. " + ${key}"'') cmd flags;
 
-        # Fokus
-        (mkBind (mkLuaInline ''mod .. " + left"'') ''hl.dsp.focus({ direction = "left" })'' null)
-        (mkBind (mkLuaInline ''mod .. " + right"'') ''hl.dsp.focus({ direction = "right" })'' null)
-        (mkBind (mkLuaInline ''mod .. " + up"'') ''hl.dsp.focus({ direction = "up" })'' null)
-        (mkBind (mkLuaInline ''mod .. " + down"'') ''hl.dsp.focus({ direction = "down" })'' null)
-        (mkBind (mkLuaInline ''mod .. " + h"'') ''hl.dsp.focus({ direction = "left" })'' null)
-        (mkBind (mkLuaInline ''mod .. " + k"'') ''hl.dsp.focus({ direction = "up" })'' null)
-        (mkBind (mkLuaInline ''mod .. " + j"'') ''hl.dsp.focus({ direction = "down" })'' null)
+          # 1–9,0: hl.dsp.focus / hl.dsp.window.move pro Ziffer, ohne Copy-Paste.
+          workspaceBinds = lib.flatten (
+            map (n: [
+              (mkModBind "${toString n}" "hl.dsp.focus({ workspace = ${toString n} })" null)
+              (mkModBind "SHIFT + ${toString n}" "hl.dsp.window.move({ workspace = ${toString n} })" null)
+            ]) [ 1 2 3 4 5 6 7 8 9 0 ]
+          );
 
-        # Sperren / Suspend
-        (mkExecBind (mkLuaInline ''mod .. " + l"'')
-          "pidof ${lib.getExe pkgs.hyprlock} || ${lib.getExe pkgs.hyprlock}"
-          null
-        )
-        (mkExecBind (mkLuaInline ''mod .. " + SHIFT + l"'') "systemctl suspend" null)
+          appBinds = [
+            (mkModExecBind "Return" terminalCmd null)
+            (mkModExecBind "W" browserCmd null)
+            (mkModExecBind "E"
+              "${lib.getExe pkgs.kitty} --title 'File Manager' -e ${lib.getExe pkgs.yazi}"
+              null
+            )
+            (mkModExecBind "T" "${lib.getExe pkgs.xfce.thunar}" null)
+            (mkModExecBind "S" "screenshootin" null)
+            (mkModExecBind "D" "rofi-launcher" null)
 
-        # Fenster verschieben
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + left"'') ''hl.dsp.window.move({ direction = "left" })''
-          null
-        )
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + right"'') ''hl.dsp.window.move({ direction = "right" })''
-          null
-        )
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + up"'') ''hl.dsp.window.move({ direction = "up" })'' null)
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + down"'') ''hl.dsp.window.move({ direction = "down" })''
-          null
-        )
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + h"'') ''hl.dsp.window.move({ direction = "left" })'' null)
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + l"'') ''hl.dsp.window.move({ direction = "right" })''
-          null
-        )
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + k"'') ''hl.dsp.window.move({ direction = "up" })'' null)
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + j"'') ''hl.dsp.window.move({ direction = "down" })'' null)
+            # Tools / Rofi
+            (mkModExecBind "SHIFT + W" "web-search" null)
+            (mkModExecBind "SHIFT + N" "swaync-client -rs" null)
+            (mkModExecBind "SHIFT + T"
+              "${lib.getExe pkgs.todofi-sh} -d ~/Nextcloud/todo/todo.cfg"
+              null
+            )
+            (mkModExecBind "SHIFT + E" "systemctl restart --user espanso" null)
+            (mkExecBind "CTRL + ALT + P" "rofi-rbw" null)
+            (mkExecBind "CTRL + ALT + V"
+              "${lib.getExe pkgs.cliphist} list | rofi -dmenu | ${lib.getExe pkgs.cliphist} decode | ${lib.getExe' pkgs.wl-clipboard "wl-copy"}"
+              null
+            )
+          ];
 
-        # Special Workspace
-        (mkBind (mkLuaInline ''mod .. " + SPACE"'') "hl.dsp.workspace.toggle_special()" null)
-        (mkBind (mkLuaInline ''mod .. " + SHIFT + SPACE"'')
-          ''hl.dsp.window.move({ workspace = "special" })''
-          null
-        )
+          windowBinds = [
+            (mkModBind "Q" "hl.dsp.window.close()" null)
+            (mkModBind "P" "hl.dsp.window.pseudo()" null)
+            (mkModBind "F" "hl.dsp.window.fullscreen()" null)
+            (mkModBind "SHIFT + F" ''hl.dsp.window.float({ action = "toggle" })'' null)
+            (mkModBind "SHIFT + C" "hl.dsp.exit()" null)
 
-        # Workspace cycling — hl.dsp.focus akzeptiert workspace = "e+1"/"e-1"
-        # laut Wiki-Beispiel: hl.bind("SUPER + mouse_down", hl.dsp.focus({ workspace = "e-1" }))
-        (mkBind (mkLuaInline ''mod .. " + CONTROL + right"'') ''hl.dsp.focus({ workspace = "e+1" })'' null)
-        (mkBind (mkLuaInline ''mod .. " + CONTROL + left"'') ''hl.dsp.focus({ workspace = "e-1" })'' null)
+            # Sperren / Suspend
+            (mkModExecBind "l"
+              "pidof ${lib.getExe pkgs.hyprlock} || ${lib.getExe pkgs.hyprlock}"
+              null
+            )
+            (mkModExecBind "SHIFT + l" "systemctl suspend" null)
 
-        # Maus-Scroll
-        (mkBind (mkLuaInline ''mod .. " + mouse_down"'') ''hl.dsp.focus({ workspace = "e+1" })'' null)
-        (mkBind (mkLuaInline ''mod .. " + mouse_up"'') ''hl.dsp.focus({ workspace = "e-1" })'' null)
+            # Fenster verschieben
+            (mkModBind "SHIFT + left" ''hl.dsp.window.move({ direction = "left" })'' null)
+            (mkModBind "SHIFT + right" ''hl.dsp.window.move({ direction = "right" })'' null)
+            (mkModBind "SHIFT + up" ''hl.dsp.window.move({ direction = "up" })'' null)
+            (mkModBind "SHIFT + down" ''hl.dsp.window.move({ direction = "down" })'' null)
+            (mkModBind "SHIFT + h" ''hl.dsp.window.move({ direction = "left" })'' null)
+            (mkModBind "SHIFT + l" ''hl.dsp.window.move({ direction = "right" })'' null)
+            (mkModBind "SHIFT + k" ''hl.dsp.window.move({ direction = "up" })'' null)
+            (mkModBind "SHIFT + j" ''hl.dsp.window.move({ direction = "down" })'' null)
 
-        # Alt+Tab — hl.dsp.focus kennt kein `cycle`-Feld. Laut Wiki-Beispiel
-        # braucht das eine Lua-Funktion mit zwei Dispatches.
-        (mkBind "ALT + Tab" ''
-          function()
-              hl.dispatch(hl.dsp.window.cycle_next())
-              hl.dispatch(hl.dsp.window.bring_to_top())
-          end
-        '' null)
+            # Special Workspace
+            (mkModBind "SPACE" "hl.dsp.workspace.toggle_special()" null)
+            (mkModBind "SHIFT + SPACE" ''hl.dsp.window.move({ workspace = "special" })'' null)
 
-        # Maus-Drag/Resize (ersetzt das nicht-existente hl.bindm)
-        (mkBind (mkLuaInline ''mod .. " + mouse:272"'') "hl.dsp.window.drag()" { mouse = true; })
-        (mkBind (mkLuaInline ''mod .. " + mouse:273"'') "hl.dsp.window.resize()" { mouse = true; })
+            # Alt+Tab — hl.dsp.focus kennt kein `cycle`-Feld. Laut Wiki-Beispiel
+            # braucht das eine Lua-Funktion mit zwei Dispatches.
+            (mkBind "ALT + Tab" ''
+              function()
+                  hl.dispatch(hl.dsp.window.cycle_next())
+                  hl.dispatch(hl.dsp.window.bring_to_top())
+              end
+            '' null)
 
-        # Lautstärke / Media (mit locked/repeating Flags)
-        (mkExecBind "XF86AudioRaiseVolume"
-          "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 5%+"
-          {
-            locked = true;
-            repeating = true;
-          }
-        )
-        (mkExecBind "XF86AudioLowerVolume"
-          "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-          {
-            locked = true;
-            repeating = true;
-          }
-        )
-        (mkExecBind "XF86AudioMute"
-          "${lib.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SINK@ toggle"
-          { locked = true; }
-        )
-        (mkExecBind "XF86AudioMicMute"
-          "${lib.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-          { locked = true; }
-        )
-        (mkExecBind "XF86AudioPlay" "${lib.getExe pkgs.playerctl} play-pause" { locked = true; })
-        (mkExecBind "XF86AudioPause" "${lib.getExe pkgs.playerctl} play-pause" { locked = true; })
-        (mkExecBind "XF86AudioNext" "${lib.getExe pkgs.playerctl} next" { locked = true; })
-        (mkExecBind "XF86AudioPrev" "${lib.getExe pkgs.playerctl} previous" { locked = true; })
+            # Maus-Drag/Resize (ersetzt das nicht-existente hl.bindm)
+            (mkModBind "mouse:272" "hl.dsp.window.drag()" { mouse = true; })
+            (mkModBind "mouse:273" "hl.dsp.window.resize()" { mouse = true; })
+          ];
 
-        # Helligkeit
-        (mkExecBind "XF86MonBrightnessDown" "${lib.getExe pkgs.brightnessctl} set 5%-" {
-          locked = true;
-          repeating = true;
-        })
-        (mkExecBind "XF86MonBrightnessUp" "${lib.getExe pkgs.brightnessctl} set +5%" {
-          locked = true;
-          repeating = true;
-        })
-      ];
+          focusBinds = [
+            (mkModBind "left" ''hl.dsp.focus({ direction = "left" })'' null)
+            (mkModBind "right" ''hl.dsp.focus({ direction = "right" })'' null)
+            (mkModBind "up" ''hl.dsp.focus({ direction = "up" })'' null)
+            (mkModBind "down" ''hl.dsp.focus({ direction = "down" })'' null)
+            (mkModBind "h" ''hl.dsp.focus({ direction = "left" })'' null)
+            (mkModBind "k" ''hl.dsp.focus({ direction = "up" })'' null)
+            (mkModBind "j" ''hl.dsp.focus({ direction = "down" })'' null)
+
+            # Workspace cycling — hl.dsp.focus akzeptiert workspace = "e+1"/"e-1"
+            # laut Wiki-Beispiel: hl.bind("SUPER + mouse_down", hl.dsp.focus({ workspace = "e-1" }))
+            (mkModBind "CONTROL + right" ''hl.dsp.focus({ workspace = "e+1" })'' null)
+            (mkModBind "CONTROL + left" ''hl.dsp.focus({ workspace = "e-1" })'' null)
+
+            # Maus-Scroll
+            (mkModBind "mouse_down" ''hl.dsp.focus({ workspace = "e+1" })'' null)
+            (mkModBind "mouse_up" ''hl.dsp.focus({ workspace = "e-1" })'' null)
+          ];
+
+          mediaBinds = [
+            # Lautstärke / Media (mit locked/repeating Flags)
+            (mkExecBind "XF86AudioRaiseVolume"
+              "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+              {
+                locked = true;
+                repeating = true;
+              }
+            )
+            (mkExecBind "XF86AudioLowerVolume"
+              "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+              {
+                locked = true;
+                repeating = true;
+              }
+            )
+            (mkExecBind "XF86AudioMute"
+              "${lib.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SINK@ toggle"
+              { locked = true; }
+            )
+            (mkExecBind "XF86AudioMicMute"
+              "${lib.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+              { locked = true; }
+            )
+            (mkExecBind "XF86AudioPlay" "${lib.getExe pkgs.playerctl} play-pause" { locked = true; })
+            (mkExecBind "XF86AudioPause" "${lib.getExe pkgs.playerctl} play-pause" { locked = true; })
+            (mkExecBind "XF86AudioNext" "${lib.getExe pkgs.playerctl} next" { locked = true; })
+            (mkExecBind "XF86AudioPrev" "${lib.getExe pkgs.playerctl} previous" { locked = true; })
+
+            # Helligkeit
+            (mkExecBind "XF86MonBrightnessDown" "${lib.getExe pkgs.brightnessctl} set 5%-" {
+              locked = true;
+              repeating = true;
+            })
+            (mkExecBind "XF86MonBrightnessUp" "${lib.getExe pkgs.brightnessctl} set +5%" {
+              locked = true;
+              repeating = true;
+            })
+          ];
+        in
+        workspaceBinds ++ appBinds ++ windowBinds ++ focusBinds ++ mediaBinds;
 
     };
   };
