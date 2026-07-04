@@ -61,12 +61,19 @@ with lib;
 
   stylix.targets.hyprland.enable = true;
   stylix.targets.hyprlock.enable = true;
-
+  home.activation.ensureHyprmonConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    run mkdir -p "${config.home.homeDirectory}/.config/hypr"
+    if [ ! -e "${config.home.homeDirectory}/.config/hypr/hyprmon.lua" ]; then
+      run touch "${config.home.homeDirectory}/.config/hypr/hyprmon.lua"
+    fi
+  '';
   wayland.windowManager.hyprland = {
     enable = true;
     configType = "lua";
     systemd.enable = true;
-
+    extraConfig = ''
+      require("hyprmon")
+    '';
     plugins = [
       # pkgs.hyprlandPlugins.hyprgrass
     ];
@@ -229,7 +236,6 @@ with lib;
             enabled = true;
           };
         };
-
 
         general = {
           gaps_in = 3;
@@ -517,7 +523,9 @@ with lib;
             ++ lib.optional (flags != null) flags;
           };
 
-          mkExecBind = keys: cmd: flags: mkBind keys ''hl.dsp.exec_cmd("${cmd}")'' flags;
+          mkExecBind =
+            keys: cmd: flags:
+            mkBind keys ''hl.dsp.exec_cmd("${cmd}")'' flags;
 
           mkModBind =
             key: dispatcher: flags:
@@ -529,17 +537,29 @@ with lib;
 
           # 1–9,0: hl.dsp.focus / hl.dsp.window.move pro Ziffer, ohne Copy-Paste.
           workspaceBinds = lib.flatten (
-            map (n: [
-              (mkModBind "${toString n}" "hl.dsp.focus({ workspace = ${toString n} })" null)
-              (mkModBind "SHIFT + ${toString n}" "hl.dsp.window.move({ workspace = ${toString n} })" null)
-            ]) [ 1 2 3 4 5 6 7 8 9 0 ]
+            map
+              (n: [
+                (mkModBind "${toString n}" "hl.dsp.focus({ workspace = ${toString n} })" null)
+                (mkModBind "SHIFT + ${toString n}" "hl.dsp.window.move({ workspace = ${toString n} })" null)
+              ])
+              [
+                1
+                2
+                3
+                4
+                5
+                6
+                7
+                8
+                9
+                0
+              ]
           );
 
           appBinds = [
             (mkModExecBind "Return" terminalCmd null)
             (mkModExecBind "W" browserCmd null)
-            (mkModExecBind "E"
-              "${lib.getExe pkgs.kitty} --title 'File Manager' -e ${lib.getExe pkgs.yazi}"
+            (mkModExecBind "E" "${lib.getExe pkgs.kitty} --title 'File Manager' -e ${lib.getExe pkgs.yazi}"
               null
             )
             (mkModExecBind "T" "${lib.getExe pkgs.xfce.thunar}" null)
@@ -549,10 +569,7 @@ with lib;
             # Tools / Rofi
             (mkModExecBind "SHIFT + W" "web-search" null)
             (mkModExecBind "SHIFT + N" "swaync-client -rs" null)
-            (mkModExecBind "SHIFT + T"
-              "${lib.getExe pkgs.todofi-sh} -d ~/Nextcloud/todo/todo.cfg"
-              null
-            )
+            (mkModExecBind "SHIFT + T" "${lib.getExe pkgs.todofi-sh} -d ~/Nextcloud/todo/todo.cfg" null)
             (mkModExecBind "SHIFT + E" "systemctl restart --user espanso" null)
             (mkExecBind "CTRL + ALT + P" "rofi-rbw" null)
             (mkExecBind "CTRL + ALT + V"
@@ -569,10 +586,7 @@ with lib;
             (mkModBind "SHIFT + C" "hl.dsp.exit()" null)
 
             # Sperren / Suspend
-            (mkModExecBind "l"
-              "pidof ${lib.getExe pkgs.hyprlock} || ${lib.getExe pkgs.hyprlock}"
-              null
-            )
+            (mkModExecBind "l" "pidof ${lib.getExe pkgs.hyprlock} || ${lib.getExe pkgs.hyprlock}" null)
             (mkModExecBind "SHIFT + l" "systemctl suspend" null)
 
             # Fenster verschieben
