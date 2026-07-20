@@ -66,6 +66,7 @@ in
   # environment.
   home.packages =
     (with pkgs; [
+      librepods
       nextcloud-client
       gparted-full
       sops

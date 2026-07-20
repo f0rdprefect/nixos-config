@@ -22,6 +22,7 @@
     ./startify.nix
     ./tagbar.nix
     ./telescope.nix
+    ./telekasten.nix
     ./treesitter.nix
     #./vimtex.nix # inria
     ./which-key.nix
