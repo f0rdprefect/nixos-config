@@ -70,7 +70,7 @@ in
       materialgram
       thunderbird
       aerc
-
+      librepods
       wl-mirror
       ####bitwarden related###
       bitwarden-desktop # will be replaced by bitwarden-desktop
@@ -96,7 +96,6 @@ in
       pavucontrol
       tree
       nix-tree
-      protonup-qt
       glib
       spotify
       sysz
@@ -133,4 +132,21 @@ in
   fonts.fontconfig.enable = true;
 
   programs.direnv.enable = true;
+  programs.lutris = {
+    enable = true;
+    winePackages = [
+      pkgs.wineWow64Packages.waylandFull
+    ];
+    extraPackages = with pkgs; [
+      mangohud
+      winetricks
+      gamescope
+      gamemode
+      umu-launcher
+      cabextract # GOG/Inno-Extraktion
+      innoextract # dito, falls Lutris' gebündelte Version zickt
+      p7zip
+    ];
+    protonPackages = [ pkgs.proton-ge-bin ];
+  };
 }

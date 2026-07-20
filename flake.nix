@@ -65,6 +65,10 @@
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # IMPORTANT
     };
     ptouch-driver.url = "github:f0rdprefect/ptouch-driver-fix";
+    librepods-main = {
+      url = "github:f0rdprefect/librepods";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
 
   };
@@ -144,6 +148,7 @@
                 nixpkgs.overlays = [
                   overlay-stable
                   inputs.ptouch-driver.overlay
+                  inputs.librepods-main.overlays.default
                 ];
               }
               (
@@ -368,6 +373,7 @@
                 nixpkgs.overlays = [
                   overlay-stable
                   inputs.ptouch-driver.overlay
+                  inputs.librepods-main.overlays.default
                 ];
               }
               (

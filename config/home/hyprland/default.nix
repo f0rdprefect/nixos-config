@@ -562,13 +562,12 @@ with lib;
             (mkModExecBind "E" "${lib.getExe pkgs.kitty} --title 'File Manager' -e ${lib.getExe pkgs.yazi}"
               null
             )
-            (mkModExecBind "T" "${lib.getExe pkgs.xfce.thunar}" null)
+            (mkModExecBind "T" "${lib.getExe pkgs.thunar}" null)
             (mkModExecBind "S" "screenshootin" null)
             (mkModExecBind "D" "rofi-launcher" null)
 
             # Tools / Rofi
             (mkModExecBind "SHIFT + W" "web-search" null)
-            (mkModExecBind "SHIFT + N" "swaync-client -rs" null)
             (mkModExecBind "SHIFT + T" "${lib.getExe pkgs.todofi-sh} -d ~/Nextcloud/todo/todo.cfg" null)
             (mkModExecBind "SHIFT + E" "systemctl restart --user espanso" null)
             (mkExecBind "CTRL + ALT + P" "rofi-rbw" null)

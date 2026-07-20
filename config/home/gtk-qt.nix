@@ -15,9 +15,10 @@
       gtk-application-prefer-dark-theme = 1;
     };
   };
-  #  qt = {
-  #   enable = true;
-  # style.name = lib.mkForce "adwaita-dark";
-  #platformTheme.name = lib.mkForce "gtk3";
-  #};
+  qt = {
+    enable = true;
+    style = "kvantum";
+    platformTheme.name = lib.mkForce "qt5ct";
+    kvantum.enable = true;
+  };
 }
