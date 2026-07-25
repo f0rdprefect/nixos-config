@@ -21,8 +21,8 @@
     "bcachefs"
     "zfs"
   ];
-  boot.zfs.extraPools = [ "immich-pool" ];
-  boot.kernelPackages = lib.mkOverride 0 pkgs.linuxPackages_latest;
+  boot.zfs.extraPools = [ "ultrastic" ];
+  boot.kernelPackages = lib.mkOverride 0 pkgs.linuxPackages_7_0;
   zramSwap = {
     enable = true;
     memoryPercent = 50;

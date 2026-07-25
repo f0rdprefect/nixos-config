@@ -50,22 +50,20 @@
   systemd.services.immich-server = {
     unitConfig = {
       RequiresMountsFor = [
-        "/srv/twoflower/immich/library"
-        "/srv/twoflower/immich/uploads"
-        "/srv/twoflower/immich/database"
+        "/srv/twoflower/immich"
       ];
     };
   };
 
   systemd.services.immich-machine-learning = {
     unitConfig = {
-      RequiresMountsFor = [ "/srv/twoflower/immich/library" ];
+      RequiresMountsFor = [ "/srv/twoflower/immich" ];
     };
   };
 
   systemd.services.postgresql = {
     unitConfig = {
-      RequiresMountsFor = [ "/srv/twoflower/immich/database" ];
+      RequiresMountsFor = [ "/srv/twoflower/immich" ];
     };
   };
 
