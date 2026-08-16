@@ -75,8 +75,9 @@
   hardware.bluetooth = {
     enable = true; # enables support for Bluetooth
     powerOnBoot = true; # powers up the default Bluetooth controller on boot
-    package = pkgs.bluez.overrideAttrs (old: { # TODO remove once bluez 5.87 becomes available or
-                                               # nixpkgs incorporates the patch
+    package = pkgs.bluez.overrideAttrs (old: {
+      # TODO remove once bluez 5.87 becomes available or
+      # nixpkgs incorporates the patch
       patches = (old.patches or [ ]) ++ [
         (pkgs.fetchpatch {
           url = "https://github.com/bluez/bluez/commit/066a164.patch";
@@ -90,6 +91,10 @@
   services.smartd = {
     enable = false;
     autodetect = true;
+  };
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.valent;
   };
   services.fwupd.enable = true;
   virtualisation.waydroid.enable = true;

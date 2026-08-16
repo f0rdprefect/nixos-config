@@ -10,6 +10,7 @@
     ../../modules/disko/btrfs-simple.nix
     ./immich.nix
     ../../modules/newt.nix
+    ./backup.nix
   ];
   boot.loader.grub = {
     # no need to set devices, disko will add all devices that have a EF02 partition to the list already
@@ -21,7 +22,10 @@
     "bcachefs"
     "zfs"
   ];
-  boot.zfs.extraPools = [ "ultrastic" ];
+  boot.zfs.extraPools = [
+    "ultrastic"
+    "backup-pool"
+  ];
   boot.kernelPackages = lib.mkOverride 0 pkgs.linuxPackages_7_0;
   zramSwap = {
     enable = true;
