@@ -22,9 +22,9 @@ in
       fractal
       calibre
       inkscape-with-extensions
-      makemkv
     ])
     ++ (with pkgs; [
+            #makemkv
       nextcloud-client
       mcpelauncher-ui-qt
       orca-slicer
