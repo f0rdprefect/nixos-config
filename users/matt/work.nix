@@ -66,6 +66,7 @@ in
   # environment.
   home.packages =
     (with pkgs; [
+      github-copilot-app
       librepods
       nextcloud-client
       gparted-full
