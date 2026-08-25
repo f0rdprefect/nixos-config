@@ -7,6 +7,7 @@
     ./kernel/lqx.nix
     ./kernel/xanmod.nix
     ./kernel/zen.nix
+    ./kernel/zfs-compatible-latest.nix
     
     # For the adventurous people
     # It's not listed in the list of possible options, 

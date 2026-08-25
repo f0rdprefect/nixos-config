@@ -57,7 +57,6 @@
       requestEncryptionCredentials = true;
       forceImportRoot = false;
     };
-    kernelPackages = lib.mkOverride 0 pkgs.linuxPackages_zen;
     kernel.sysctl."vm.swappiness" = 40;
   };
   zramSwap = {

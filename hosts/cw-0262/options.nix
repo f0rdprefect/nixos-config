@@ -41,7 +41,7 @@ in {
   theLCVariables = "en_US.UTF-8";
   theTimezone = "Europe/Berlin";
   theShell = "bash"; # Possible options: bash, zsh
-  theKernel = "zen"; # Possible options: default, latest, lqx, xanmod, zen
+  theKernel = "zfs-compatible-latest"; # Possible options: default, latest, lqx, xanmod, zen, zfs-compatible-latest
   sdl-videodriver = "x11"; # Either x11 or wayland ONLY. Games might require x11 set here
   # For Hybrid Systems intel-nvidia
   # Should Be Used As gpuType
