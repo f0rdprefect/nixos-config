@@ -3,19 +3,16 @@
   config,
   username,
   host,
+  hostConfig,
   ...
 }:
-
-let
-  inherit (import ./../hosts/${host}/options.nix) gitUsername theShell;
-in
 {
   users.users = {
     "${username}" = {
       homeMode = "755";
       hashedPassword = "$6$YdPBODxytqUWXCYL$AHW1U9C6Qqkf6PZJI54jxFcPVm2sm/XWq3Z1qa94PFYz0FF.za9gl5WZL/z/g4nFLQ94SSEzMg5GMzMjJ6Vd7.";
       isNormalUser = true;
-      description = "${gitUsername}";
+      description = hostConfig.gitUsername;
       extraGroups = [
         "networkmanager"
         "wheel"
@@ -24,7 +21,7 @@ in
         "cdrom"
         "ydotool"
       ];
-      shell = pkgs.${theShell};
+      shell = pkgs.${hostConfig.theShell};
       ignoreShellProgramCheck = true;
       packages = with pkgs; [ ];
     };

@@ -4,22 +4,12 @@
   inputs,
   lib,
   host,
+  hostConfig,
   gtkThemeFromScheme,
   ...
 }:
 let
-  inherit (import ./../../hosts/${host}/options.nix)
-    gitUsername
-    gitEmail
-    theme
-    browser
-    wallpaperDir
-    wallpaperGit
-    flakeDir
-    waybarStyle
-    ;
   username = "berenice";
-
 in
 {
   # Home Manager Settings
@@ -28,7 +18,7 @@ in
   home.stateVersion = "26.05";
 
   # Set The Colorscheme
-  colorScheme = inputs.nix-colors.colorSchemes."${theme}";
+  colorScheme = inputs.nix-colors.colorSchemes.${hostConfig.theme};
   stylix.targets.gnome = {
     enable = true;
     useWallpaper = false;

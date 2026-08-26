@@ -1,7 +1,12 @@
-{ pkgs, config, lib, host, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  hostConfig,
+  ...
+}:
 
-let inherit (import ../../hosts/${host}/options.nix) kdenlive; in
-lib.mkIf (kdenlive == true) {
+lib.mkIf hostConfig.kdenlive {
   home.packages = with pkgs; [
     pkgs.kdenlive
   ];

@@ -1,14 +1,10 @@
 {
-  config,
   lib,
   pkgs,
+  hostConfig,
   ...
 }:
 
-let
-  host = config.networking.hostName;
-  inherit (import ../../../hosts/${host}/options.nix) theKernel;
-in
-lib.mkIf (theKernel == "zen") {
+lib.mkIf (hostConfig.theKernel == "zen") {
   boot.kernelPackages = pkgs.linuxPackages_zen;
 }

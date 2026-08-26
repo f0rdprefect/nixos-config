@@ -1,8 +1,9 @@
-{ pkgs, host, ... }:
+{
+  pkgs,
+  hostConfig,
+  ...
+}:
 
-let
-  inherit ( import ../../hosts/${host}/options.nix ) terminal browser;
-in
 pkgs.writeShellScriptBin "list-hypr-bindings" ''
   yad --width=800 --height=650 \
   --center \
@@ -16,12 +17,12 @@ pkgs.writeShellScriptBin "list-hypr-bindings" ''
   --timeout=90 \
   --timeout-indicator=right \
   " = Windows/Super/CAPS LOCK" "Modifier Key, used for keybindings" "Doesn't really execute anything by itself." \
-  " + ENTER" "Terminal" "${terminal}" \
+  " + ENTER" "Terminal" "${hostConfig.terminal}" \
   " + SHIFT + ENTER" "Rofi App Launcher" "rofi -show drun" \
   " + Q" "Kill Focused Window" "killactive" \
   " + SHIFT + W" "Search Websites Like Nix Packages" "web-search" \
   " + SHIFT + N" "Reload SwayNC Styling" "swaync-client -rs" \
-  " + W" "Launch Web Browser" "${browser}" \
+  " + W" "Launch Web Browser" "${hostConfig.browser}" \
   " + E" "Yazi File Manager" "yazi-file-picker" \
   " + S" "Take Screenshot" "screenshootin" \
   " + D" "Launch Discord" "discord" \

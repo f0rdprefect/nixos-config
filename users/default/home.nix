@@ -5,21 +5,10 @@
   username,
   lib,
   host,
+  hostConfig,
   gtkThemeFromScheme,
   ...
 }:
-let
-  inherit (import ./../../hosts/${host}/options.nix)
-    gitUsername
-    gitEmail
-    theme
-    browser
-    wallpaperDir
-    wallpaperGit
-    flakeDir
-    waybarStyle
-    ;
-in
 {
   # Home Manager Settings
   home.username = "${username}";
@@ -27,7 +16,7 @@ in
   home.stateVersion = "26.05";
 
   # Set The Colorscheme
-  colorScheme = inputs.nix-colors.colorSchemes."${theme}";
+  colorScheme = inputs.nix-colors.colorSchemes.${hostConfig.theme};
 
   # Import Program Configurations
   imports = [
@@ -46,8 +35,8 @@ in
     enable = true;
     settings = {
       user = {
-        name = "${gitUsername}";
-        email = "${gitEmail}";
+        name = hostConfig.gitUsername;
+        email = hostConfig.gitEmail;
       };
     };
   };

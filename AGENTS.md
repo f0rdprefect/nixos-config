@@ -25,3 +25,7 @@
 ## Additional Notes
 - No Cursor/Copilot rules found in repo
 - Always test rebuilds before switching; mimic existing patterns in codebase
+- Active host config data is now centralized in `flake.nix` under `hostProfiles`/`mkHostConfig`; do not reintroduce `import ../../hosts/${host}/options.nix` lookups in shared modules.
+- State-version policy for active non-`pix` hosts: target `26.11`, except `ook` (NAS) which stays on `26.05` + stable channel.
+- Full `nix flake check` currently still fails on `pix` (existing recursion issue). For active-host consistency work, checkpoint with targeted evals:
+  `for h in xin xenity uhura cw-0262 mup yakari nix serenity ook; do nix eval --raw .#nixosConfigurations.$h.config.system.build.toplevel.drvPath >/dev/null; done`

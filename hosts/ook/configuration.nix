@@ -26,7 +26,7 @@
     "ultrastic"
     "backup-pool"
   ];
-  boot.kernelPackages = lib.mkOverride 0 pkgs.linuxPackages_7_0;
+  boot.kernelPackages = lib.mkOverride 0 pkgs.linuxPackages;
   zramSwap = {
     enable = true;
     memoryPercent = 50;
@@ -161,5 +161,6 @@
   };
   nixpkgs.config.allowUnfree = true;
 
+  # NAS host intentionally stays on 26.05/stable.
   system.stateVersion = "26.05";
 }

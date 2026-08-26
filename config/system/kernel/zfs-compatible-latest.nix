@@ -1,15 +1,12 @@
 {
-  config,
   lib,
   pkgs,
+  config,
+  hostConfig,
   ...
 }:
 
-let
-  host = config.networking.hostName;
-  inherit (import ../../../hosts/${host}/options.nix) theKernel;
-in
-lib.mkIf (theKernel == "zfs-compatible-latest") (
+lib.mkIf (hostConfig.theKernel == "zfs-compatible-latest") (
   let
     isUnstableZfs = config.boot.zfs.package == pkgs.zfs_unstable;
     zfsPackageAttr = if isUnstableZfs then "zfs_unstable" else "zfs";

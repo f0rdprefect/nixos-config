@@ -1,15 +1,11 @@
 {
   pkgs,
   lib,
-  config,
+  hostConfig,
   ...
 }:
 
-let
-  host = config.networking.hostName;
-  inherit (import ../../hosts/${host}/options.nix) tailscale;
-in
-lib.mkIf (tailscale == true) {
+lib.mkIf hostConfig.tailscale {
   services = {
     tailscale.enable = true;
   };

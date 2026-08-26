@@ -1,17 +1,9 @@
 {
   pkgs,
-  config,
+  hostConfig,
   ...
 }:
 
-let
-  host = config.networking.hostName;
-  inherit (import ../../hosts/${host}/options.nix)
-    theKBDVariant
-    theKBDLayout
-    theSecondKBDLayout
-    ;
-in
 {
   services.libinput.enable = true;
   environment.systemPackages = [
@@ -20,8 +12,8 @@ in
   services.xserver = {
     enable = true;
     xkb = {
-      variant = "${theKBDVariant}";
-      layout = "${theKBDLayout}, ${theSecondKBDLayout}";
+      variant = hostConfig.theKBDVariant;
+      layout = "${hostConfig.theKBDLayout}, ${hostConfig.theSecondKBDLayout}";
     };
   };
   services.displayManager.ly = {

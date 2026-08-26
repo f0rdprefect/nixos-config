@@ -1,11 +1,11 @@
 {
   pkgs,
   lib,
-  cfgoptions,
+  hostConfig,
   ...
 }:
 
-lib.mkIf ("${cfgoptions.gpuType}" == "intel") {
+lib.mkIf (hostConfig.gpuType == "intel") {
   # NixOS configuration for Intel UHD Graphics 620 with Vulkan support
   hardware.graphics = {
     enable = true;

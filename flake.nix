@@ -110,12 +110,128 @@
       overlay-stable = final: prev: {
         stable = pkgs-stable;
       };
+
+      mkHostConfig =
+        {
+          username,
+          host,
+          gitUsername ? "Matthias Berse",
+          gitEmail ? "matthias@berse.xyz",
+          theKBDLayout ? "us",
+          theSecondKBDLayout ? "de",
+          theKBDVariant ? "",
+          theKernel ? "zen",
+        }:
+        let
+          userHome = "/home/${username}";
+        in
+        {
+          inherit
+            username
+            host
+            userHome
+            gitUsername
+            gitEmail
+            theKBDLayout
+            theSecondKBDLayout
+            theKBDVariant
+            theKernel
+            ;
+          flakeDir = "${userHome}/nixos-config";
+          wallpaperGit = "https://github.com/f0rdprefect/my-wallpaper.git";
+          wallpaperDir = "${userHome}/Pictures/Wallpapers";
+          screenshotDir = "${userHome}/Pictures/Screenshots";
+          flakePrev = "${userHome}/.zaneyos-previous";
+          flakeBackup = "${userHome}/.zaneyos-backup";
+          theme = "gruvbox-material-dark-medium";
+          borderAnim = false;
+          extraMonitorSettings = " ";
+          waybarAnim = false;
+          waybarStyle = "default";
+          bar-number = true;
+          clock24h = true;
+          theLocale = "en_US.UTF-8";
+          theLCVariables = "en_US.UTF-8";
+          theTimezone = "Europe/Berlin";
+          theShell = "bash";
+          sdl-videodriver = "x11";
+          cpuType = "intel";
+          gpuType = "intel";
+          intel-bus-id = "PCI:1:0:0";
+          nvidia-bus-id = "PCI:0:2:0";
+          nfs = false;
+          nfsMountPoint = "/mnt/nas";
+          nfsDevice = "nas:/volume1/nas";
+          ntp = true;
+          localHWClock = false;
+          printer = true;
+          browser = "firefox";
+          terminal = "kitty";
+          distrobox = true;
+          flatpak = true;
+          kdenlive = false;
+          blender = false;
+          enableZeroAD = false;
+          logitech = false;
+          wezterm = false;
+          alacritty = false;
+          kitty = true;
+          python = true;
+          syncthing = true;
+          espanso = true;
+          tailscale = true;
+        };
+
+      hostProfiles = {
+        xin = mkHostConfig {
+          username = "matt";
+          host = "xin";
+        };
+        xenity = mkHostConfig {
+          username = "matt";
+          host = "xenity";
+        };
+        uhura = mkHostConfig {
+          username = "matt";
+          host = "uhura";
+          theKBDLayout = "de";
+        };
+        cw-0262 = mkHostConfig {
+          username = "matt";
+          host = "cw-0262";
+          gitEmail = "matthias.berse@raith.com";
+          theKernel = "zfs-compatible-latest";
+        };
+        mup = mkHostConfig {
+          username = "matt";
+          host = "mup";
+          gitEmail = "matthias.berse@raith.com";
+        };
+        yakari = mkHostConfig {
+          username = "yilian";
+          host = "yakari";
+        };
+        nix = mkHostConfig {
+          username = "matt";
+          host = "nix";
+        };
+        serenity = mkHostConfig {
+          username = "matt";
+          host = "serenity";
+        };
+        ook = mkHostConfig {
+          username = "matt";
+          host = "ook";
+          theKernel = "default";
+        };
+      };
     in
     {
       nixosConfigurations = {
         xin =
           let
-            inherit (import ./hosts/xin/options.nix) username host;
+            hostConfig = hostProfiles.xin;
+            inherit (hostConfig) username host;
           in
           nixpkgs.lib.nixosSystem {
             specialArgs = {
@@ -125,7 +241,7 @@
               inherit host;
               inherit nix-colors;
               inherit pkgs-stable;
-              cfgoptions = import ./hosts/xin/options.nix;
+              inherit hostConfig;
 
             };
             modules = [
@@ -153,6 +269,7 @@
                     inherit username;
                     inherit pkgs-stable;
                     inherit host;
+                    inherit hostConfig;
                     inherit inputs;
                     inherit nixvim-conf;
                     inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
@@ -168,7 +285,8 @@
 
         xenity =
           let
-            inherit (import ./hosts/xenity/options.nix) username host;
+            hostConfig = hostProfiles.xenity;
+            inherit (hostConfig) username host;
           in
           nixpkgs.lib.nixosSystem {
             specialArgs = {
@@ -177,7 +295,7 @@
               inherit username;
               inherit host;
               inherit nix-colors;
-              cfgoptions = import ./hosts/xenity/options.nix;
+              inherit hostConfig;
             };
             modules = [
               inputs.nixos-facter-modules.nixosModules.facter
@@ -201,6 +319,7 @@
                     inherit username;
                     inherit pkgs-stable;
                     inherit host;
+                    inherit hostConfig;
                     inherit inputs;
                     inherit nixvim-conf;
                     inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
@@ -216,7 +335,8 @@
           };
         uhura =
           let
-            inherit (import ./hosts/uhura/options.nix) username host;
+            hostConfig = hostProfiles.uhura;
+            inherit (hostConfig) username host;
           in
           nixpkgs.lib.nixosSystem {
             specialArgs = {
@@ -225,7 +345,7 @@
               inherit username;
               inherit host;
               inherit nix-colors;
-              cfgoptions = import ./hosts/uhura/options.nix;
+              inherit hostConfig;
             };
             modules = [
               #./system.nix
@@ -247,6 +367,7 @@
                     inherit username;
                     inherit pkgs-stable;
                     inherit host;
+                    inherit hostConfig;
                     inherit inputs;
                     inherit nixvim-conf;
                     inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
@@ -265,6 +386,7 @@
             inherit system;
             inherit inputs;
             inherit nix-colors;
+            hostConfig = hostProfiles.yakari;
           };
           modules = [
             inputs.nixos-facter-modules.nixosModules.facter
@@ -286,6 +408,7 @@
             inherit system;
             inherit inputs;
             inherit nix-colors;
+            hostConfig = hostProfiles.nix;
           };
           modules = [
             sops-nix.nixosModules.sops
@@ -304,6 +427,7 @@
             inherit system;
             inherit inputs;
             inherit nix-colors;
+            hostConfig = hostProfiles.serenity;
           };
           modules = [
             ./hosts/serenity/configuration.nix
@@ -318,8 +442,13 @@
           ];
 
         };
-        ook = nixpkgs.lib.nixosSystem {
+        ook = nixpkgs-stable.lib.nixosSystem {
           system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+            inherit nix-colors;
+            hostConfig = hostProfiles.ook;
+          };
           modules = [
             disko.nixosModules.disko
             { disko.devices.disk.disk1.device = "/dev/nvme0n1"; }
@@ -337,7 +466,8 @@
         };
         cw-0262 =
           let
-            inherit (import ./hosts/cw-0262/options.nix) username host;
+            hostConfig = hostProfiles.cw-0262;
+            inherit (hostConfig) username host;
           in
           nixpkgs.lib.nixosSystem {
             specialArgs = {
@@ -345,8 +475,7 @@
               inherit inputs;
               inherit nix-colors;
               inherit pkgs-stable;
-              cfgoptions = import ./hosts/${host}/options.nix;
-              #Todo in all modules where options are used use cfgoptions instead
+              inherit hostConfig;
             };
             system = "x86_64-linux";
             modules = [
@@ -377,6 +506,7 @@
                     inherit username;
                     inherit pkgs-stable;
                     inherit host;
+                    inherit hostConfig;
                     inherit inputs;
                     inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
                   };
@@ -390,15 +520,15 @@
           };
         mup =
           let
-            inherit (import ./hosts/mup/options.nix) username host;
+            hostConfig = hostProfiles.mup;
+            inherit (hostConfig) username host;
           in
           nixpkgs.lib.nixosSystem {
             specialArgs = {
               inherit system;
               inherit inputs;
               inherit nix-colors;
-              cfgoptions = import ./hosts/${host}/options.nix;
-              #Todo in all modules where options are used use cfgoptions instead
+              inherit hostConfig;
             };
             system = "x86_64-linux";
             modules = [

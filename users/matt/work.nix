@@ -4,20 +4,11 @@
   inputs,
   host,
   username,
+  hostConfig,
   lib,
   ...
 }:
 
-let
-  inherit (import ../../hosts/${host}/options.nix)
-    gitUsername
-    gitEmail
-    theme
-    wallpaperDir
-    wallpaperGit
-    flakeDir # refactor me away
-    ;
-in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -51,7 +42,7 @@ in
   ];
   home.username = "${username}";
   home.homeDirectory = "/home/${username}";
-  colorScheme = inputs.nix-colors.colorSchemes."${theme}";
+  colorScheme = inputs.nix-colors.colorSchemes.${hostConfig.theme};
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -156,13 +147,13 @@ in
       (import ../../config/scripts/squirtle.nix { inherit pkgs; })
       (import ../../config/scripts/wallsetter.nix {
         inherit pkgs;
-        inherit wallpaperDir;
+        wallpaperDir = hostConfig.wallpaperDir;
         inherit username;
-        inherit wallpaperGit;
+        wallpaperGit = hostConfig.wallpaperGit;
       })
       (import ../../config/scripts/themechange.nix {
         inherit pkgs;
-        inherit flakeDir;
+        flakeDir = hostConfig.flakeDir;
         inherit host;
       })
       (import ../../config/scripts/theme-selector.nix { inherit pkgs; })
@@ -239,8 +230,8 @@ in
     enable = true;
     settings = {
       user = {
-        name = "${gitUsername}";
-        email = "${gitEmail}";
+        name = hostConfig.gitUsername;
+        email = hostConfig.gitEmail;
       };
     };
   };

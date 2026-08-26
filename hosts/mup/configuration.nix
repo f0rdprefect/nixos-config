@@ -2,7 +2,7 @@
   modulesPath,
   lib,
   pkgs,
-  cfgoptions,
+  hostConfig,
   inputs,
   ...
 }@args:
@@ -137,7 +137,7 @@
   };
 
   networking = {
-    hostName = cfgoptions.host; # Define your hostname
+    hostName = hostConfig.host; # Define your hostname
     networkmanager.enable = true;
     firewall.enable = true;
     #hostId = builtins.substring 0 8 (builtins.hashString "md5" "nook");
@@ -189,5 +189,5 @@
   };
   nixpkgs.config.allowUnfree = true;
 
-  system.stateVersion = "26.05";
+  system.stateVersion = "26.11";
 }

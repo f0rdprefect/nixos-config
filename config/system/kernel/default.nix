@@ -1,14 +1,10 @@
 {
-  config,
   lib,
   pkgs,
+  hostConfig,
   ...
 }:
 
-let
-  host = config.networking.hostName;
-  inherit (import ../../../hosts/${host}/options.nix) theKernel;
-in
-lib.mkIf (theKernel == "default") {
+lib.mkIf (hostConfig.theKernel == "default") {
   boot.kernelPackages = pkgs.linuxPackages;
 }

@@ -1,15 +1,11 @@
 {
-  config,
   lib,
   pkgs,
+  hostConfig,
   ...
 }:
 
-let
-  host = config.networking.hostName;
-  inherit (import ../../hosts/${host}/options.nix) distrobox;
-in
-lib.mkIf (distrobox == true) {
+lib.mkIf hostConfig.distrobox {
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;

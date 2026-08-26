@@ -1,15 +1,10 @@
 {
-  pkgs,
-  config,
   lib,
+  hostConfig,
   ...
 }:
 
-let
-  host = config.networking.hostName;
-  inherit (import ../../hosts/${host}/options.nix) logitech;
-in
-lib.mkIf (logitech == true) {
+lib.mkIf hostConfig.logitech {
   hardware.logitech.wireless.enable = true;
   hardware.logitech.wireless.enableGraphical = true;
 }

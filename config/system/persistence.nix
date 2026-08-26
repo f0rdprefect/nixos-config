@@ -1,12 +1,8 @@
 {
-  config,
+  hostConfig,
   ...
 }:
 
-let
-  host = config.networking.hostName;
-  inherit (import ../../hosts/${host}/options.nix) username;
-in
 {
   environment.persistence."/nix/persist" = {
     hideMounts = true;
@@ -20,7 +16,7 @@ in
     files = [
       # "/etc/machine-id"
     ];
-    users.${username} = {
+    users.${hostConfig.username} = {
       directories = [
         "Downloads"
         "Music"

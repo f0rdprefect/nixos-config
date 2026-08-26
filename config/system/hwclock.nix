@@ -1,13 +1,9 @@
 {
-  config,
   lib,
+  hostConfig,
   ...
 }:
 
-let
-  host = config.networking.hostName;
-  inherit (import ../../hosts/${host}/options.nix) localHWClock;
-in
-lib.mkIf (localHWClock == true) {
+lib.mkIf hostConfig.localHWClock {
   time.hardwareClockInLocalTime = true;
 }

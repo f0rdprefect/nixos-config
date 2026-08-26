@@ -1,7 +1,12 @@
-{ pkgs, config, lib, host, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  hostConfig,
+  ...
+}:
 
-let inherit (import ../../hosts/${host}/options.nix) blender; in
-lib.mkIf (blender == true) {
+lib.mkIf hostConfig.blender {
   home.packages = with pkgs; [
     pkgs.blender-hip
   ];

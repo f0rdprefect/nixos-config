@@ -1,16 +1,12 @@
 {
-  config,
   lib,
+  hostConfig,
   ...
 }:
 
-let
-  host = config.networking.hostName;
-  inherit (import ../../hosts/${host}/options.nix) nfs nfsMountPoint nfsDevice;
-in
-lib.mkIf (nfs == true) {
-  fileSystems."${nfsMountPoint}" = {
-    device = "${nfsDevice}";
+lib.mkIf hostConfig.nfs {
+  fileSystems."${hostConfig.nfsMountPoint}" = {
+    device = hostConfig.nfsDevice;
     fsType = "nfs";
   };
   services = {

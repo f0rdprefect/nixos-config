@@ -1,15 +1,11 @@
 {
   pkgs,
-  config,
   lib,
+  hostConfig,
   ...
 }:
 
-let
-  host = config.networking.hostName;
-  inherit (import ../../hosts/${host}/options.nix) gpuType;
-in
-lib.mkIf ("${gpuType}" == "intel-amd") {
+lib.mkIf (hostConfig.gpuType == "intel-amd") {
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override {
       enableHybridCodec = true;

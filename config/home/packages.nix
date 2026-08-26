@@ -3,17 +3,9 @@
   pkgs-stable,
   username,
   host,
+  hostConfig,
   ...
 }:
-
-let
-  inherit (import ../../hosts/${host}/options.nix)
-    browser
-    wallpaperDir
-    wallpaperGit
-    flakeDir
-    ;
-in
 {
   # Install Packages For The User
   home.packages =
@@ -82,7 +74,7 @@ in
       wtype
       cliphist
       #######
-      pkgs."${browser}"
+      pkgs.${hostConfig.browser}
       libvirt
       grim
       slurp
@@ -112,13 +104,13 @@ in
       (import ./../scripts/squirtle.nix { inherit pkgs; })
       (import ./../scripts/wallsetter.nix {
         inherit pkgs;
-        inherit wallpaperDir;
+        wallpaperDir = hostConfig.wallpaperDir;
         inherit username;
-        inherit wallpaperGit;
+        wallpaperGit = hostConfig.wallpaperGit;
       })
       (import ./../scripts/themechange.nix {
         inherit pkgs;
-        inherit flakeDir;
+        flakeDir = hostConfig.flakeDir;
         inherit host;
       })
       (import ./../scripts/theme-selector.nix { inherit pkgs; })

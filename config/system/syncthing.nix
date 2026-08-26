@@ -1,20 +1,16 @@
 {
-  config,
   lib,
+  hostConfig,
   ...
 }:
 
-let
-  host = config.networking.hostName;
-  inherit (import ../../hosts/${host}/options.nix) syncthing username userHome;
-in
-lib.mkIf (syncthing == true) {
+lib.mkIf hostConfig.syncthing {
   services = {
     syncthing = {
       enable = true;
-      user = "${username}";
-      dataDir = "/home/${username}"; # Default folder for new synced folders
-      configDir = "/home/${username}/.config/syncthing"; # Folder for Syncthing's settings and keys
+      user = hostConfig.username;
+      dataDir = hostConfig.userHome; # Default folder for new synced folders
+      configDir = "${hostConfig.userHome}/.config/syncthing"; # Folder for Syncthing's settings and keys
     };
   };
 }

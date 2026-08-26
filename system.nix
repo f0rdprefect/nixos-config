@@ -4,24 +4,10 @@
   pkgs,
   username,
   host,
+  hostConfig,
   lib,
   ...
 }:
-
-let
-  inherit (import ./hosts/${host}/options.nix)
-    theLocale
-    theTimezone
-    gitUsername
-    theShell
-    wallpaperDir
-    wallpaperGit
-    theLCVariables
-    theKBDLayout
-    flakeDir
-    theme
-    ;
-in
 {
   imports = [
     ./hosts/${host}/hardware.nix
@@ -36,23 +22,23 @@ in
   networking.firewall.enable = true;
 
   # Set your time zone
-  time.timeZone = "${theTimezone}";
+  time.timeZone = hostConfig.theTimezone;
 
   # Select internationalisation properties
-  i18n.defaultLocale = "${theLocale}";
+  i18n.defaultLocale = hostConfig.theLocale;
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "${theLCVariables}";
-    LC_IDENTIFICATION = "${theLCVariables}";
-    LC_MEASUREMENT = "${theLCVariables}";
-    LC_MONETARY = "${theLCVariables}";
-    LC_NAME = "${theLCVariables}";
-    LC_NUMERIC = "${theLCVariables}";
-    LC_PAPER = "${theLCVariables}";
-    LC_TELEPHONE = "${theLCVariables}";
-    LC_TIME = "${theLCVariables}";
+    LC_ADDRESS = hostConfig.theLCVariables;
+    LC_IDENTIFICATION = hostConfig.theLCVariables;
+    LC_MEASUREMENT = hostConfig.theLCVariables;
+    LC_MONETARY = hostConfig.theLCVariables;
+    LC_NAME = hostConfig.theLCVariables;
+    LC_NUMERIC = hostConfig.theLCVariables;
+    LC_PAPER = hostConfig.theLCVariables;
+    LC_TELEPHONE = hostConfig.theLCVariables;
+    LC_TIME = hostConfig.theLCVariables;
   };
 
-  console.keyMap = "${theKBDLayout}";
+  console.keyMap = hostConfig.theKBDLayout;
 
   # Define a user account.
   users = {
@@ -60,7 +46,7 @@ in
   };
 
   environment.variables = {
-    FLAKE = "${flakeDir}";
+    FLAKE = hostConfig.flakeDir;
     ZANEYOS_VERSION = "1.0";
     POLKIT_BIN = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
     #EDITOR = "nvim";

@@ -1,7 +1,13 @@
-{ config, lib, pkgs, host, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  host,
+  hostConfig,
+  ...
+}:
 
-let inherit (import ../../hosts/${host}/options.nix) flakeDir theShell; in
-lib.mkIf (theShell == "zsh") {
+lib.mkIf (hostConfig.theShell == "zsh") {
   programs.zsh = {
     enable = true;
     syntaxHighlighting.enable = true;

@@ -2,14 +2,11 @@
   pkgs,
   config,
   lib,
+  hostConfig,
   ...
 }:
 
-let
-  host = config.networking.hostName;
-  inherit (import ../../hosts/${host}/options.nix) gpuType;
-in
-lib.mkIf ("${gpuType}" == "nvidia") {
+lib.mkIf (hostConfig.gpuType == "nvidia") {
   environment.systemPackages = with pkgs; [
     nvtop
   ];

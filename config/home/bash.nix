@@ -3,18 +3,11 @@
   lib,
   pkgs,
   host,
+  hostConfig,
   ...
 }:
 
-let
-  inherit (import ../../hosts/${host}/options.nix)
-    flakeDir
-    flakePrev
-    flakeBackup
-    theShell
-    ;
-in
-lib.mkIf (theShell == "bash") {
+lib.mkIf (hostConfig.theShell == "bash") {
   # Configure Bash
   programs.bash = {
     enable = true;
@@ -35,8 +28,8 @@ lib.mkIf (theShell == "bash") {
       fi
     '';
     sessionVariables = {
-      FLAKEBACKUP = "${flakeBackup}";
-      FLAKEPREV = "${flakePrev}";
+      FLAKEBACKUP = hostConfig.flakeBackup;
+      FLAKEPREV = hostConfig.flakePrev;
     };
     shellAliases = {
       sv = "sudo nvim";

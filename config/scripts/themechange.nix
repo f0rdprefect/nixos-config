@@ -1,14 +1,17 @@
-{ pkgs, host, ... }:
+{
+  pkgs,
+  flakeDir,
+  host,
+  ...
+}:
 
-let
-  inherit (import ../../hosts/${host}/options.nix) flakeDir;
-in
 pkgs.writeShellScriptBin "themechange" ''
-  if [[ ! $@ ]];then
+  if [[ ! $@ ]]; then
     echo "No Theme Given"
+    exit 1
   else
-    replacement="$1"
-    sed -i "/^\s*theme[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$replacement\"/" ${flakeDir}/hosts/${host}/options.nix
-    kitty -e pkexec nixos-rebuild switch --flake ${flakeDir}
+    echo "themechange no longer edits hosts/*/options.nix."
+    echo "Set hostProfiles.${host}.theme in flake.nix manually, then rebuild."
+    exit 1
   fi
 ''

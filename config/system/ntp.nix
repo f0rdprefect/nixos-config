@@ -1,14 +1,10 @@
 {
-  config,
   lib,
   options,
+  hostConfig,
   ...
 }:
 
-let
-  host = config.networking.hostName;
-  inherit (import ../../hosts/${host}/options.nix) ntp;
-in
-lib.mkIf (ntp == true) {
+lib.mkIf hostConfig.ntp {
   networking.timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
 }

@@ -1,9 +1,14 @@
-{ pkgs, config, lib, host, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  hostConfig,
+  ...
+}:
 
 let
   palette = config.colorScheme.palette;
-  inherit (import ../../hosts/${host}/options.nix) alacritty;
-in lib.mkIf (alacritty == true) {
+in lib.mkIf hostConfig.alacritty {
   programs.alacritty = {
     enable = true;
     settings = {

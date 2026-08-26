@@ -7,7 +7,7 @@
 # Multi-Argument-Calls (z.B. bind). mkLuaInline für rohe Lua-Ausdrücke
 # (Funktionen, lokale Variablen-Referenzen etc.)
 #
-# Toggle: useNewLuaConfig = true/false in hosts/<host>/options.nix
+# Host toggles are defined in flake.nix hostProfiles.<host>.
 
 {
   pkgs,
@@ -15,28 +15,20 @@
   lib,
   inputs,
   host,
+  hostConfig,
   ...
 }:
 
 let
   theme = config.colorScheme.palette;
 
-  inherit (import ../../../hosts/${host}/options.nix)
-    browser
-    cpuType
-    gpuType
-    wallpaperDir
-    borderAnim
-    theKBDLayout
-    terminal
-    theSecondKBDLayout
-    theKBDVariant
-    sdl-videodriver
-    ;
+  browserCmd = if hostConfig.browser == "google-chrome" then "google-chrome-stable" else hostConfig.browser;
 
-  browserCmd = if browser == "google-chrome" then "google-chrome-stable" else browser;
-
-  terminalCmd = if lib.hasAttr terminal pkgs then lib.getExe pkgs.${terminal} else terminal; # Fallback falls terminal kein pkgs-Attribut ist (z.B. schon ein voller Befehl)
+  terminalCmd =
+    if lib.hasAttr hostConfig.terminal pkgs then
+      lib.getExe pkgs.${hostConfig.terminal}
+    else
+      hostConfig.terminal; # Fallback falls terminal kein pkgs-Attribut ist (z.B. schon ein voller Befehl)
 
   inherit (lib.generators) mkLuaInline;
 
@@ -157,7 +149,7 @@ with lib;
         {
           _args = [
             "SDL_VIDEODRIVER"
-            sdl-videodriver
+            hostConfig."sdl-videodriver"
           ];
         }
         {
@@ -185,7 +177,7 @@ with lib;
           ];
         }
       ]
-      ++ lib.optionals (cpuType == "vm") [
+      ++ lib.optionals (hostConfig.cpuType == "vm") [
         {
           _args = [
             "WLR_NO_HARDWARE_CURSORS"
@@ -199,7 +191,7 @@ with lib;
           ];
         }
       ]
-      ++ lib.optionals (gpuType == "nvidia") [
+      ++ lib.optionals (hostConfig.gpuType == "nvidia") [
         {
           _args = [
             "WLR_NO_HARDWARE_CURSORS"
@@ -217,7 +209,7 @@ with lib;
       config = {
         # ── input ─────────────────────────────────────────────────────────────
         input = {
-          kb_layout = "${theKBDLayout}, ${theSecondKBDLayout}";
+          kb_layout = "${hostConfig.theKBDLayout}, ${hostConfig.theSecondKBDLayout}";
           kb_options = "grp:alt_shift_toggle,compose:caps";
           follow_mouse = 1;
           natural_scroll = true;
@@ -414,7 +406,7 @@ with lib;
           bezier = "liner";
         }
       ]
-      ++ lib.optional borderAnim {
+      ++ lib.optional hostConfig.borderAnim {
         leaf = "borderangle";
         enabled = true;
         speed = 30;
@@ -784,7 +776,7 @@ with lib;
   services.hyprpaper.settings = {
     wallpaper = [
       {
-        path = "${wallpaperDir}";
+        path = hostConfig.wallpaperDir;
         timeout = 900;
       }
     ];

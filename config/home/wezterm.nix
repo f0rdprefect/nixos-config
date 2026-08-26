@@ -1,9 +1,14 @@
-{ pkgs, config, lib, host, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  hostConfig,
+  ...
+}:
 
 let
   palette = config.colorScheme.palette;
-  inherit (import ../../hosts/${host}/options.nix) wezterm;
-in lib.mkIf (wezterm == true) {
+in lib.mkIf hostConfig.wezterm {
   home.packages = with pkgs; [
     pkgs.wezterm
   ];
