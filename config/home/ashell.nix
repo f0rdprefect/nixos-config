@@ -6,10 +6,10 @@
 }:
 
 {
+  stylix.targets.ashell.opacity.enable = false;
   programs.ashell = {
     enable = true;
     settings = {
-      log_level = "warn";
       region = "de-DE";
       position = "Top";
       indicators = [
@@ -30,7 +30,7 @@
         show_bodies = false;
         grouped = true;
         toast = true;
-        toast_position = "top_right";
+        toast_position = "TopRight";
         toast_timeout = 4000;
         toast_limit = 5;
         toast_max_height = 150;
@@ -64,6 +64,9 @@
 
       tempo = {
         clock_format = "%a %d %b %R";
+        weather_location = {
+          City = "Dortmund";
+        };
       };
 
       window_title = {
