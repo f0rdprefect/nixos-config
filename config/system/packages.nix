@@ -75,6 +75,7 @@
       enable = true;
       xwayland.enable = true;
     };
+    niri.enable = true;
     fuse.userAllowOther = true;
     mtr.enable = true;
     gnupg.agent = {

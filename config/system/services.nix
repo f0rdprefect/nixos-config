@@ -127,6 +127,7 @@
     };
 
   };
+services.envfs.enable = true; #fixes bad copilot defaul behavior https://github.com/github/copilot-cli/issues/3392
   services.kanata = {
     enable = false;
     keyboards = {

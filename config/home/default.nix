@@ -11,6 +11,7 @@
     #    ./gtk-qt.nix
     ./git.nix
     ./hyprland
+    ./niri
     ./kdenlive.nix
     ./kitty.nix
     ./neovim
