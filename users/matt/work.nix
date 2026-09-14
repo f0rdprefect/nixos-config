@@ -24,6 +24,7 @@
     #../../config/home/gtk-qt.nix
     ../../config/home/git.nix
     ../../config/home/hyprland
+    ../../config/home/niri
     ../../config/home/kitty.nix
     ../../config/home/neovim
     ../../config/home/rofi.nix
@@ -58,6 +59,7 @@
   home.packages =
     (with pkgs; [
       github-copilot-app
+      github-copilot-cli
       librepods
       nextcloud-client
       gparted-full

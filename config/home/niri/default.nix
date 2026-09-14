@@ -43,7 +43,7 @@ let
     ''
   ) namedWorkspaces;
 
-  # Numerische Workspaces 6-10 (0) zusätzlich zu den benannten.
+  # Numerische Workspaces 1-12 via F1-F12 zusätzlich zu den benannten.
   workspaceNumberBinds =
     lib.concatMapStringsSep "\n"
       (ws: ''
@@ -52,24 +52,52 @@ let
       '')
       [
         {
-          key = "6";
+          key = "F1";
+          num = 1;
+        }
+        {
+          key = "F2";
+          num = 2;
+        }
+        {
+          key = "F3";
+          num = 3;
+        }
+        {
+          key = "F4";
+          num = 4;
+        }
+        {
+          key = "F5";
+          num = 5;
+        }
+        {
+          key = "F6";
           num = 6;
         }
         {
-          key = "7";
+          key = "F7";
           num = 7;
         }
         {
-          key = "8";
+          key = "F8";
           num = 8;
         }
         {
-          key = "9";
+          key = "F9";
           num = 9;
         }
         {
-          key = "0";
+          key = "F10";
           num = 10;
+        }
+        {
+          key = "F11";
+          num = 11;
+        }
+        {
+          key = "F12";
+          num = 12;
         }
       ];
 
@@ -315,6 +343,11 @@ in
 
                 ${lib.concatStringsSep "\n" workspaceBinds}
                 ${workspaceNumberBinds}
+
+                    Mod+Ctrl+Alt+Left  ${hkt "Workspace zu linkem Monitor"} { move-workspace-to-monitor-left; }
+                    Mod+Ctrl+Alt+Right ${hkt "Workspace zu rechtem Monitor"} { move-workspace-to-monitor-right; }
+                    Mod+Ctrl+Alt+Up    ${hkt "Workspace zu oberem Monitor"} { move-workspace-to-monitor-up; }
+                    Mod+Ctrl+Alt+Down  ${hkt "Workspace zu unterem Monitor"} { move-workspace-to-monitor-down; }
 
                     XF86AudioRaiseVolume hotkey-overlay-title=null allow-when-locked=true { spawn-sh "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 5%+"; }
                     XF86AudioLowerVolume hotkey-overlay-title=null allow-when-locked=true { spawn-sh "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 5%-"; }
