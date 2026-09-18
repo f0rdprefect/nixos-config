@@ -23,8 +23,8 @@ let
   namedWorkspaces = [
     "main"
     "web"
-    "dev"
     "chat"
+    "dev"
     "tmp"
   ];
 
@@ -311,7 +311,7 @@ in
                     Mod+P { toggle-column-tabbed-display; }
                     Mod+Shift+C hotkey-overlay-title="Niri beenden" { quit; }
 
-                    Mod+L ${hkt "Bildschirm sperren"} { spawn-sh "pidof ${lib.getExe pkgs.hyprlock} || ${lib.getExe pkgs.hyprlock}"; }
+                    Mod+L ${hkt "Bildschirm sperren"} { spawn-sh "pkill -9  ${lib.getExe pkgs.hyprlock};  ${lib.getExe pkgs.hyprlock}"; }
                     Mod+Ctrl+Shift+L ${hkt "Suspend"} { spawn "systemctl" "suspend"; }
 
                     Mod+Left  { focus-column-left; }
