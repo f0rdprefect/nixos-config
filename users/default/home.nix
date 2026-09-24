@@ -22,8 +22,23 @@
   imports = [
     inputs.sops-nix.homeManagerModules.sops
     inputs.nix-colors.homeManagerModules.default
+    inputs.multiverse.homeManagerModules.default
     ./../../config/home
   ];
+  multiverse = {
+    enable = true;
+    cooldown = {
+      enable = true;
+      days = 7;
+      # any selector `at` takes
+      anchor = "tip";
+      packages = [
+        "ripgrep"
+        "fd"
+      ];
+    };
+  };
+
 
   # Define Settings For Xresources
   xresources.properties = {

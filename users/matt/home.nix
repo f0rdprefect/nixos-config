@@ -18,11 +18,27 @@
     ../../config/home/neovim
     ../../config/home/xdg
     ../../config/home/yazi.nix
+    inputs.multiverse.homeManagerModules.default
   ];
   #targets.genericLinux.nixGL = {
   #  packages = nixgl.packages; # you must set this or everything will be a noop
   #  defaultWrapper = "mesa"; # choose from options
   #};
+
+  multiverse = {
+    enable = true;
+    cooldown = {
+      enable = true;
+      days = 7;
+      # any selector `at` takes
+      anchor = "tip";
+      packages = [
+        "ripgrep"
+        "fd"
+      ];
+    };
+  };
+
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [ "gradle-7.6.6" ];
@@ -55,7 +71,7 @@
   home.packages =
     (with pkgs; [
       (config.lib.nixGL.wrap kitty)
-            #kitty
+      #kitty
       #(config.lib.nixGL.wrap weasis)
       #inputs.nixvim-conf.packages.${system}.default
       brave

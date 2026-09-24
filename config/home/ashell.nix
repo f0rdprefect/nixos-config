@@ -21,6 +21,7 @@
         "Brightness"
       ];
       battery_format = "IconAndTime";
+      bluetooth_more_cmd = "blueman-manager";
       appearance = {
         scale_factor = 1.3;
       };

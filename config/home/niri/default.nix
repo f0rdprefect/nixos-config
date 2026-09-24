@@ -362,4 +362,15 @@ in
                 }
     '';
   };
+
+  # niri.service zieht xdg-desktop-autostart.target hoch; dadurch würde
+  # blueman.desktop (aus services.blueman) automatisch mitgestartet.
+  # User-Override mit Hidden=true unterdrückt den Autostart, so dass sich
+  # niri hier wie hyprland verhält (blueman nur bei Bedarf).
+  xdg.configFile."autostart/blueman.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=Blueman Applet
+    Hidden=true
+  '';
 }

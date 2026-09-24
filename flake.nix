@@ -8,6 +8,9 @@
     nixpkgs-stable = {
       url = "github:nixos/nixpkgs/release-26.05";
     };
+    multiverse = {
+      url = "github:fzakaria/nixpkgs-multiverse";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -82,6 +85,7 @@
     {
       nixpkgs,
       nixpkgs-stable,
+      multiverse,
       home-manager,
       impermanence,
       nixos-hardware,
