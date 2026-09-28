@@ -16,7 +16,7 @@
       inkscape-with-extensions
     ])
     ++ (with pkgs; [
-            #makemkv
+      #makemkv
       nextcloud-client
       mcpelauncher-ui-qt
       orca-slicer
@@ -92,12 +92,6 @@
       spotify
       sysz
       navi
-      #fonts
-      nerd-fonts.jetbrains-mono
-      fantasque-sans-mono
-      font-awesome
-      roboto
-      source-sans-pro
       # Import Scripts
       (import ./../scripts/emopicker9000.nix { inherit pkgs; })
       (import ./../scripts/task-waybar.nix { inherit pkgs; })
@@ -120,8 +114,6 @@
       (import ./../scripts/screenshootin.nix { inherit pkgs; })
       (import ./../scripts/togglekbd.nix { inherit pkgs; })
     ]);
-
-  fonts.fontconfig.enable = true;
 
   programs.direnv.enable = true;
   programs.lutris = {

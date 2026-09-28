@@ -20,6 +20,7 @@
     ../../config/home/bash.nix
     ../../config/home/ashell.nix
     ../../config/home/espanso
+    ../../config/home/fonts.nix
     ../../config/home/fzf.nix
     #../../config/home/gtk-qt.nix
     ../../config/home/git.nix
@@ -124,12 +125,6 @@
       tree
       nix-tree
       protonup-qt
-      #fonts
-      nerd-fonts.jetbrains-mono
-      fantasque-sans-mono
-      font-awesome
-      roboto
-      source-sans-pro
       # No more xterm please
       (pkgs.writeShellScriptBin "xterm" ''
         exec ''${TERMINAL:-${lib.getExe pkgs.kitty}} "$@"
@@ -163,7 +158,6 @@
       (import ../../config/scripts/screenshootin.nix { inherit pkgs; })
     ];
 
-  fonts.fontconfig.enable = true;
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {

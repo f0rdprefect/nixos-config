@@ -398,11 +398,18 @@
             ./hosts/yakari/configuration.nix
             # add your model from this list: https://github.com/NixOS/nixos-hardware/blob/master/flake.nix
             stylix.nixosModules.stylix
+            home-manager.nixosModules.home-manager
             # Apply the overlays
             {
               nixpkgs.overlays = [
                 overlay-stable
               ];
+            }
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+              home-manager.users.yilian = import ./users/yilian/home.nix;
             }
           ];
 

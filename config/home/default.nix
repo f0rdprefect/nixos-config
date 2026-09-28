@@ -7,6 +7,7 @@
     ./ashell.nix
     ./bash.nix
     ./espanso
+    ./fonts.nix
     ./fzf.nix
     #    ./gtk-qt.nix
     ./git.nix
