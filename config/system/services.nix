@@ -41,6 +41,13 @@
       pkgs.xdg-desktop-portal
     ];
   };
+
+  # Make libdbus-1 discoverable via the same LD_LIBRARY_PATH mechanism that
+  # nixpkgs already uses for sane-libs and pipewire-jack. Apps built with
+  # `rfd` (e.g. `nix run`'d pdfcraft) dlopen("libdbus-1.so") at runtime to
+  # talk to the XDG desktop portal; without this they silently fall back to
+  # zenity (or nothing). With it, they use the portal -> termfilechooser -> yazi.
+  environment.sessionVariables.LD_LIBRARY_PATH = lib.mkAfter [ "${pkgs.dbus.lib}/lib" ];
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -127,7 +134,7 @@
     };
 
   };
-services.envfs.enable = true; #fixes bad copilot defaul behavior https://github.com/github/copilot-cli/issues/3392
+  services.envfs.enable = true; # fixes bad copilot defaul behavior https://github.com/github/copilot-cli/issues/3392
   services.kanata = {
     enable = false;
     keyboards = {
