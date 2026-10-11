@@ -37,6 +37,7 @@
       gimp
       libreoffice
       mupdf
+      koreader
       nomacs
       kdePackages.okular
       pandoc
