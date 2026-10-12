@@ -69,6 +69,10 @@
     };
     ptouch-driver.url = "github:f0rdprefect/ptouch-driver-fix";
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
+    artcraft = {
+      url = "github:Hy4ri/artcraft-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
   };
   nixConfig = {
@@ -264,6 +268,7 @@
                 nixpkgs.overlays = [
                   overlay-stable
                   inputs.ptouch-driver.overlay
+                  inputs.artcraft.overlays.default
                 ];
               }
               (
@@ -314,6 +319,7 @@
               {
                 nixpkgs.overlays = [
                   overlay-stable
+                  inputs.artcraft.overlays.default
                 ];
               }
               (
@@ -362,6 +368,7 @@
               {
                 nixpkgs.overlays = [
                   overlay-stable
+                  inputs.artcraft.overlays.default
                 ];
               }
               (
@@ -403,6 +410,7 @@
             {
               nixpkgs.overlays = [
                 overlay-stable
+                inputs.artcraft.overlays.default
               ];
             }
             {
@@ -508,6 +516,7 @@
                 nixpkgs.overlays = [
                   overlay-stable
                   inputs.ptouch-driver.overlay
+                  inputs.artcraft.overlays.default
                 ];
               }
               (

@@ -17,6 +17,7 @@
 
     inputs.sops-nix.homeManagerModules.sops
     inputs.nix-colors.homeManagerModules.default
+    ../../config/home/artcraft.nix
     ../../config/home/bash.nix
     ../../config/home/ashell.nix
     ../../config/home/espanso

@@ -22,7 +22,10 @@ in
   # introduces backwards incompatible changes.
   home.stateVersion = "26.05";
 
-  imports = [ ../../config/home/fonts.nix ];
+  imports = [
+    ../../config/home/artcraft.nix
+    ../../config/home/fonts.nix
+  ];
 
   xdg.enable = true;
 
