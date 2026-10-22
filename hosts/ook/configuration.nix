@@ -159,7 +159,13 @@
     };
 
   };
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    # immich 2.7.5 is marked insecure in nixpkgs-stable (26.05):
+    # CVE-2026-59258, CVE-2026-82272 and no further 2.x updates.
+    # Immich 3.x only lands in 26.11, so permit it until the channel bump.
+    permittedInsecurePackages = [ "immich-2.7.5" ];
+  };
 
   # NAS host intentionally stays on 26.05/stable.
   system.stateVersion = "26.05";
