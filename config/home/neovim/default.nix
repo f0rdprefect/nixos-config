@@ -21,7 +21,7 @@
     nixpkgs.useGlobalPackages = true;
     performance = {
       combinePlugins = {
-        enable = true;
+        enable = false; # Disabled due to vim plugin conflict with luajit packages
         standalonePlugins = [
           "hmts.nvim"
           "neorg"

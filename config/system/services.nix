@@ -82,6 +82,23 @@
   hardware.bluetooth = {
     enable = true; # enables support for Bluetooth
     powerOnBoot = true; # powers up the default Bluetooth controller on boot
+    settings = {
+      General = {
+        # Erlaubt erweiterte Features wie mSBC, LL-HCI, bessere eSCO-Negotiation
+        Experimental = true;
+
+        # Classic Bluetooth (für HFP/HSP benötigt, A2DP + Headset-Profile)
+        ControllerMode = "bredr";
+
+        # Verhindert aggressive Power-Down des Controllers
+        Disable = "Sap";
+      };
+
+      Policy = {
+        # AutoEnable für klassisches Pairing-Handshake
+        AutoEnable = true;
+      };
+    };
   };
   services.blueman.enable = true;
   services.upower.enable = true;

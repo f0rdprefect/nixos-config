@@ -6,6 +6,8 @@
   username,
   hostConfig,
   lib,
+  system,
+  opencode-flake,
   ...
 }:
 
@@ -74,16 +76,15 @@
       mupdf
 
       kitty
-      brave
-      chromium
-      firefox
-      libreoffice
-      opencode
-      logseq
+       brave
+       chromium
+       firefox
+       libreoffice
+       opencode-flake.packages.${system}.opencode2-avx
+       logseq
       sleek-todo
       fzf
       gimp
-      git
       git-credential-oauth
       hamster
       kdePackages.falkon
@@ -220,17 +221,6 @@
   # Define Settings For Xresources
   xresources.properties = {
     "Xcursor.size" = lib.mkDefault 24;
-  };
-
-  # Install & Configure Git
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        name = hostConfig.gitUsername;
-        email = hostConfig.gitEmail;
-      };
-    };
   };
 
   # Create XDG Dirs

@@ -20,7 +20,6 @@
     wget
     jq
     curl
-    git
     cmatrix
     lolcat
     macchina

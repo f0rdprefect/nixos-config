@@ -4,6 +4,8 @@
   username,
   host,
   hostConfig,
+  inputs,
+  system,
   ...
 }:
 {
@@ -45,9 +47,9 @@
       typst
       xournalpp
       sleek-todo
-      todofi-sh
-      opencode
-      ####Media Ripping###
+       todofi-sh
+       opencode-flake.packages.${system}.opencode2-avx
+       ####Media Ripping###
       asunder
       handbrake
       lame

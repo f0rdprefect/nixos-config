@@ -30,7 +30,7 @@
         max_lines = 2;
       };
     };
-    rainbow-delimiters.enable = true;
+    rainbow-delimiters.enable = false; # Disabled due to vim plugin conflict (doc/news.txt) with cmdparse
 
     hmts.enable = false;
   };

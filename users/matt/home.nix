@@ -74,12 +74,12 @@
       #kitty
       #(config.lib.nixGL.wrap weasis)
       #inputs.nixvim-conf.packages.${system}.default
-      brave
-      #chromium
-      firefox
-      libreoffice
-      opencode
-      logseq
+       brave
+       #chromium
+       firefox
+       libreoffice
+       opencode-flake.packages.${system}.opencode2-avx
+       logseq
       sleek-todo
       fzf
       gimp

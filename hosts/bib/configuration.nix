@@ -21,7 +21,7 @@
 
   environment.systemPackages = map lib.lowPrio [
     pkgs.curl
-    pkgs.gitMinimal
+    pkgs.gitFull
     pkgs.htop
     pkgs.fastfetch
   ];

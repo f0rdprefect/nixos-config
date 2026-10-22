@@ -73,6 +73,9 @@
       url = "github:Hy4ri/artcraft-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    opencode-flake = {
+      url = "github:noblepayne/opencode-flake";
+    };
 
   };
   nixConfig = {
@@ -103,6 +106,7 @@
       chaotic,
       disko,
       nixos-facter-modules,
+      opencode-flake,
       ...
     }@inputs:
     let
@@ -280,6 +284,8 @@
                     inherit host;
                     inherit hostConfig;
                     inherit inputs;
+                    inherit system;
+                    inherit opencode-flake;
                     inherit nixvim-conf;
                     inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
                   };
@@ -331,6 +337,8 @@
                     inherit host;
                     inherit hostConfig;
                     inherit inputs;
+                    inherit system;
+                    inherit opencode-flake;
                     inherit nixvim-conf;
                     inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
                   };
@@ -380,6 +388,8 @@
                     inherit host;
                     inherit hostConfig;
                     inherit inputs;
+                    inherit system;
+                    inherit opencode-flake;
                     inherit nixvim-conf;
                     inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
                   };
@@ -528,6 +538,8 @@
                     inherit host;
                     inherit hostConfig;
                     inherit inputs;
+                    inherit system;
+                    inherit opencode-flake;
                     inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
                   };
                   home-manager.useGlobalPkgs = true;
@@ -616,6 +628,7 @@
           inherit inputs;
           inherit system;
           inherit pkgs-stable;
+          inherit opencode-flake;
         };
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
