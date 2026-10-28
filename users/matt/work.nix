@@ -81,8 +81,7 @@
       firefox
       libreoffice
       opencode-flake.packages.${system}.opencode2-avx
-      logseq
-      sleek-todo
+      marksman
       fzf
       gimp
       git-credential-oauth

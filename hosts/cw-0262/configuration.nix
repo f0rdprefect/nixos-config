@@ -1,5 +1,6 @@
 {
   modulesPath,
+  config,
   lib,
   pkgs,
   hostConfig,
@@ -23,8 +24,6 @@
       "rd.udev.log_level=3"
     ];
     extraModulePackages = [ ];
-    initrd.systemd.enable = true;
-    initrd.verbose = false;
     initrd.kernelModules = [ "amdgpu" ]; # amdgpu auf dem echten eisen
     consoleLogLevel = 0;
     plymouth.enable = true;
@@ -81,6 +80,8 @@
     NIXOS_OZONE_WL = "1";
     VK_ICD_FILENAMES = lib.mkForce "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
     LIBVA_DRIVER_NAME = lib.mkForce "radeonsi";
+    # TeamViewer (Qt5 WebEngine) crasht unter XWayland ohne GLX-Kontext
+    #QT_XCB_GL_INTEGRATION = "none";
   };
   services.xserver = {
     enable = true; # still needed even for Wayland on NixOS
@@ -199,7 +200,12 @@
   services.tailscale = {
     enable = true;
   };
-  services.teamviewer.enable = true;
+  services.teamviewer = {
+    enable = true;
+    package = pkgs.teamviewer.overrideAttrs (old: {
+      nativeBuildInputs = [ pkgs.stable.patchelf ] ++ (old.nativeBuildInputs or [ ]);
+    });
+  };
 
   time.timeZone = "Europe/Berlin";
 
