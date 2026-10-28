@@ -35,7 +35,6 @@ with lib;
         ];
         modules-right = [
           "custom/hyprbindings"
-          "custom/notification"
           "battery"
           "tray"
           "custom/exit"
@@ -138,24 +137,6 @@ with lib;
             deactivated = "";
           };
           tooltip = "true";
-        };
-        "custom/notification" = {
-          format = "{icon}";
-          format-icons = {
-            notification = "<span foreground='green'>🗪</span>"; # 󰃳 nf-md-bell-badge
-            none = "🗪"; # 󰖔 nf-md-bell-outline
-            dnd-notification = "<span foreground='gray'>🗪</span>";
-            dnd-none = "🗪"; # nf-md-bell-cancel
-            inhibited-notification = "<span foreground='red'>🗪</span>";
-            inhibited-none = "🗪";
-            dnd-inhibited-notification = "<span foreground='red'>🗪</span>";
-            dnd-inhibited-none = "🗪";
-          };
-          return-type = "json";
-          exec-if = "which swaync-client";
-          exec = "swaync-client -swb";
-          on-click = "sleep 0.1 && task-waybar";
-          escape = true;
         };
         "battery" = {
           states = {

@@ -76,12 +76,12 @@
       mupdf
 
       kitty
-       brave
-       chromium
-       firefox
-       libreoffice
-       opencode-flake.packages.${system}.opencode2-avx
-       logseq
+      brave
+      chromium
+      firefox
+      libreoffice
+      opencode-flake.packages.${system}.opencode2-avx
+      logseq
       sleek-todo
       fzf
       gimp
@@ -142,7 +142,6 @@
 
       # Import Scripts
       (import ../../config/scripts/emopicker9000.nix { inherit pkgs; })
-      (import ../../config/scripts/task-waybar.nix { inherit pkgs; })
       (import ../../config/scripts/squirtle.nix { inherit pkgs; })
       (import ../../config/scripts/wallsetter.nix {
         inherit pkgs;

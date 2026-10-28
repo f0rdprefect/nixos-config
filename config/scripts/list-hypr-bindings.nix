@@ -21,7 +21,6 @@ pkgs.writeShellScriptBin "list-hypr-bindings" ''
   " + SHIFT + ENTER" "Rofi App Launcher" "rofi -show drun" \
   " + Q" "Kill Focused Window" "killactive" \
   " + SHIFT + W" "Search Websites Like Nix Packages" "web-search" \
-  " + SHIFT + N" "Reload SwayNC Styling" "swaync-client -rs" \
   " + W" "Launch Web Browser" "${hostConfig.browser}" \
   " + E" "Yazi File Manager" "yazi-file-picker" \
   " + S" "Take Screenshot" "screenshootin" \

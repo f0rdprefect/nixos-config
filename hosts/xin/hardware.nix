@@ -23,7 +23,6 @@
         "nvme"
       ];
       kernelModules = [ ];
-      systemd.enable = true;
     };
     kernelModules = [ "kvm-intel" ];
     kernelParams = [

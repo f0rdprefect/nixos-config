@@ -6,16 +6,19 @@
   hostConfig,
   inputs,
   system,
+  opencode-flake,
   ...
 }:
 {
+
   # Install Packages For The User
   home.packages =
     (with pkgs-stable; [
-
       fractal
       calibre
       inkscape-with-extensions
+      # unstable handbrake currently fails to build (nixpkgs#576333)
+      handbrake
     ])
     ++ (with pkgs; [
       #makemkv
@@ -29,7 +32,7 @@
       rustic
       caligula
       #####shell stuff####
-      fd
+      #fd
       nix-search-cli
       nixfmt
       #####python stuff#####
@@ -46,12 +49,10 @@
       texliveFull
       typst
       xournalpp
-      sleek-todo
-       todofi-sh
-       opencode-flake.packages.${system}.opencode2-avx
-       ####Media Ripping###
+      todofi-sh
+      opencode-flake.packages.${system}.opencode2-avx
+      ####Media Ripping###
       asunder
-      handbrake
       lame
       yt-dlp
       vlc
@@ -82,7 +83,6 @@
       grim
       slurp
       file-roller
-      swaynotificationcenter
       rofi
       imv
       mpv
@@ -97,7 +97,6 @@
       navi
       # Import Scripts
       (import ./../scripts/emopicker9000.nix { inherit pkgs; })
-      (import ./../scripts/task-waybar.nix { inherit pkgs; })
       (import ./../scripts/squirtle.nix { inherit pkgs; })
       (import ./../scripts/wallsetter.nix {
         inherit pkgs;

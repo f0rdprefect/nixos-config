@@ -24,7 +24,6 @@
     ./wlogout.nix
     ./swappy.nix
     ./swaylock.nix
-    ./swaync.nix
     ./stylix.nix
     #./vlc.nix did not work but make rebuild slow as hell
     ./wezterm.nix
