@@ -13,7 +13,7 @@
     enable = true;
     xkb = {
       variant = hostConfig.theKBDVariant;
-      layout = "${hostConfig.theKBDLayout}, ${hostConfig.theSecondKBDLayout}";
+      layout = hostConfig.theKBDLayout;
     };
   };
   services.displayManager.ly = {

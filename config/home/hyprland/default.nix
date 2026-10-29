@@ -209,8 +209,8 @@ with lib;
       config = {
         # ── input ─────────────────────────────────────────────────────────────
         input = {
-          kb_layout = "${hostConfig.theKBDLayout}, ${hostConfig.theSecondKBDLayout}";
-          kb_options = "grp:alt_shift_toggle,compose:caps";
+          kb_layout = hostConfig.theKBDLayout;
+          kb_options = "compose:caps";
           follow_mouse = 1;
           natural_scroll = true;
           sensitivity = 0.5;

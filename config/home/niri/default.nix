@@ -103,6 +103,32 @@ let
 
   # Sprechende Titel für den Hotkey-Overlay statt roher nix-Store-Pfade.
   hkt = t: "hotkey-overlay-title=\"${t}\"";
+
+  jrnl = pkgs.writeShellApplication {
+    name = "jrnl";
+    runtimeInputs = [ pkgs.coreutils ];
+    text = ''
+      f="/home/matt/work/OneDrive/obsidian/journals/$(date +%F).md"
+      [ -e "$f" ] || printf '# %s\n\n' "$(date +%F)" > "$f"
+      nvim -c 'autocmd TextChanged,TextChangedI,InsertLeave * silent! update' "$f"
+    '';
+  };
+
+  jrnlQuake = pkgs.writeShellApplication {
+    name = "jrnl-quake";
+    runtimeInputs = [
+      pkgs.jq
+      pkgs.coreutils
+    ];
+    text = ''
+      id=$(niri msg -j windows | jq -r '.[] | select(.app_id == "jrnl") | .id' | head -n1)
+      if [ -n "$id" ]; then
+        niri msg action close-window --id "$id"
+      else
+        exec ${lib.getExe' pkgs.kitty "kitty"} --class jrnl -o confirm_os_window_close=0 -e ${lib.getExe jrnl}
+      fi
+    '';
+  };
 in
 {
   imports = [ ../../../modules/wttr-cache.nix ];
@@ -110,6 +136,7 @@ in
   home.packages = with pkgs; [
     hypridle
     hyprlock
+    jrnl
     nirimon
     wayland-pipewire-idle-inhibit
   ];
@@ -122,8 +149,8 @@ in
                 input {
                     keyboard {
                         xkb {
-                            layout "${hostConfig.theKBDLayout},${hostConfig.theSecondKBDLayout}"
-                            options "grp:alt_shift_toggle,compose:caps"
+                            layout "${hostConfig.theKBDLayout}"
+                            options "compose:caps"
                         }
                     }
 
@@ -199,6 +226,13 @@ in
                 window-rule {
                     match app-id=".*"
                     geometry-corner-radius 5
+                }
+
+                window-rule {
+                    match app-id="jrnl"
+                    open-floating true
+                    default-column-width { fixed 1000; }
+                    default-window-height { proportion 0.5; }
                 }
 
       window-rule {
@@ -304,6 +338,8 @@ in
                     Print hotkey-overlay-title="Screenshot" { screenshot; }
                     Ctrl+Print hotkey-overlay-title="Screenshot: Bildschirm" { screenshot-screen; }
                     Mod+Shift+S hotkey-overlay-title="Screenshot: Fenster" { screenshot-window show-pointer=true; }
+
+                    Mod+grave ${hkt "Journal (Quake-Terminal)"} { spawn "${lib.getExe jrnlQuake}"; }
 
                     Mod+Q repeat=false { close-window; }
                     Mod+F { maximize-column; }

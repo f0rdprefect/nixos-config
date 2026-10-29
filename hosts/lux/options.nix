@@ -36,7 +36,6 @@ in {
   clock24h = true;
   theLocale = "en_US.UTF-8";
   theKBDLayout = "us";
-  theSecondKBDLayout = "de";
   theKBDVariant = "";
   theLCVariables = "en_US.UTF-8";
   theTimezone = "Europe/Berlin";

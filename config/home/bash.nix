@@ -36,7 +36,6 @@ lib.mkIf (hostConfig.theShell == "bash") {
       flake-rebuild = "nh os switch --hostname ${host}";
       flake-update = "nh os switch --hostname ${host} --update";
       gcCleanup = "nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
-      jrnl = "f=/home/matt/work/OneDrive/obsidian/journals/$(date +%F).md; [ -e \"$f\" ] || printf '# %s\n\n' \"$(date +%F)\" > \"$f\"; nvim \"$f\"";
       v = "nvim";
       vi = "nvim";
       ls = "lsd";

@@ -1,10 +1,19 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  hostConfig,
+  ...
+}:
 
 {
   programs.git = {
     enable = true;
     package = pkgs.gitFull;
     settings = {
+      user = {
+        name = hostConfig.gitUsername;
+        email = hostConfig.gitEmail;
+      };
       credential = {
         helper = [ "cache --timeout=28800" ]; # Timeout in Sekunden
       };
