@@ -76,11 +76,6 @@
     opencode-flake = {
       url = "github:noblepayne/opencode-flake";
     };
-    boltwarden = {
-      url = "github:vleeuwenmenno/boltwarden";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
   };
   nixConfig = {
     extra-substituters = [

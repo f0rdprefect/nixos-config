@@ -108,13 +108,11 @@
       wl-mirror
       net-tools
       arp-scan-rs
+      (callPackage ../../config/pkgs/cfait.nix { })
 
       ####bitwarden related###
       bitwarden-desktop # will be replaced by bitwarden-desktop
-      # Upstream test suite needs a D-Bus session that the Nix sandbox lacks
-      (inputs.boltwarden.packages.${system}.default.overrideAttrs (_: {
-        doCheck = false;
-      }))
+      (callPackage ../../config/pkgs/boltwarden.nix { })
       rofi-rbw
       rbw
       pinentry-rofi
