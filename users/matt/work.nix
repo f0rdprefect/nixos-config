@@ -111,6 +111,10 @@
 
       ####bitwarden related###
       bitwarden-desktop # will be replaced by bitwarden-desktop
+      # Upstream test suite needs a D-Bus session that the Nix sandbox lacks
+      (inputs.boltwarden.packages.${system}.default.overrideAttrs (_: {
+        doCheck = false;
+      }))
       rofi-rbw
       rbw
       pinentry-rofi

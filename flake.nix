@@ -76,6 +76,10 @@
     opencode-flake = {
       url = "github:noblepayne/opencode-flake";
     };
+    boltwarden = {
+      url = "github:vleeuwenmenno/boltwarden";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
   };
   nixConfig = {
@@ -130,7 +134,6 @@
           gitUsername ? "Matthias Berse",
           gitEmail ? "matthias@berse.xyz",
           theKBDLayout ? "us",
-          theSecondKBDLayout ? "de",
           theKBDVariant ? "",
           theKernel ? "zen",
         }:
@@ -145,7 +148,6 @@
             gitUsername
             gitEmail
             theKBDLayout
-            theSecondKBDLayout
             theKBDVariant
             theKernel
             ;
