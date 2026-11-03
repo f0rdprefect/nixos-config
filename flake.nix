@@ -257,6 +257,7 @@
               inputs.nixos-facter-modules.nixosModules.facter
               { config.facter.reportPath = ./hosts/xin/facter.json; }
               ./system.nix
+              ./modules/newt.nix
               nixos-hardware.nixosModules.lenovo-thinkpad-x1-yoga
               stylix.nixosModules.stylix
               impermanence.nixosModules.impermanence
