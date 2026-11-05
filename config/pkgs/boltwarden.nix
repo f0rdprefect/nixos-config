@@ -31,11 +31,11 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "boltwarden";
-  version = "1.0.0-rc.7";
+  version = "1.0.0-rc.8";
 
   src = fetchurl {
     url = "https://github.com/vleeuwenmenno/boltwarden/releases/download/v${finalAttrs.version}/boltwarden-${finalAttrs.version}-x86_64-linux.tar.gz";
-    sha256 = "de50b117f746c270f810fbd4ed91bde42801162c253b08a7434d57fd24f1d389";
+    sha256 = "6c0934a2b5774615351d30b83d50fbb478099ea758e1981480aff03c5f0b656f";
   };
 
   nativeBuildInputs = [
